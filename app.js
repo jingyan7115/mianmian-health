@@ -602,7 +602,9 @@
         );
       }
 
-      const prepared = await materializeLocalAssets(clone(nextState));
+      const prepared = await materializeLocalAssets(
+        synchronizeDerivedData(nextState),
+      );
       prepared._cloud = {
         revision: remoteRevision + 1,
         updatedAt: new Date().toISOString(),
@@ -892,6 +894,148 @@
       .join("")}</div>`;
   }
 
+  function kidneyMeasurementSeries(source = state) {
+    const byDate = new Map();
+    for (const item of source.kidneyMeasurements || []) {
+      if (!item?.date) continue;
+      const left = Number(item.left);
+      const right = Number(item.right);
+      byDate.set(item.date, {
+        recordedAt: item.date,
+        left: Number.isFinite(left) ? left : null,
+        right: Number.isFinite(right) ? right : null,
+      });
+    }
+
+    for (const entry of source.moduleEntries || []) {
+      if (entry.module !== "imaging" || !entry.recordedAt) continue;
+      const hasLeft = Object.hasOwn(entry.data || {}, "leftKidneyCm");
+      const hasRight = Object.hasOwn(entry.data || {}, "rightKidneyCm");
+      if (!hasLeft && !hasRight) continue;
+      const current = byDate.get(entry.recordedAt) || {
+        recordedAt: entry.recordedAt,
+        left: null,
+        right: null,
+      };
+      const left = Number(entry.data?.leftKidneyCm);
+      const right = Number(entry.data?.rightKidneyCm);
+      if (hasLeft) current.left = Number.isFinite(left) ? left : null;
+      if (hasRight) current.right = Number.isFinite(right) ? right : null;
+      byDate.set(entry.recordedAt, current);
+    }
+
+    return [...byDate.values()]
+      .filter((item) => Number.isFinite(item.left) || Number.isFinite(item.right))
+      .sort((a, b) => a.recordedAt.localeCompare(b.recordedAt));
+  }
+
+  function synchronizeDerivedData(source) {
+    const next = clone(source);
+    const hasImagingEntries = (next.moduleEntries || []).some(
+      (entry) => entry.module === "imaging",
+    );
+    if (hasImagingEntries) {
+      next.kidneyMeasurements = kidneyMeasurementSeries(next).map((item) => ({
+        date: item.recordedAt,
+        left: item.left,
+        right: item.right,
+      }));
+    }
+    return next;
+  }
+
+  function formatCm(value) {
+    if (!Number.isFinite(value)) return "—";
+    return Number(value).toFixed(2).replace(/0+$/, "").replace(/\.$/, "");
+  }
+
+  function kidneyChart() {
+    const points = kidneyMeasurementSeries();
+    if (!points.length) {
+      return '<div class="empty">暂无可核对的双肾长度记录。</div>';
+    }
+
+    const values = points
+      .flatMap((point) => [point.left, point.right])
+      .filter(Number.isFinite);
+    const minimum = Math.min(...values);
+    const maximum = Math.max(...values);
+    const padding = Math.max((maximum - minimum) * 0.18, 0.12);
+    const low = minimum - padding;
+    const high = maximum + padding;
+    const width = 760;
+    const height = 245;
+    const left = 50;
+    const right = 18;
+    const top = 24;
+    const bottom = 40;
+    const xAt = (index) =>
+      left +
+      (points.length === 1 ? 0.5 : index / (points.length - 1)) *
+        (width - left - right);
+    const yAt = (value) =>
+      top + ((high - value) / (high - low)) * (height - top - bottom);
+    const leftPoints = points
+      .map((point, index) => ({ ...point, index, value: point.left }))
+      .filter((point) => Number.isFinite(point.value));
+    const rightPoints = points
+      .map((point, index) => ({ ...point, index, value: point.right }))
+      .filter((point) => Number.isFinite(point.value));
+    const pathFor = (series) =>
+      series
+        .map(
+          (point, index) =>
+            `${index ? "L" : "M"}${xAt(point.index).toFixed(1)},${yAt(point.value).toFixed(1)}`,
+        )
+        .join(" ");
+
+    return `<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin:4px 0 2px;color:var(--muted);font-size:13px;font-weight:700">
+        <span><i style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#2f806d;margin-right:6px"></i>左肾长径</span>
+        <span><i style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#7b66b3;margin-right:6px"></i>右肾长径</span>
+        <span>单位：cm</span>
+      </div>
+      <div class="chart-wrap">
+        <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="面面左右肾长径趋势图">
+          ${[0, 0.25, 0.5, 0.75, 1]
+            .map((factor) => {
+              const y = top + factor * (height - top - bottom);
+              const label = high - factor * (high - low);
+              return `<line class="chart-grid" x1="${left}" x2="${width - right}" y1="${y}" y2="${y}"/>
+                <text class="chart-label" x="${left - 8}" y="${y + 3}" text-anchor="end">${label.toFixed(1)}</text>`;
+            })
+            .join("")}
+          <path d="${pathFor(leftPoints)}" fill="none" stroke="#2f806d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="${pathFor(rightPoints)}" fill="none" stroke="#7b66b3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          ${leftPoints
+            .map(
+              (point) => `<circle cx="${xAt(point.index)}" cy="${yAt(point.value)}" r="4" fill="#fff" stroke="#2f806d" stroke-width="2.5"/>
+                <text class="chart-label" x="${xAt(point.index)}" y="${yAt(point.value) - 10}" text-anchor="middle" style="fill:#2f806d">${formatCm(point.value)}</text>`,
+            )
+            .join("")}
+          ${rightPoints
+            .map(
+              (point) => `<circle cx="${xAt(point.index)}" cy="${yAt(point.value)}" r="4" fill="#fff" stroke="#7b66b3" stroke-width="2.5"/>
+                <text class="chart-label" x="${xAt(point.index)}" y="${yAt(point.value) - 10}" text-anchor="middle" style="fill:#7b66b3">${formatCm(point.value)}</text>`,
+            )
+            .join("")}
+          ${points
+            .map(
+              (point, index) => `<text class="chart-label" x="${xAt(index)}" y="${height - 10}" text-anchor="middle">${esc(point.recordedAt.slice(2).replaceAll("-", "."))}</text>`,
+            )
+            .join("")}
+        </svg>
+      </div>
+      <table class="result-table">
+        <thead><tr><th>超声日期</th><th>左肾长径</th><th>右肾长径</th></tr></thead>
+        <tbody>${[...points]
+          .reverse()
+          .map(
+            (point) => `<tr><td>${date(point.recordedAt)}</td><td>${formatCm(point.left)} cm</td><td>${formatCm(point.right)} cm</td></tr>`,
+          )
+          .join("")}</tbody>
+      </table>`;
+  }
+
   function trends() {
     const metrics = ["WEIGHT", "CREA", "SDMA", "PHOS", "BUN", "ALT"];
     return `<div class="view">
@@ -904,6 +1048,12 @@
           )
           .join("")}</div>
         ${chart(selectedMetric)}
+      </div>
+      <div style="height:14px"></div>
+      <div class="chart-card">
+        <div class="section-head" style="margin:0 0 13px"><div><h2>双肾大小趋势</h2><p>来自历次腹部超声报告的左右肾长径</p></div></div>
+        ${kidneyChart()}
+        <div class="privacy" style="margin-top:14px">超声长径会受检查切面、操作者和设备影响，应结合肾脏形态、尿检、UPC、血压及肾功能指标综合判断；本图不单独用于 CKD 诊断或分期。</div>
       </div>
     </div>`;
   }
