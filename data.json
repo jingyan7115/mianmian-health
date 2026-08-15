@@ -1509,6 +1509,26 @@
   ],
   "moduleEntries": [
     {
+      "id": "user-722fcd5a-21c3-4fe4-be22-dabc72b9763e",
+      "module": "treatment",
+      "recordedAt": "2026-08-08",
+      "title": "泼尼松龙",
+      "summary": "泼尼松龙减量给药",
+      "data": {
+        "treatmentClass": "激素药",
+        "indication": "肥大细胞瘤",
+        "dose": "0.5mg/kg",
+        "frequency": "每晚一次",
+        "route": "胶囊喂食",
+        "cycle": "持续进行中，预计一个月。",
+        "adverseEffects": "无"
+      },
+      "imageUrls": [],
+      "sourceKey": "user:950d0fd2-3faa-485e-b0ee-b19a9a9f9ca8",
+      "createdAt": "2026-08-15T12:40:43.362Z",
+      "updatedAt": "2026-08-15T12:40:43.362Z"
+    },
+    {
       "id": 17,
       "module": "imaging",
       "recordedAt": "2026-08-15",
@@ -2047,8 +2067,8 @@
     }
   ],
   "_cloud": {
-    "revision": 1,
-    "updatedAt": "2026-08-15T12:11:14.571Z",
-    "updatedBy": "initial-online-library"
+    "revision": 2,
+    "updatedAt": "2026-08-15T12:40:45.266Z",
+    "updatedBy": "jingyan7115"
   }
 }
