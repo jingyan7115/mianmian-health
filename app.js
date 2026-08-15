@@ -401,6 +401,11 @@
       } catch (error) {
         apiError = error;
         if (!ownerToken) throw error;
+        if (error instanceof GitHubApiError && error.status === 401) {
+          ownerToken = "";
+          ownerMode = false;
+          storageRemove(TOKEN_KEY);
+        }
         file = await getGitHubContent(DATA_PATH, "");
       }
       const remote = JSON.parse(file.text);
