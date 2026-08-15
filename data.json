@@ -1509,6 +1509,18 @@
   ],
   "moduleEntries": [
     {
+      "id": "user-eb3a33a6-a719-4b70-ab94-a65344a8aee8",
+      "module": "treatment",
+      "recordedAt": "2026-08-15",
+      "title": "疑似MCT05冷冻处理",
+      "summary": "左后爪中央掌垫处边缘，疑似有一个小包，上周有破溃结痂。这周未进行细胞学确认，直接处理掉了。",
+      "data": {},
+      "imageUrls": [],
+      "sourceKey": "user:2bd4e0e7-2924-4362-8d69-52550bacf6ab",
+      "createdAt": "2026-08-15T12:48:02.616Z",
+      "updatedAt": "2026-08-15T12:48:02.616Z"
+    },
+    {
       "id": "user-722fcd5a-21c3-4fe4-be22-dabc72b9763e",
       "module": "treatment",
       "recordedAt": "2026-08-08",
@@ -2070,8 +2082,8 @@
     }
   ],
   "_cloud": {
-    "revision": 3,
-    "updatedAt": "2026-08-15T12:44:43.931Z",
+    "revision": 4,
+    "updatedAt": "2026-08-15T12:48:05.711Z",
     "updatedBy": "jingyan7115"
   }
 }
