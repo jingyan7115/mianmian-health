@@ -1626,18 +1626,21 @@
       "module": "treatment",
       "recordedAt": "2026-06-21",
       "title": "泼尼松龙 + 法莫替丁",
-      "summary": "原始 2026-08-15 版资料将结束日期记为“至今”；当前是否仍在使用需要手动确认。",
+      "summary": "泼尼松龙控制肿瘤发展，法莫替丁抑制胃酸",
       "data": {
         "treatmentClass": "药物治疗",
         "indication": "MCT-004",
-        "endDate": "原始资料记为至今",
-        "status": "待确认当前状态",
-        "dose": "原始健康库未录入剂量"
+        "endDate": "2026-08-08",
+        "dose": "泼尼松龙一1mg/kg，法莫替丁0.5mg/kg",
+        "frequency": "泼尼松龙每晚一次；法莫替丁由早晚各一次，逐渐减量至每天一次。",
+        "route": "胶囊喂食",
+        "response": "泼尼松龙效果不是很明显，肿瘤并没有减小，倒是也没有快速增大。但是这个肿瘤本来就稳定。不好说有多大的作用。",
+        "status": "一切正常。"
       },
       "imageUrls": [],
       "sourceKey": "baseline:treatment:2026-06-21-pred-famotidine",
       "createdAt": "2026-08-15 08:55:05",
-      "updatedAt": "2026-08-15 08:55:05"
+      "updatedAt": "2026-08-15T12:44:39.608Z"
     },
     {
       "id": 13,
@@ -2067,8 +2070,8 @@
     }
   ],
   "_cloud": {
-    "revision": 2,
-    "updatedAt": "2026-08-15T12:40:45.266Z",
+    "revision": 3,
+    "updatedAt": "2026-08-15T12:44:43.931Z",
     "updatedBy": "jingyan7115"
   }
 }
