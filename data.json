@@ -1515,17 +1515,19 @@
       "title": "疑似左后爪掌垫MCT处理+泼尼松龙持续",
       "summary": "左后爪中央掌垫处边缘，疑似有一个小包，上周有破溃结痂。这周未进行细胞学确认，直接处理掉了。",
       "data": {
+        "treatmentClass": "局部治疗+药物治疗",
         "indication": "MCT-005（疑似）",
         "dose": "泼尼松龙按照8.8剂量继续给药",
         "frequency": "泼尼松龙每晚一次",
         "route": "胶囊喂食",
+        "cycle": "冷冻当日结束，泼尼松龙还有三周",
         "monitoring": "戴脖圈，禁止爪部舔舐。",
         "notes": "该MCT因为过小，细胞学没有采到有用细胞，所以未确诊。只是出于疑似的角度，反正也是长出的异物，就进行了冷冻处理。"
       },
       "imageUrls": [],
       "sourceKey": "user:2bd4e0e7-2924-4362-8d69-52550bacf6ab",
       "createdAt": "2026-08-15T12:48:02.616Z",
-      "updatedAt": "2026-08-15T12:51:45.905Z"
+      "updatedAt": "2026-08-15T12:52:58.387Z"
     },
     {
       "id": "user-722fcd5a-21c3-4fe4-be22-dabc72b9763e",
@@ -2089,8 +2091,8 @@
     }
   ],
   "_cloud": {
-    "revision": 5,
-    "updatedAt": "2026-08-15T12:51:50.215Z",
+    "revision": 6,
+    "updatedAt": "2026-08-15T12:53:04.675Z",
     "updatedBy": "jingyan7115"
   }
 }
