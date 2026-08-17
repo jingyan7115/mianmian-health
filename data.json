@@ -600,7 +600,8 @@
       "reportPages": [
         {
           "label": "生化报告",
-          "url": "/reports/2020-02-16-chemistry-1.jpg"
+          "url": "/reports/2020-02-16-chemistry-1.jpg",
+          "sha256": "1df0f17a3867e18830d3605cf11fb909a9805ec15bca781fdf43304ce12b784d"
         }
       ]
     },
@@ -682,7 +683,8 @@
       "reportPages": [
         {
           "label": "生化报告",
-          "url": "/reports/2021-04-01-chemistry-1.jpg"
+          "url": "/reports/2021-04-01-chemistry-1.jpg",
+          "sha256": "420aff9bbe65ba24dac444de81718a1260c50a226bf420e3d6ae0537dac6f94f"
         }
       ]
     },
@@ -762,7 +764,8 @@
       "reportPages": [
         {
           "label": "生化报告",
-          "url": "/reports/2023-02-22-chemistry-1.jpg"
+          "url": "/reports/2023-02-22-chemistry-1.jpg",
+          "sha256": "a6aca3db451e5772923c9c3663e27796920be0dce1ba3f626fb17a3558976ee2"
         }
       ]
     },
@@ -969,31 +972,38 @@
       "reportPages": [
         {
           "label": "肾功能荧光",
-          "url": "/reports/2026-06-21-renal-fluorescence-1.jpg"
+          "url": "/reports/2026-06-21-renal-fluorescence-1.jpg",
+          "sha256": "f9725e7a9c84bb98f98a219a07ac60b9b7721244594c8c037fd855083a2ae390"
         },
         {
           "label": "心肌/凝血筛查",
-          "url": "/reports/2026-06-21-cardiac-coagulation-1.jpg"
+          "url": "/reports/2026-06-21-cardiac-coagulation-1.jpg",
+          "sha256": "aeb0068fc188bd0c617a5973843ccf19de04a7a2654f5454f471e6c634709218"
         },
         {
           "label": "血常规",
-          "url": "/reports/2026-06-21-cbc-1.jpg"
+          "url": "/reports/2026-06-21-cbc-1.jpg",
+          "sha256": "703942bc66d8275d697f554d6932c7830154cb4dffae4485955e125bdd1b0393"
         },
         {
           "label": "SAA",
-          "url": "/reports/2026-06-21-saa-1.jpg"
+          "url": "/reports/2026-06-21-saa-1.jpg",
+          "sha256": "a4db68968ab0e71fa22168b1ab4809abfdddfff22acfa3079b72352970604ca1"
         },
         {
           "label": "血液生化",
-          "url": "/reports/2026-06-21-chemistry-1.jpg"
+          "url": "/reports/2026-06-21-chemistry-1.jpg",
+          "sha256": "32cc4ed614665c645fd826285b1d34decbbf5b3665fc190de067ab9e4d14d880"
         },
         {
           "label": "静脉血气/电解质",
-          "url": "/reports/2026-06-21-blood-gas-1.jpg"
+          "url": "/reports/2026-06-21-blood-gas-1.jpg",
+          "sha256": "11630ea80a49bbcc0d7626fcf0a55248ccdc48381f6d214a178cf4d8497ea67f"
         },
         {
           "label": "抗体滴度",
-          "url": "/reports/2026-06-21-antibody-titers-1.jpg"
+          "url": "/reports/2026-06-21-antibody-titers-1.jpg",
+          "sha256": "acce2a1f38fc022e2201bef7b62c15efb1ea0b0e1865215e2a1adf6dc42c26ea"
         }
       ]
     },
@@ -1063,11 +1073,13 @@
       "reportPages": [
         {
           "label": "血常规",
-          "url": "/reports/2026-06-28-cbc-1.jpg"
+          "url": "/reports/2026-06-28-cbc-1.jpg",
+          "sha256": "dec87903839e984483f290082764cfce2f39a45d066ab3a635aff59997617d5c"
         },
         {
           "label": "SAA",
-          "url": "/reports/2026-06-28-saa-1.jpg"
+          "url": "/reports/2026-06-28-saa-1.jpg",
+          "sha256": "775413f61d5a752a8d4769944c0308016803cb129b2ede8d8c4a431a8af75ef9"
         }
       ]
     },
@@ -1157,7 +1169,8 @@
       "reportPages": [
         {
           "label": "生化报告",
-          "url": "/reports/2026-07-04-chemistry-1.jpg"
+          "url": "/reports/2026-07-04-chemistry-1.jpg",
+          "sha256": "fe8bd85da0a1d801bbb69e40272aac4cb085e4036c9a93cbf2a6f0d4fbff717d"
         }
       ]
     },
@@ -1281,11 +1294,13 @@
       "reportPages": [
         {
           "label": "CBC 数值",
-          "url": "/reports/2026-07-18-cbc-1.jpg"
+          "url": "/reports/2026-07-18-cbc-1.jpg",
+          "sha256": "b2a6eb6b8f64dee884549cd26f03e4a065b3014f6031bdca092203dc9eceb8b0"
         },
         {
           "label": "CBC 图谱与提示",
-          "url": "/reports/2026-07-18-cbc-2.jpg"
+          "url": "/reports/2026-07-18-cbc-2.jpg",
+          "sha256": "9fcc3166921f58c78579e63b5fceaa872b7a6bcbd7da35a5b9d042dae5c68906"
         }
       ]
     },
@@ -1494,15 +1509,18 @@
       "reportPages": [
         {
           "label": "生化 / SDMA",
-          "url": "/reports/2026-08-15-chemistry-1.jpg"
+          "url": "/reports/2026-08-15-chemistry-1.jpg",
+          "sha256": "ed361717d96d92b03b7b31c2ba6b60974979ef219f1eb26d81129f283c715454"
         },
         {
           "label": "CBC 数值",
-          "url": "/reports/2026-08-15-cbc-1.jpg"
+          "url": "/reports/2026-08-15-cbc-1.jpg",
+          "sha256": "6ebc46a86dc6d2849e1c53c6bfad8dac9baddd79cf97659fc9c38da7a1dc3ea0"
         },
         {
           "label": "CBC 图谱与提示",
-          "url": "/reports/2026-08-15-cbc-2.jpg"
+          "url": "/reports/2026-08-15-cbc-2.jpg",
+          "sha256": "2b0a64840a7f8469c73e7e7da89b9f43faead3c67ebd98e10a15471c8eb0e988"
         }
       ]
     }
@@ -1567,7 +1585,14 @@
       ],
       "sourceKey": "baseline:imaging:2026-08-15-abdominal",
       "createdAt": "2026-08-15 08:55:04",
-      "updatedAt": "2026-08-15 08:55:04"
+      "updatedAt": "2026-08-15 08:55:04",
+      "imageFiles": [
+        {
+          "url": "/reports/2026-08-15-abdominal-us-1.jpg",
+          "name": "2026-08-15-abdominal-us-1.jpg",
+          "sha256": "e555ad4cf89fd8376bc019d53e673dfc8523e0830a579ed410599e5749059b82"
+        }
+      ]
     },
     {
       "id": 20,
@@ -1603,7 +1628,14 @@
       ],
       "sourceKey": "baseline:imaging:2026-07-04-abdominal",
       "createdAt": "2026-08-15 08:55:04",
-      "updatedAt": "2026-08-15 08:55:04"
+      "updatedAt": "2026-08-15 08:55:04",
+      "imageFiles": [
+        {
+          "url": "/reports/2026-07-04-abdominal-us-1.jpg",
+          "name": "2026-07-04-abdominal-us-1.jpg",
+          "sha256": "bc58bae26d3964163aeeca6139b050947e864829737b6946ed7fdfbfaf9eb4ee"
+        }
+      ]
     },
     {
       "id": 15,
@@ -1621,7 +1653,14 @@
       ],
       "sourceKey": "baseline:imaging:2026-06-28-pancreas",
       "createdAt": "2026-08-15 08:55:04",
-      "updatedAt": "2026-08-15 08:55:04"
+      "updatedAt": "2026-08-15 08:55:04",
+      "imageFiles": [
+        {
+          "url": "/reports/2026-06-28-pancreas-us-1.jpg",
+          "name": "2026-06-28-pancreas-us-1.jpg",
+          "sha256": "553504c9a32bfe79b3652897513c6540ed39937080d5a58821333c2a515aa05a"
+        }
+      ]
     },
     {
       "id": 14,
@@ -1640,7 +1679,19 @@
       ],
       "sourceKey": "baseline:imaging:2026-06-28-abdominal",
       "createdAt": "2026-08-15 08:55:04",
-      "updatedAt": "2026-08-15 08:55:04"
+      "updatedAt": "2026-08-15 08:55:04",
+      "imageFiles": [
+        {
+          "url": "/reports/2026-06-28-abdominal-us-1.jpg",
+          "name": "2026-06-28-abdominal-us-1.jpg",
+          "sha256": "cb5d063f118fb66b89137fad76961f8b9a72041be156c1ff11486efd9fa8712a"
+        },
+        {
+          "url": "/reports/2026-06-28-abdominal-us-2.jpg",
+          "name": "2026-06-28-abdominal-us-2.jpg",
+          "sha256": "53c30735f7fb9e3bd247593ab74569e813969a3f85c397cf9afd5e4b31a18569"
+        }
+      ]
     },
     {
       "id": 19,
@@ -1680,7 +1731,14 @@
       ],
       "sourceKey": "baseline:imaging:2026-06-21-cardiac",
       "createdAt": "2026-08-15 08:55:04",
-      "updatedAt": "2026-08-15 08:55:04"
+      "updatedAt": "2026-08-15 08:55:04",
+      "imageFiles": [
+        {
+          "url": "/reports/2026-06-21-cardiac-us-1.jpg",
+          "name": "2026-06-21-cardiac-us-1.jpg",
+          "sha256": "9a4a61c6dce2b854caa9fd0def2952573ab8f5709f1961d688db1ceda1610cf4"
+        }
+      ]
     },
     {
       "id": 12,
@@ -1700,7 +1758,24 @@
       ],
       "sourceKey": "baseline:imaging:2026-06-21-abdominal-dr",
       "createdAt": "2026-08-15 08:55:04",
-      "updatedAt": "2026-08-15 08:55:04"
+      "updatedAt": "2026-08-15 08:55:04",
+      "imageFiles": [
+        {
+          "url": "/reports/2026-06-21-dr-1.jpg",
+          "name": "2026-06-21-dr-1.jpg",
+          "sha256": "da32c44f86c1e1ed44f18c9e4e4df9a4e622e401295d51b58537b6c7389c82db"
+        },
+        {
+          "url": "/reports/2026-06-21-abdominal-us-1.jpg",
+          "name": "2026-06-21-abdominal-us-1.jpg",
+          "sha256": "e7653650b3d5e32b64c2f69022b489c37f1cbb32ac9e4200f1bf4639f51c83a6"
+        },
+        {
+          "url": "/reports/2026-06-21-abdominal-us-2.jpg",
+          "name": "2026-06-21-abdominal-us-2.jpg",
+          "sha256": "69ed9be9e6860131f0151b7a6db128869ca69eeed3a8d4178857a660b30f1fad"
+        }
+      ]
     },
     {
       "id": 18,
@@ -1758,7 +1833,14 @@
       ],
       "sourceKey": "baseline:imaging:2025-07-05-cardiac",
       "createdAt": "2026-08-15 08:55:04",
-      "updatedAt": "2026-08-15 08:55:04"
+      "updatedAt": "2026-08-15 08:55:04",
+      "imageFiles": [
+        {
+          "url": "/reports/2025-07-05-cardiac-us-1.jpg",
+          "name": "2025-07-05-cardiac-us-1.jpg",
+          "sha256": "d07199c2553e9d1d091c4b10c45fc8c83283aad8aefee52f81df28ea7253c46f"
+        }
+      ]
     },
     {
       "id": 10,
@@ -1776,7 +1858,14 @@
       ],
       "sourceKey": "baseline:imaging:2025-07-05-abdominal",
       "createdAt": "2026-08-15 08:55:04",
-      "updatedAt": "2026-08-15 08:55:04"
+      "updatedAt": "2026-08-15 08:55:04",
+      "imageFiles": [
+        {
+          "url": "/reports/2025-07-05-abdominal-us-1.jpg",
+          "name": "2025-07-05-abdominal-us-1.jpg",
+          "sha256": "e0a724db1be38d8e6f4e9c2f148320ef78898c426afc53096204b1b95454179b"
+        }
+      ]
     },
     {
       "id": 3,
@@ -1815,7 +1904,14 @@
       ],
       "sourceKey": "baseline:imaging:2023-02-22-cardiac",
       "createdAt": "2026-08-15 08:55:04",
-      "updatedAt": "2026-08-15 08:55:04"
+      "updatedAt": "2026-08-15 08:55:04",
+      "imageFiles": [
+        {
+          "url": "/reports/2023-02-22-cardiac-us-1.jpg",
+          "name": "2023-02-22-cardiac-us-1.jpg",
+          "sha256": "917da3e918bdd6fb21122842563cb2f2bdfe30c6dd47a353762da4a79b451f35"
+        }
+      ]
     },
     {
       "id": 8,
@@ -1834,7 +1930,19 @@
       ],
       "sourceKey": "baseline:imaging:2023-02-22-abdominal",
       "createdAt": "2026-08-15 08:55:04",
-      "updatedAt": "2026-08-15 08:55:04"
+      "updatedAt": "2026-08-15 08:55:04",
+      "imageFiles": [
+        {
+          "url": "/reports/2023-02-22-abdominal-us-1.jpg",
+          "name": "2023-02-22-abdominal-us-1.jpg",
+          "sha256": "9fe238d62f4b42a7330a50e7fc499e55a39f4d346de8f4fe67f54aef0b69b10a"
+        },
+        {
+          "url": "/reports/2023-02-22-abdominal-us-2.jpg",
+          "name": "2023-02-22-abdominal-us-2.jpg",
+          "sha256": "b947db875e3e8aad422b0a0852f66e13c2eccf79903a2f2f2b0dd810c391ba8d"
+        }
+      ]
     },
     {
       "id": 2,
@@ -1892,7 +2000,19 @@
       ],
       "sourceKey": "baseline:imaging:2021-07-23-cardiac",
       "createdAt": "2026-08-15 08:55:04",
-      "updatedAt": "2026-08-15 08:55:04"
+      "updatedAt": "2026-08-15 08:55:04",
+      "imageFiles": [
+        {
+          "url": "/reports/2021-07-23-cardiac-us-1.jpg",
+          "name": "2021-07-23-cardiac-us-1.jpg",
+          "sha256": "1124705edb312cda9f060d2c1ec42eb27268c10749554af4cdb208c015fab897"
+        },
+        {
+          "url": "/reports/2021-07-23-cardiac-us-2.jpg",
+          "name": "2021-07-23-cardiac-us-2.jpg",
+          "sha256": "784cc709fea101c1bfb498ab15074f4d9ff5c408aa0b3ba1eab03aef83f2c75b"
+        }
+      ]
     },
     {
       "id": 6,
@@ -1908,7 +2028,14 @@
       ],
       "sourceKey": "baseline:imaging:2021-04-01-abdominal",
       "createdAt": "2026-08-15 08:55:04",
-      "updatedAt": "2026-08-15 08:55:04"
+      "updatedAt": "2026-08-15 08:55:04",
+      "imageFiles": [
+        {
+          "url": "/reports/2021-04-01-abdominal-us-1.jpg",
+          "name": "2021-04-01-abdominal-us-1.jpg",
+          "sha256": "6f6b9572a4039bd8ecacb40e2e29e79ef74ea9c63d6bfa082807a39d1931b635"
+        }
+      ]
     },
     {
       "id": 5,
@@ -1926,7 +2053,14 @@
       ],
       "sourceKey": "baseline:imaging:2020-12-15-abdominal",
       "createdAt": "2026-08-15 08:55:04",
-      "updatedAt": "2026-08-15 08:55:04"
+      "updatedAt": "2026-08-15 08:55:04",
+      "imageFiles": [
+        {
+          "url": "/reports/2020-12-15-abdominal-us-1.jpg",
+          "name": "2020-12-15-abdominal-us-1.jpg",
+          "sha256": "38f621205748ff995a1e8d9ba0302a1a93be0909930d018380b297c340114a87"
+        }
+      ]
     }
   ],
   "source": "面面_长期健康管理数据库0815版(2).xlsx",
@@ -2091,8 +2225,8 @@
     }
   ],
   "_cloud": {
-    "revision": 6,
-    "updatedAt": "2026-08-15T12:53:04.675Z",
+    "revision": 7,
+    "updatedAt": "2026-08-17T12:58:54.034Z",
     "updatedBy": "jingyan7115"
   }
 }
