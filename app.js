@@ -15,6 +15,33 @@
   const LEGACY_MIGRATED_KEY = "mianmian-legacy-migrated-v1";
   const MAX_UPLOAD_BYTES = 20 * 1024 * 1024;
 
+  const GUIDANCE_SOURCES = Object.freeze({
+    iris: {
+      label: "IRIS CKD 分期系统",
+      url: "https://www.iris-kidney.com/iris-staging-system",
+    },
+    isfmCkd: {
+      label: "ISFM 猫CKD诊疗共识",
+      url: "https://journals.sagepub.com/doi/10.1177/1098612X16631234",
+    },
+    wsavaNutrition: {
+      label: "WSAVA 全球营养指南",
+      url: "https://wsava.org/global-guidelines/global-nutrition-guidelines/",
+    },
+    phosphorusReview: {
+      label: "JFMS 2024 猫磷与肾病综述",
+      url: "https://journals.sagepub.com/doi/full/10.1177/1098612X241283355",
+    },
+    hydrationReview: {
+      label: "JAS 2025 猫摄水证据综述",
+      url: "https://academic.oup.com/jas/article/doi/10.1093/jas/skaf434/8379605",
+    },
+    mctStudy: {
+      label: "Vet Pathol 猫皮肤MCT研究",
+      url: "https://journals.sagepub.com/doi/10.1177/0300985818800028",
+    },
+  });
+
   const CATEGORIES = [
     ["lab", "实验室", "CBC · 生化 · 炎症指标", "🔬", "blue"],
     ["renal", "肾脏管理", "CREA · SDMA · 尿检 · 血压", "💧", "mint"],
@@ -855,6 +882,110 @@
     ).join("")}</div>`;
   }
 
+  function evidenceLinks(keys) {
+    return keys
+      .map((key) => GUIDANCE_SOURCES[key])
+      .filter(Boolean)
+      .map(
+        (source) =>
+          `<a class="evidence-link" href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.label)} ↗</a>`,
+      )
+      .join("");
+  }
+
+  function guidanceCard({ tone, level, title, observation, advice, sources }) {
+    return `<article class="guidance-card tone-${esc(tone)}">
+      <div class="guidance-card-head"><span class="evidence-level">${esc(level)}</span><h3>${esc(title)}</h3></div>
+      <p class="guidance-observation"><strong>当前依据：</strong>${esc(observation)}</p>
+      <p><strong>建议：</strong>${esc(advice)}</p>
+      <div class="evidence-links" aria-label="科学来源">${evidenceLinks(sources)}</div>
+    </article>`;
+  }
+
+  function medicalGuidance() {
+    const crea = latest("CREA");
+    const sdma = latest("SDMA");
+    const phos = latest("PHOS");
+    const weight = latest("WEIGHT");
+    const missingRenal = ["USG", "UPC", "SBP"].filter((metric) => !latest(metric));
+    const kidneySnapshot = [
+      crea ? `CREA ${crea.value} ${crea.unit || ""}（${date(crea.recordedAt)}）` : "CREA 未记录",
+      sdma ? `SDMA ${sdma.value} ${sdma.unit || ""}（${date(sdma.recordedAt)}）` : "SDMA 未记录",
+    ].join("；");
+    const renalAdvice = missingRenal.length
+      ? `现有数据不足以单独确诊或进行IRIS分期。建议结合临床状态，在稳定水合条件下复查CREA/SDMA，并补充${missingRenal.map((metric) => METRIC_LABEL[metric]).join("、")}；如需分期，应先确认肾脏异常持续存在并排除肾前性和肾后性原因。`
+      : "尿比重、UPC和收缩压已有记录；仍应由医生结合稳定期CREA/SDMA、尿沉渣、影像及临床状态确认是否存在CKD并决定复查频率。";
+
+    const phosValue = Number(phos?.value);
+    const phosphorusLow =
+      Number.isFinite(phosValue) &&
+      (phosValue < 1 || /低|偏低|下限/.test(String(phos?.status || "")));
+    const phosphorusObservation = phos
+      ? `最新PHOS为 ${phos.value} ${phos.unit || ""}，记录状态为“${phos.status || "未标注"}”。`
+      : "目前没有可用的血磷记录。";
+    const phosphorusAdvice = !phos
+      ? "在决定是否限磷前先补充血磷，并结合肾脏诊断、完整饮食史和实验室参考区间评估。"
+      : phosphorusLow
+        ? "目前不支持自行进一步限磷或使用磷结合剂。磷是必需营养素；建议先复查血磷，并核对主食是否完整均衡、实际摄入热量及钙磷信息，再由医生决定是否需要饮食调整。"
+        : "不要仅凭单次CREA自行切换处方肾脏饮食。若医生确认CKD，再依据IRIS阶段、血磷趋势、体况和肌肉量制定适度限磷方案。";
+
+    const waterMl = Number(state.nutritionSummary?.averageWaterMlPerDay);
+    const weightKg = Number(weight?.value);
+    const waterPerKg =
+      Number.isFinite(waterMl) && Number.isFinite(weightKg) && weightKg > 0
+        ? waterMl / weightKg
+        : null;
+    const nutritionObservation = [
+      weight ? `体重 ${weight.value} ${weight.unit || "kg"}（${date(weight.recordedAt)}）` : "体重未记录",
+      Number.isFinite(waterMl)
+        ? `资料中的日均总摄水约 ${waterMl} ml${Number.isFinite(waterPerKg) ? `（约 ${waterPerKg.toFixed(0)} ml/kg/日）` : ""}`
+        : "尚无可核对的总摄水记录",
+    ].join("；");
+
+    const mctObservation = state.mctFollowUp?.detail || "既往存在皮肤肥大细胞瘤病史，当前随访信息待更新。";
+
+    const cards = [
+      guidanceCard({
+        tone: "mint",
+        level: "临床指南",
+        title: "肾脏：先确认诊断，再进行分期",
+        observation: kidneySnapshot,
+        advice: renalAdvice,
+        sources: ["iris", "isfmCkd"],
+      }),
+      guidanceCard({
+        tone: phosphorusLow ? "amber" : "blue",
+        level: "指南＋综述",
+        title: phosphorusLow ? "喂养：当前不宜继续机械限磷" : "喂养：依据确诊状态制定限磷方案",
+        observation: phosphorusObservation,
+        advice: phosphorusAdvice,
+        sources: ["phosphorusReview", "isfmCkd"],
+      }),
+      guidanceCard({
+        tone: "blue",
+        level: "营养指南＋综述",
+        title: "营养与水合：监测体况，而非只看体重",
+        observation: nutritionObservation,
+        advice: "维持可长期完整均衡的主食，并在每次复诊记录体重、BCS和MCS。湿粮或提高膳食含水量通常能增加总水摄入，但摄水记录不能替代尿比重和临床水合评估；不建议在没有医生评估时强行设定补液量。",
+        sources: ["wsavaNutrition", "hydrationReview"],
+      }),
+      guidanceCard({
+        tone: "peach",
+        level: "同行评议研究",
+        title: "MCT：持续记录新病灶与原位变化",
+        observation: mctObservation,
+        advice: "建议用同一角度照片、尺标和日期记录病灶；若出现增大、破溃、反复舔咬或新结节，应尽快由医生复查并决定是否FNA或活检。研究显示猫皮肤MCT可发生局部复发或远处新发病灶，因此长期随访具有依据，但个体风险仍需结合病理。",
+        sources: ["mctStudy"],
+      }),
+    ];
+
+    return `<section class="guidance-section" aria-labelledby="medical-guidance-title">
+      <div class="section-head"><div><h2 id="medical-guidance-title">循证医疗与喂养建议</h2><p>根据当前线上指标动态生成 · 每条建议均附可点击来源</p></div></div>
+      <div class="guidance-note"><strong>使用边界：</strong>这是基于现有记录的决策提示，不代替兽医诊断、处方或面对面检查。若数据更新，建议内容会随最新指标重新计算。</div>
+      <div class="guidance-grid">${cards.join("")}</div>
+    </section>`;
+  }
+
   function home() {
     return `<div class="view">
       ${hero()}
@@ -868,6 +999,7 @@
         <article class="notice"><h3>${esc(state.renalNotice?.title || "肾脏监测")}</h3><p>${esc(state.renalNotice?.detail || "")}</p></article>
         <article class="notice"><h3>${esc(state.mctFollowUp?.title || "MCT 随访")}</h3><p>${esc(state.mctFollowUp?.detail || "")}</p></article>
       </div>
+      ${medicalGuidance()}
     </div>`;
   }
 
