@@ -1599,18 +1599,19 @@
       "module": "treatment",
       "recordedAt": "2026-07-18",
       "title": "左前爪掌垫 MCT 冷冻处理",
-      "summary": "局部冷冻处理后进入恢复与病灶观察期。",
+      "summary": "局部冷冻处理后经过一个月恢复，原位目前已看不出肿瘤。",
       "data": {
         "treatmentClass": "局部治疗",
         "indication": "MCT-004",
         "route": "局部",
-        "response": "恢复观察中",
+        "response": "已恢复，原位肉眼看不出肿瘤。",
         "status": "已完成"
       },
       "imageUrls": [],
+      "imageFiles": [],
       "sourceKey": "baseline:treatment:2026-07-18-cryo",
       "createdAt": "2026-08-15 08:55:05",
-      "updatedAt": "2026-08-15 08:55:05"
+      "updatedAt": "2026-08-17T13:26:03.497Z"
     },
     {
       "id": 16,
@@ -2225,8 +2226,8 @@
     }
   ],
   "_cloud": {
-    "revision": 7,
-    "updatedAt": "2026-08-17T12:58:54.034Z",
+    "revision": 8,
+    "updatedAt": "2026-08-17T13:26:11.210Z",
     "updatedBy": "jingyan7115"
   }
 }
