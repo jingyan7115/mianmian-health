@@ -1810,12 +1810,13 @@
         "diagnosis": "细针穿刺（FNA）",
         "treatment": "药物治疗；2026-07-18 冷冻处理",
         "response": "2025 年短期药物治疗约半月未见明显缩小",
-        "status": "冷冻后观察中（基于 2026-08-15 版原始资料）"
+        "status": "冷冻后历时3周已恢复正常，肉眼看不出肿瘤"
       },
       "imageUrls": [],
+      "imageFiles": [],
       "sourceKey": "baseline:mct-004",
       "createdAt": "2026-08-15 08:55:04",
-      "updatedAt": "2026-08-15 08:55:04"
+      "updatedAt": "2026-08-17T13:32:06.702Z"
     },
     {
       "id": 11,
@@ -2226,8 +2227,8 @@
     }
   ],
   "_cloud": {
-    "revision": 8,
-    "updatedAt": "2026-08-17T13:26:11.210Z",
+    "revision": 9,
+    "updatedAt": "2026-08-17T13:32:12.753Z",
     "updatedBy": "jingyan7115"
   }
 }
