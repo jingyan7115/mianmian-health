@@ -1560,6 +1560,11 @@
         "frequency": "每晚一次",
         "route": "胶囊喂食",
         "cycle": "持续进行中，预计一个月。",
+        "durationValue": 1,
+        "durationUnit": "月",
+        "endDate": "2026-09-08",
+        "reminderAction": "联系医生确认停药或换量",
+        "reminderNote": "泼尼松龙减量疗程到期；不要自行骤停，按开药医生既定方案确认下一步。",
         "adverseEffects": "无"
       },
       "imageUrls": [],
@@ -1708,7 +1713,8 @@
         "frequency": "泼尼松龙每晚一次；法莫替丁由早晚各一次，逐渐减量至每天一次。",
         "route": "胶囊喂食",
         "response": "泼尼松龙效果不是很明显，肿瘤并没有减小，倒是也没有快速增大。但是这个肿瘤本来就稳定。不好说有多大的作用。",
-        "status": "一切正常。"
+        "status": "一切正常。",
+        "reminderCompletedAt": "2026-08-08T00:00:00.000Z"
       },
       "imageUrls": [],
       "sourceKey": "baseline:treatment:2026-06-21-pred-famotidine",
@@ -2227,8 +2233,8 @@
     }
   ],
   "_cloud": {
-    "revision": 9,
-    "updatedAt": "2026-08-17T13:32:12.753Z",
+    "revision": 10,
+    "updatedAt": "2026-08-19T14:07:35.000Z",
     "updatedBy": "jingyan7115"
   }
 }
