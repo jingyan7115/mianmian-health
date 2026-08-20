@@ -2475,8 +2475,8 @@
       button.onclick = () => {
         const target = document.querySelector(button.dataset.medJump);
         if (!target) return;
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-        setTimeout(() => target.focus({ preventScroll: true }), 420);
+        target.scrollIntoView({ block: "start" });
+        target.focus({ preventScroll: true });
       };
     });
     document.querySelectorAll("[data-med-complete]").forEach((button) => {
