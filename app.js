@@ -1081,11 +1081,38 @@
           </article>`;
         }).join("")
       : '<div class="empty">目前没有未处理的用药疗程提醒。可在“用药与治疗”中填写开始日期和疗程长度。</div>';
-    return `<section class="medication-reminder-section" aria-labelledby="medication-reminder-title">
-      <div class="section-head"><div><h2 id="medication-reminder-title">用药疗程提醒</h2><p>按开始日期和疗程自动计算 · 可添加到手机日历</p></div></div>
+    return `<section class="medication-reminder-section" id="medication-reminder-details" tabindex="-1" aria-labelledby="medication-reminder-title">
+      <div class="section-head"><div><h2 id="medication-reminder-title">用药疗程详情</h2><p>按开始日期和疗程自动计算 · 可添加到手机日历</p></div></div>
       <div class="guidance-note"><strong>安全边界：</strong>提醒用于执行已经确定的医嘱，不会自动替你决定停药。尤其是泼尼松龙等糖皮质激素，到期后应按开药医生给出的减量或换量方案处理。</div>
       <div class="med-reminder-grid">${cards}</div>
       <div class="evidence-links med-evidence">${evidenceLinks(["prednisoloneSafety", "felineSteroidTaper"])}</div>
+    </section>`;
+  }
+
+  function medicationReminderPeek() {
+    const reminders = medicationReminders();
+    if (!reminders.length) {
+      return `<section class="med-calendar-peek" aria-label="用药提醒">
+        <button class="med-calendar-note is-empty" data-category="treatment">
+          <span class="calendar-sheet" aria-hidden="true"><small>用药</small><strong>＋</strong></span>
+          <span class="calendar-copy"><span class="calendar-eyebrow">用药疗程提醒</span><strong>目前没有未处理的提醒</strong><small>点击进入“用药与治疗”添加疗程</small></span>
+          <span class="calendar-arrow">去添加 <b>›</b></span>
+        </button>
+      </section>`;
+    }
+    const reminder = reminders[0];
+    const status = reminderStatus(reminder);
+    const due = parseDateOnly(reminder.dueDate);
+    const data = reminder.entry.data || {};
+    const month = due ? due.getUTCMonth() + 1 : "—";
+    const day = due ? String(due.getUTCDate()).padStart(2, "0") : "—";
+    const more = reminders.length > 1 ? ` · 另有 ${reminders.length - 1} 条` : "";
+    return `<section class="med-calendar-peek" aria-label="最近用药提醒">
+      <button class="med-calendar-note tone-${esc(status.tone)}" data-med-jump="#medication-reminder-details" aria-label="查看${esc(reminder.entry.title)}的完整疗程提醒">
+        <span class="calendar-sheet" aria-hidden="true"><small>${esc(month)}月</small><strong>${esc(day)}</strong></span>
+        <span class="calendar-copy"><span class="calendar-eyebrow">最近用药提醒 · ${esc(status.text)}${esc(more)}</span><strong>${esc(reminder.entry.title)}</strong><small>${date(reminder.dueDate)}${data.reminderTime ? ` ${esc(data.reminderTime)}` : ""} · ${esc(reminder.action)}</small></span>
+        <span class="calendar-arrow">查看详情 <b>›</b></span>
+      </button>
     </section>`;
   }
 
@@ -1252,6 +1279,7 @@
     const mctNotice = liveMctFollowUp();
     const manualNotice = recentManualNotice();
     return `<div class="view">
+      ${medicationReminderPeek()}
       ${hero()}
       ${searchBar()}
       <div class="section-head"><div><h2>关键指标</h2><p>最新一次已确认记录</p></div></div>
@@ -2442,6 +2470,14 @@
     });
     document.querySelectorAll("[data-med-calendar]").forEach((button) => {
       button.onclick = () => downloadMedicationCalendar(button.dataset.medCalendar);
+    });
+    document.querySelectorAll("[data-med-jump]").forEach((button) => {
+      button.onclick = () => {
+        const target = document.querySelector(button.dataset.medJump);
+        if (!target) return;
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        setTimeout(() => target.focus({ preventScroll: true }), 420);
+      };
     });
     document.querySelectorAll("[data-med-complete]").forEach((button) => {
       button.onclick = async () => {
