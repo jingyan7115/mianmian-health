@@ -1527,6 +1527,26 @@
   ],
   "moduleEntries": [
     {
+      "id": "user-7452f539-699c-4e52-b159-9cbc44e8f833",
+      "module": "mct",
+      "recordedAt": "2026-08-08",
+      "title": "疑似MCT-005",
+      "summary": "患处太小，细胞学确认无果。本着预防的目的冷冻处理掉了。",
+      "data": {
+        "lesionId": "疑似MCT-005",
+        "location": "左后爪掌垫边缘",
+        "size": "非常小",
+        "diagnosis": "尝试细胞学失败，没有破损，玻片未采集到有用信息。",
+        "treatment": "冷冻",
+        "status": "肉眼看去近乎正常，持续观察中"
+      },
+      "imageUrls": [],
+      "imageFiles": [],
+      "sourceKey": "user:16131c41-40ae-434c-948a-dde2001eaa11",
+      "createdAt": "2026-08-20T07:34:54.928Z",
+      "updatedAt": "2026-08-20T07:34:54.928Z"
+    },
+    {
       "id": "user-eb3a33a6-a719-4b70-ab94-a65344a8aee8",
       "module": "treatment",
       "recordedAt": "2026-08-15",
@@ -2233,8 +2253,8 @@
     }
   ],
   "_cloud": {
-    "revision": 10,
-    "updatedAt": "2026-08-19T14:07:35.000Z",
+    "revision": 11,
+    "updatedAt": "2026-08-20T07:34:56.156Z",
     "updatedBy": "jingyan7115"
   }
 }
