@@ -1527,6 +1527,29 @@
   ],
   "moduleEntries": [
     {
+      "id": "user-e3426f2f-be18-4cbf-83fc-75679cc94071",
+      "module": "treatment",
+      "recordedAt": "2026-09-09",
+      "title": "泼尼松龙减量适应",
+      "summary": "",
+      "data": {
+        "indication": "肥大细胞瘤",
+        "dose": "0.25mg/kg",
+        "frequency": "每晚一次",
+        "route": "胶囊",
+        "cycle": "一个月",
+        "durationUnit": "月",
+        "endDate": "2026-10-09",
+        "reminderTime": "19:30",
+        "reminderAction": "联系医生确认停药或换量"
+      },
+      "imageUrls": [],
+      "imageFiles": [],
+      "sourceKey": "user:30f1a46a-aec0-4efb-bfe9-2e6658f3ab51",
+      "createdAt": "2026-09-09T17:20:21.820Z",
+      "updatedAt": "2026-09-09T17:20:21.820Z"
+    },
+    {
       "id": "user-7452f539-699c-4e52-b159-9cbc44e8f833",
       "module": "mct",
       "recordedAt": "2026-08-08",
@@ -2254,8 +2277,8 @@
     }
   ],
   "_cloud": {
-    "revision": 12,
-    "updatedAt": "2026-09-09T17:17:39.262Z",
+    "revision": 13,
+    "updatedAt": "2026-09-09T17:20:24.049Z",
     "updatedBy": "jingyan7115"
   }
 }
