@@ -1585,12 +1585,13 @@
         "endDate": "2026-09-08",
         "reminderAction": "联系医生确认停药或换量",
         "reminderNote": "泼尼松龙减量疗程到期；不要自行骤停，按开药医生既定方案确认下一步。",
-        "adverseEffects": "无"
+        "adverseEffects": "无",
+        "reminderCompletedAt": "2026-09-09T17:17:38.007Z"
       },
       "imageUrls": [],
       "sourceKey": "user:950d0fd2-3faa-485e-b0ee-b19a9a9f9ca8",
       "createdAt": "2026-08-15T12:40:43.362Z",
-      "updatedAt": "2026-08-15T12:40:43.362Z"
+      "updatedAt": "2026-09-09T17:17:38.007Z"
     },
     {
       "id": 17,
@@ -2253,8 +2254,8 @@
     }
   ],
   "_cloud": {
-    "revision": 11,
-    "updatedAt": "2026-08-20T07:34:56.156Z",
+    "revision": 12,
+    "updatedAt": "2026-09-09T17:17:39.262Z",
     "updatedBy": "jingyan7115"
   }
 }
