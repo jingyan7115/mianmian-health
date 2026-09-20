@@ -1,8 +1,7 @@
 (() => {
   "use strict";
 
-  const INITIAL = {"metrics":[{"id":1,"ownerId":"mianmian-vault-v1","recordedAt":"2020-02-16","metric":"WEIGHT","value":3.6,"unit":"kg","status":"历史记录","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:29"},{"id":2,"ownerId":"mianmian-vault-v1","recordedAt":"2020-02-16","metric":"CREA","value":175,"unit":"µmol/L","status":"历史记录","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:29"},{"id":3,"ownerId":"mianmian-vault-v1","recordedAt":"2020-02-16","metric":"BUN","value":6.53,"unit":"mmol/L","status":"报告范围内","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:29"},{"id":4,"ownerId":"mianmian-vault-v1","recordedAt":"2020-02-16","metric":"PHOS","value":1.27,"unit":"mmol/L","status":"报告范围内","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:29"},{"id":5,"ownerId":"mianmian-vault-v1","recordedAt":"2020-02-16","metric":"ALT","value":69,"unit":"U/L","status":"报告范围内","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:29"},{"id":6,"ownerId":"mianmian-vault-v1","recordedAt":"2021-04-01","metric":"WEIGHT","value":3.59,"unit":"kg","status":"历史记录","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:29"},{"id":7,"ownerId":"mianmian-vault-v1","recordedAt":"2021-04-01","metric":"CREA","value":176.8,"unit":"µmol/L","status":"单位已换算","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:29"},{"id":8,"ownerId":"mianmian-vault-v1","recordedAt":"2021-04-01","metric":"BUN","value":10.35,"unit":"mmol/L","status":"单位已换算","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:29"},{"id":9,"ownerId":"mianmian-vault-v1","recordedAt":"2021-04-01","metric":"PHOS","value":1.16,"unit":"mmol/L","status":"单位已换算","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":10,"ownerId":"mianmian-vault-v1","recordedAt":"2021-04-01","metric":"ALT","value":57,"unit":"U/L","status":"报告范围内","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":11,"ownerId":"mianmian-vault-v1","recordedAt":"2023-02-22","metric":"CREA","value":152,"unit":"µmol/L","status":"脂血样本","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":12,"ownerId":"mianmian-vault-v1","recordedAt":"2023-02-22","metric":"BUN","value":13.3,"unit":"mmol/L","status":"高于报告范围","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":13,"ownerId":"mianmian-vault-v1","recordedAt":"2023-02-22","metric":"PHOS","value":1.07,"unit":"mmol/L","status":"接近下限","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":14,"ownerId":"mianmian-vault-v1","recordedAt":"2023-02-22","metric":"ALT","value":61,"unit":"U/L","status":"报告范围内","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":15,"ownerId":"mianmian-vault-v1","recordedAt":"2025-07-05","metric":"WEIGHT","value":3.59,"unit":"kg","status":"心超报告","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":16,"ownerId":"mianmian-vault-v1","recordedAt":"2026-06-21","metric":"WEIGHT","value":3.58,"unit":"kg","status":"稳定","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":17,"ownerId":"mianmian-vault-v1","recordedAt":"2026-06-21","metric":"CREA","value":192.9,"unit":"µmol/L","status":"方法学差异","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":18,"ownerId":"mianmian-vault-v1","recordedAt":"2026-06-21","metric":"SDMA","value":12.47,"unit":"µg/dL","status":"报告范围内","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":19,"ownerId":"mianmian-vault-v1","recordedAt":"2026-06-21","metric":"BUN","value":9.86,"unit":"mmol/L","status":"报告范围内","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":20,"ownerId":"mianmian-vault-v1","recordedAt":"2026-06-21","metric":"PHOS","value":1.14,"unit":"mmol/L","status":"报告范围内","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":21,"ownerId":"mianmian-vault-v1","recordedAt":"2026-06-21","metric":"ALT","value":99,"unit":"U/L","status":"报告范围内","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":22,"ownerId":"mianmian-vault-v1","recordedAt":"2026-06-28","metric":"WEIGHT","value":3.58,"unit":"kg","status":"复查报告","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":23,"ownerId":"mianmian-vault-v1","recordedAt":"2026-07-04","metric":"WEIGHT","value":3.46,"unit":"kg","status":"记录值","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":24,"ownerId":"mianmian-vault-v1","recordedAt":"2026-07-04","metric":"CREA","value":151,"unit":"µmol/L","status":"报告范围内","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":25,"ownerId":"mianmian-vault-v1","recordedAt":"2026-07-04","metric":"BUN","value":10.3,"unit":"mmol/L","status":"报告范围内","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":26,"ownerId":"mianmian-vault-v1","recordedAt":"2026-07-04","metric":"PHOS","value":0.73,"unit":"mmol/L","status":"低于参考","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":27,"ownerId":"mianmian-vault-v1","recordedAt":"2026-07-04","metric":"ALT","value":16,"unit":"U/L","status":"报告范围内","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":28,"ownerId":"mianmian-vault-v1","recordedAt":"2026-07-18","metric":"WEIGHT","value":3.63,"unit":"kg","status":"CBC报告","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":29,"ownerId":"mianmian-vault-v1","recordedAt":"2026-08-15","metric":"WEIGHT","value":3.64,"unit":"kg","status":"稳定","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":30,"ownerId":"mianmian-vault-v1","recordedAt":"2026-08-15","metric":"CREA","value":151,"unit":"µmol/L","status":"本次报告范围内","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":31,"ownerId":"mianmian-vault-v1","recordedAt":"2026-08-15","metric":"SDMA","value":9,"unit":"µg/dL","status":"报告范围内","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":32,"ownerId":"mianmian-vault-v1","recordedAt":"2026-08-15","metric":"BUN","value":10,"unit":"mmol/L","status":"报告范围内","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":33,"ownerId":"mianmian-vault-v1","recordedAt":"2026-08-15","metric":"PHOS","value":0.8,"unit":"mmol/L","status":"低于参考","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":34,"ownerId":"mianmian-vault-v1","recordedAt":"2026-08-15","metric":"ALT","value":22,"unit":"U/L","status":"报告范围内","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":35,"ownerId":"mianmian-vault-v1","recordedAt":"2026-08-15","metric":"WBC","value":8.02,"unit":"10^9/L","status":"报告范围内","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":36,"ownerId":"mianmian-vault-v1","recordedAt":"2026-08-15","metric":"HCT","value":40.7,"unit":"%","status":"无贫血证据","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":37,"ownerId":"mianmian-vault-v1","recordedAt":"2026-08-15","metric":"HGB","value":138,"unit":"g/L","status":"无贫血证据","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":38,"ownerId":"mianmian-vault-v1","recordedAt":"2026-08-15","metric":"PLT","value":174,"unit":"10^9/L","status":"报告范围内","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"},{"id":39,"ownerId":"mianmian-vault-v1","recordedAt":"2026-08-15","metric":"MPV","value":19.3,"unit":"fL","status":"高于参考","source":"baseline:0815(2)","sourceUploadId":null,"createdAt":"2026-08-15 07:23:30"}],"records":[{"id":1,"ownerId":"mianmian-vault-v1","recordedAt":"2026-08-15","category":"综合复查","title":"CBC + IDEXX 生化 + 全腹超声","summary":"CREA 151、SDMA 9、UREA 10.0；PHOS 0.80 低。CBC 无贫血、白细胞减少或血小板减少。左肾 3.03 cm，右肾 3.83 cm。","sourceUploadId":"baseline","createdAt":"2026-08-15 07:23:30"},{"id":3,"ownerId":"mianmian-vault-v1","recordedAt":"2026-07-18","category":"肿瘤","title":"左前爪掌垫 MCT 冷冻","summary":"冷冻笔处理后进入恢复观察期；病灶位置已统一更正为左前爪掌垫。","sourceUploadId":"baseline","createdAt":"2026-08-15 07:23:30"},{"id":2,"ownerId":"mianmian-vault-v1","recordedAt":"2026-07-18","category":"CBC","title":"血常规复查","summary":"CBC 总体稳定；LYM% 轻度相对升高但绝对值正常，MPV 高而 PLT 正常。报告性别误记为雄性。","sourceUploadId":"baseline","createdAt":"2026-08-15 07:23:30"},{"id":4,"ownerId":"mianmian-vault-v1","recordedAt":"2026-07-04","category":"综合检查","title":"生化与全腹超声","summary":"CREA 151、PHOS 0.73；脾脏多发小结节，胰腺慢性改变，建议动态随访。","sourceUploadId":"baseline","createdAt":"2026-08-15 07:23:30"},{"id":5,"ownerId":"mianmian-vault-v1","recordedAt":"2026-06-21","category":"年度体检","title":"多系统综合检查","summary":"SDMA 与 CysC 在报告范围内；CREA 192.9 存在方法学差异，需结合稳定状态复测、尿检和血压。","sourceUploadId":"baseline","createdAt":"2026-08-15 07:23:30"}],"uploads":[],"labReports":[{"id":"lab-2020-02-16","recordedAt":"2020-02-16","title":"血液生化检查","summary":"生化：CREA 175 µmol/L、BUN 6.53 mmol/L、PHOS 1.27 mmol/L；ALT 69 U/L、GLU 8.08 mmol/L。原报告采用 SI 单位。","panels":["血液生化"],"results":[{"label":"体重","value":"3.60 kg"},{"label":"CREA","value":"175 µmol/L"},{"label":"BUN","value":"6.53 mmol/L"},{"label":"PHOS","value":"1.27 mmol/L"},{"label":"Ca","value":"2.30 mmol/L"},{"label":"ALT","value":"69 U/L"},{"label":"ALP","value":"40 U/L"},{"label":"TBIL","value":"3.76 µmol/L"},{"label":"ALB","value":"35.7 g/L"},{"label":"TP","value":"77.8 g/L"},{"label":"GLOB","value":"42.1 g/L"},{"label":"GLU","value":"8.08 mmol/L"},{"label":"AMYL","value":"2314 U/L"},{"label":"CHOL","value":"3.34 mmol/L"},{"label":"CK","value":"101 U/L"},{"label":"A/G","value":"0.80"}],"reportPages":[{"label":"生化报告","url":"/reports/2020-02-16-chemistry-1.jpg","sha256":"1df0f17a3867e18830d3605cf11fb909a9805ec15bca781fdf43304ce12b784d"}]},{"id":"lab-2021-04-01","recordedAt":"2021-04-01","title":"血液生化检查","summary":"生化：CREA 176.8 µmol/L、BUN 10.35 mmol/L、PHOS 1.16 mmol/L、GLU 10.99 mmol/L。原报告常规单位已换算为 SI。","panels":["血液生化"],"results":[{"label":"体重","value":"3.59 kg"},{"label":"CREA","value":"176.8 µmol/L"},{"label":"BUN","value":"10.35 mmol/L"},{"label":"PHOS","value":"1.16 mmol/L"},{"label":"Ca","value":"2.64 mmol/L"},{"label":"ALT","value":"57 U/L"},{"label":"ALP","value":"46 U/L"},{"label":"GGT","value":"0 U/L"},{"label":"TBIL","value":"3.42 µmol/L"},{"label":"ALB","value":"24 g/L"},{"label":"TP","value":"79 g/L"},{"label":"GLOB","value":"45 g/L"},{"label":"GLU","value":"10.99 mmol/L"},{"label":"AMYL","value":"654 U/L"},{"label":"LIPA","value":"779 U/L"},{"label":"CHOL","value":"189 mg/dL"}],"note":"换算依据保留在长期库：CREA 2.00 mg/dL、BUN 29 mg/dL、GLU 198 mg/dL、PHOS 3.60 mg/dL、Ca 10.60 mg/dL、TBIL 0.20 mg/dL。","reportPages":[{"label":"生化报告","url":"/reports/2021-04-01-chemistry-1.jpg","sha256":"420aff9bbe65ba24dac444de81718a1260c50a226bf420e3d6ae0537dac6f94f"}]},{"id":"lab-2023-02-22","recordedAt":"2023-02-22","title":"血液生化检查","summary":"生化：CREA 152 µmol/L、BUN 13.3 mmol/L、PHOS 1.07 mmol/L；样本脂血，BUN 与 CHOL 高于该报告参考范围。","panels":["血液生化"],"results":[{"label":"CREA","value":"152 µmol/L"},{"label":"BUN","value":"13.3 mmol/L","flag":"high"},{"label":"PHOS","value":"1.07 mmol/L"},{"label":"Ca","value":"2.36 mmol/L"},{"label":"ALT","value":"61 U/L"},{"label":"ALP","value":"27 U/L"},{"label":"TBIL","value":"8.46 µmol/L"},{"label":"ALB","value":"33.1 g/L"},{"label":"TP","value":"71.8 g/L"},{"label":"GLOB","value":"38.7 g/L"},{"label":"GLU","value":"7.78 mmol/L"},{"label":"AMYL","value":"1392 U/L"},{"label":"CHOL","value":"6.09 mmol/L","flag":"high"},{"label":"CK","value":"113 U/L"},{"label":"A/G","value":"0.90"}],"note":"原报告注明样本脂血；异常标记仅按该次报告的参考范围呈现。","reportPages":[{"label":"生化报告","url":"/reports/2023-02-22-chemistry-1.jpg","sha256":"a6aca3db451e5772923c9c3663e27796920be0dce1ba3f626fb17a3558976ee2"}]},{"id":"lab-2026-06-21","recordedAt":"2026-06-21","title":"综合实验室检查","summary":"同日完成 CBC、血气、电解质、生化、肾脏荧光指标、SAA、心肌/凝血筛查及抗体滴度，共关联 7 份原始报告。","panels":["CBC","生化","肾脏荧光","SAA","静脉血气","心肌/凝血筛查","抗体滴度"],"results":[{"label":"体重","value":"3.58 kg"},{"label":"CREA（生化）","value":"192.9 µmol/L"},{"label":"CREA（荧光）","value":"0.97 mg/dL","flag":"note"},{"label":"SDMA","value":"12.47 µg/dL"},{"label":"CysC","value":"0.25 mg/L"},{"label":"BUN","value":"9.86 mmol/L"},{"label":"PHOS","value":"1.14 mmol/L"},{"label":"Ca","value":"2.49 mmol/L"},{"label":"Na（生化）","value":"140 mmol/L"},{"label":"K（生化）","value":"4.15 mmol/L"},{"label":"ALT","value":"99 U/L"},{"label":"AST","value":"42 U/L"},{"label":"ALP","value":"40 U/L"},{"label":"GGT","value":"2 U/L"},{"label":"TBIL","value":"1.3 µmol/L"},{"label":"ALB","value":"34.8 g/L"},{"label":"TP","value":"79.1 g/L"},{"label":"GLOB","value":"44.3 g/L"},{"label":"GLU","value":"9.85 mmol/L"},{"label":"HCT","value":"36.0 %"},{"label":"HGB","value":"129 g/L"},{"label":"WBC","value":"8.07 ×10^9/L"},{"label":"NEU#","value":"3.479 ×10^9/L"},{"label":"LYM#","value":"3.436 ×10^9/L"},{"label":"EOS#","value":"0.873 ×10^9/L"},{"label":"PLT","value":"193 ×10^9/L"},{"label":"MPV","value":"19.8 fL","flag":"high"},{"label":"SAA","value":"3.7 mg/L"},{"label":"BNP","value":"<50 pmol/L"},{"label":"feline-cTnI","value":"<0.10 ng/mL"},{"label":"D-dimer","value":"0.26 mg/L"},{"label":"FHW","value":"<5（阴性）"},{"label":"FDP","value":"<1（阴性）"},{"label":"静脉血气 pH","value":"7.35"},{"label":"HCO3","value":"18.1 mmol/L","flag":"low"},{"label":"PCO2","value":"37 mmHg"},{"label":"阴离子间隙","value":"26 mmol/L"},{"label":"tCO2","value":"19.1 mmol/L","flag":"low"},{"label":"Na（血气）","value":"162 mmol/L","flag":"note"},{"label":"K（血气）","value":"3.5 mmol/L","flag":"note"},{"label":"Cl（血气）","value":"121 mmol/L","flag":"note"},{"label":"猫瘟抗体","value":"S4"},{"label":"杯状病毒抗体","value":"S4"},{"label":"疱疹病毒抗体","value":"S5"}],"note":"同日不同检测平台的 CREA 与电解质结果不可直接合并；这里按原报告分别保留。抗体滴度仅记录原始等级，不据此推断保护力。","reportPages":[{"label":"肾功能荧光","url":"/reports/2026-06-21-renal-fluorescence-1.jpg","sha256":"f9725e7a9c84bb98f98a219a07ac60b9b7721244594c8c037fd855083a2ae390"},{"label":"心肌/凝血筛查","url":"/reports/2026-06-21-cardiac-coagulation-1.jpg","sha256":"aeb0068fc188bd0c617a5973843ccf19de04a7a2654f5454f471e6c634709218"},{"label":"血常规","url":"/reports/2026-06-21-cbc-1.jpg","sha256":"703942bc66d8275d697f554d6932c7830154cb4dffae4485955e125bdd1b0393"},{"label":"SAA","url":"/reports/2026-06-21-saa-1.jpg","sha256":"a4db68968ab0e71fa22168b1ab4809abfdddfff22acfa3079b72352970604ca1"},{"label":"血液生化","url":"/reports/2026-06-21-chemistry-1.jpg","sha256":"32cc4ed614665c645fd826285b1d34decbbf5b3665fc190de067ab9e4d14d880"},{"label":"静脉血气/电解质","url":"/reports/2026-06-21-blood-gas-1.jpg","sha256":"11630ea80a49bbcc0d7626fcf0a55248ccdc48381f6d214a178cf4d8497ea67f"},{"label":"抗体滴度","url":"/reports/2026-06-21-antibody-titers-1.jpg","sha256":"acce2a1f38fc022e2201bef7b62c15efb1ea0b0e1865215e2a1adf6dc42c26ea"}]},{"id":"lab-2026-06-28","recordedAt":"2026-06-28","title":"血常规与 SAA","summary":"CBC：HCT 35.0%、HGB 124 g/L、WBC 9.34×10^9/L、PLT 264×10^9/L；LYM% 45.99% 轻度高、RDW-CV 14.7% 轻度低、MPV 21.1 fL 高。SAA 4.8 mg/L。","panels":["CBC","SAA"],"results":[{"label":"体重","value":"3.58 kg"},{"label":"WBC","value":"9.34 ×10^9/L"},{"label":"LYM%","value":"45.99 %","flag":"high"},{"label":"LYM#","value":"4.295 ×10^9/L"},{"label":"NEU#","value":"4.048 ×10^9/L"},{"label":"EOS#","value":"0.731 ×10^9/L"},{"label":"HGB","value":"124 g/L"},{"label":"HCT","value":"35.0 %"},{"label":"RDW-CV","value":"14.7 %","flag":"low"},{"label":"PLT","value":"264 ×10^9/L"},{"label":"MPV","value":"21.1 fL","flag":"high"},{"label":"SAA","value":"4.8 mg/L"}],"note":"异常标记按该次原报告参考范围保留；SAA 位于报告显示的 0–8 mg/L 区间内。","reportPages":[{"label":"血常规","url":"/reports/2026-06-28-cbc-1.jpg","sha256":"dec87903839e984483f290082764cfce2f39a45d066ab3a635aff59997617d5c"},{"label":"SAA","url":"/reports/2026-06-28-saa-1.jpg","sha256":"775413f61d5a752a8d4769944c0308016803cb129b2ede8d8c4a431a8af75ef9"}]},{"id":"lab-2026-07-04","recordedAt":"2026-07-04","title":"IDEXX Catalyst One 生化检查","summary":"CREA 151 µmol/L、UREA 10.3 mmol/L、PHOS 0.73 mmol/L；PHOS 低于该报告参考范围。已关联当天生化报告原图。","panels":["IDEXX Catalyst One 生化"],"results":[{"label":"体重","value":"3.46 kg"},{"label":"GLU","value":"7.10 mmol/L"},{"label":"CREA","value":"151 µmol/L"},{"label":"UREA","value":"10.3 mmol/L"},{"label":"BUN/CREA","value":"17"},{"label":"PHOS","value":"0.73 mmol/L","flag":"low"},{"label":"Ca","value":"2.41 mmol/L"},{"label":"TP","value":"81 g/L"},{"label":"ALB","value":"34 g/L"},{"label":"GLOB","value":"47 g/L"},{"label":"A/G","value":"0.7"},{"label":"ALT","value":"16 U/L"},{"label":"ALKP","value":"30 U/L"},{"label":"GGT","value":"0 U/L"},{"label":"TBIL","value":"<2 µmol/L"},{"label":"CHOL","value":"3.65 mmol/L"},{"label":"AMYL","value":"867 U/L"},{"label":"LIPA","value":"675 U/L"}],"reportPages":[{"label":"生化报告","url":"/reports/2026-07-04-chemistry-1.jpg","sha256":"fe8bd85da0a1d801bbb69e40272aac4cb085e4036c9a93cbf2a6f0d4fbff717d"}]},{"id":"lab-2026-07-18","recordedAt":"2026-07-18","title":"血常规五分类","summary":"HCT 37.7%、HGB 127 g/L、WBC 10.14×10^9/L、PLT 197×10^9/L；LYM% 47.59% 轻度高但绝对值在报告区间内，MPV 19.0 fL 高。","panels":["CBC 五分类"],"results":[{"label":"WBC","value":"10.14 ×10^9/L"},{"label":"LYM%","value":"47.59 %","flag":"high"},{"label":"MON%","value":"4.04 %"},{"label":"NEU%","value":"43.65 %"},{"label":"EOS%","value":"4.50 %"},{"label":"BASO%","value":"0.22 %"},{"label":"LYM#","value":"4.825 ×10^9/L"},{"label":"MON#","value":"0.409 ×10^9/L"},{"label":"NEU#","value":"4.428 ×10^9/L"},{"label":"EOS#","value":"0.456 ×10^9/L"},{"label":"BASO#","value":"0.022 ×10^9/L"},{"label":"NRBC%","value":"0.88 %"},{"label":"NRBC#","value":"0.08 ×10^9/L"},{"label":"RBC","value":"7.91 ×10^12/L"},{"label":"HGB","value":"127 g/L"},{"label":"HCT","value":"37.7 %"},{"label":"MCV","value":"47.7 fL"},{"label":"MCH","value":"16.0 pg"},{"label":"MCHC","value":"336 g/L"},{"label":"RDW-CV","value":"17.1 %"},{"label":"PLT","value":"197 ×10^9/L"},{"label":"MPV","value":"19.0 fL","flag":"high"},{"label":"ALY%","value":"1.08 %"},{"label":"ALY#","value":"0.109 ×10^9/L"},{"label":"LIC%","value":"0.38 %"},{"label":"LIC#","value":"0.038 ×10^9/L"}],"note":"报告抬头登记为雄性，与长期档案中的雌性记录不一致；这里保留该资料冲突，待后续核对。","reportPages":[{"label":"CBC 数值","url":"/reports/2026-07-18-cbc-1.jpg","sha256":"b2a6eb6b8f64dee884549cd26f03e4a065b3014f6031bdca092203dc9eceb8b0"},{"label":"CBC 图谱与提示","url":"/reports/2026-07-18-cbc-2.jpg","sha256":"9fcc3166921f58c78579e63b5fceaa872b7a6bcbd7da35a5b9d042dae5c68906"}]},{"id":"lab-2026-08-15","recordedAt":"2026-08-15","title":"CBC + IDEXX 生化 / SDMA","summary":"CREA 151 µmol/L、SDMA 9 µg/dL、UREA 10.0 mmol/L；PHOS 0.80 mmol/L 低。CBC 中 LYM% 轻度高但绝对值在报告区间内，MPV 19.3 fL 高、PLT 正常。","panels":["CBC 五分类","IDEXX Catalyst One 生化","SDMA"],"results":[{"label":"体重（长期库）","value":"3.64 kg","flag":"note"},{"label":"体重（报告抬头）","value":"3.46 kg","flag":"note"},{"label":"GLU","value":"6.79 mmol/L"},{"label":"SDMA","value":"9 µg/dL"},{"label":"CREA","value":"151 µmol/L"},{"label":"UREA","value":"10.0 mmol/L"},{"label":"BUN/CREA","value":"16"},{"label":"PHOS","value":"0.80 mmol/L","flag":"low"},{"label":"Ca","value":"2.52 mmol/L"},{"label":"TP","value":"78 g/L"},{"label":"ALB","value":"36 g/L"},{"label":"GLOB","value":"42 g/L"},{"label":"A/G","value":"0.9"},{"label":"ALT","value":"22 U/L"},{"label":"ALKP","value":"30 U/L"},{"label":"GGT","value":"0 U/L"},{"label":"TBIL","value":"<2 µmol/L"},{"label":"CHOL","value":"3.60 mmol/L"},{"label":"AMYL","value":"858 U/L"},{"label":"LIPA","value":"686 U/L"},{"label":"WBC","value":"8.02 ×10^9/L"},{"label":"LYM%","value":"48.18 %","flag":"high"},{"label":"MON%","value":"3.50 %"},{"label":"NEU%","value":"42.72 %"},{"label":"EOS%","value":"5.44 %"},{"label":"BASO%","value":"0.16 %"},{"label":"LYM#","value":"3.864 ×10^9/L"},{"label":"MON#","value":"0.280 ×10^9/L"},{"label":"NEU#","value":"3.428 ×10^9/L"},{"label":"EOS#","value":"0.436 ×10^9/L"},{"label":"BASO#","value":"0.012 ×10^9/L"},{"label":"NRBC%","value":"0.83 %"},{"label":"NRBC#","value":"0.06 ×10^9/L"},{"label":"RBC","value":"8.50 ×10^12/L"},{"label":"HGB","value":"138 g/L"},{"label":"HCT","value":"40.7 %"},{"label":"MCV","value":"47.9 fL"},{"label":"MCH","value":"16.2 pg"},{"label":"MCHC","value":"339 g/L"},{"label":"RDW-CV","value":"17.0 %"},{"label":"PLT","value":"174 ×10^9/L"},{"label":"MPV","value":"19.3 fL","flag":"high"},{"label":"ALY%","value":"1.38 %"},{"label":"ALY#","value":"0.110 ×10^9/L"},{"label":"LIC%","value":"0.26 %"},{"label":"LIC#","value":"0.020 ×10^9/L"}],"note":"生化报告抬头体重为 3.46 kg，而 0815 长期数据库记录为 3.64 kg；两项均保留，待核对原始就诊记录。异常标记按各自报告参考范围呈现。","reportPages":[{"label":"生化 / SDMA","url":"/reports/2026-08-15-chemistry-1.jpg","sha256":"ed361717d96d92b03b7b31c2ba6b60974979ef219f1eb26d81129f283c715454"},{"label":"CBC 数值","url":"/reports/2026-08-15-cbc-1.jpg","sha256":"6ebc46a86dc6d2849e1c53c6bfad8dac9baddd79cf97659fc9c38da7a1dc3ea0"},{"label":"CBC 图谱与提示","url":"/reports/2026-08-15-cbc-2.jpg","sha256":"2b0a64840a7f8469c73e7e7da89b9f43faead3c67ebd98e10a15471c8eb0e988"}]}],"moduleEntries":[{"id":"user-eb3a33a6-a719-4b70-ab94-a65344a8aee8","module":"treatment","recordedAt":"2026-08-15","title":"疑似左后爪掌垫MCT处理+泼尼松龙持续","summary":"左后爪中央掌垫处边缘，疑似有一个小包，上周有破溃结痂。这周未进行细胞学确认，直接处理掉了。","data":{"treatmentClass":"局部治疗+药物治疗","indication":"MCT-005（疑似）","dose":"泼尼松龙按照8.8剂量继续给药","frequency":"泼尼松龙每晚一次","route":"胶囊喂食","cycle":"冷冻当日结束，泼尼松龙还有三周","monitoring":"戴脖圈，禁止爪部舔舐。","notes":"该MCT因为过小，细胞学没有采到有用细胞，所以未确诊。只是出于疑似的角度，反正也是长出的异物，就进行了冷冻处理。"},"imageUrls":[],"sourceKey":"user:2bd4e0e7-2924-4362-8d69-52550bacf6ab","createdAt":"2026-08-15T12:48:02.616Z","updatedAt":"2026-08-15T12:52:58.387Z"},{"id":"user-722fcd5a-21c3-4fe4-be22-dabc72b9763e","module":"treatment","recordedAt":"2026-08-08","title":"泼尼松龙","summary":"泼尼松龙减量给药","data":{"treatmentClass":"激素药","indication":"肥大细胞瘤","dose":"0.5mg/kg","frequency":"每晚一次","route":"胶囊喂食","cycle":"持续进行中，预计一个月。","durationValue":1,"durationUnit":"月","endDate":"2026-09-08","reminderAction":"联系医生确认停药或换量","reminderNote":"泼尼松龙减量疗程到期；不要自行骤停，按开药医生既定方案确认下一步。","adverseEffects":"无"},"imageUrls":[],"sourceKey":"user:950d0fd2-3faa-485e-b0ee-b19a9a9f9ca8","createdAt":"2026-08-15T12:40:43.362Z","updatedAt":"2026-08-15T12:40:43.362Z"},{"id":17,"module":"imaging","recordedAt":"2026-08-15","title":"全腹超声","summary":"脾脏小结节及血管钙化；左肾 3.03 cm，右肾 3.83 cm；胰腺厚约 0.69 cm。","data":{"modality":"全腹超声","leftKidneyCm":3.03,"rightKidneyCm":3.83,"pancreasCm":0.69,"largestSplenicNodule":"0.22 × 0.14 cm"},"imageUrls":["/reports/2026-08-15-abdominal-us-1.jpg"],"sourceKey":"baseline:imaging:2026-08-15-abdominal","createdAt":"2026-08-15 08:55:04","updatedAt":"2026-08-15 08:55:04","imageFiles":[{"url":"/reports/2026-08-15-abdominal-us-1.jpg","name":"2026-08-15-abdominal-us-1.jpg","sha256":"e555ad4cf89fd8376bc019d53e673dfc8523e0830a579ed410599e5749059b82"}]},{"id":20,"module":"treatment","recordedAt":"2026-07-18","title":"左前爪掌垫 MCT 冷冻处理","summary":"局部冷冻处理后经过一个月恢复，原位目前已看不出肿瘤。","data":{"treatmentClass":"局部治疗","indication":"MCT-004","route":"局部","response":"已恢复，原位肉眼看不出肿瘤。","status":"已完成"},"imageUrls":[],"imageFiles":[],"sourceKey":"baseline:treatment:2026-07-18-cryo","createdAt":"2026-08-15 08:55:05","updatedAt":"2026-08-17T13:26:03.497Z"},{"id":16,"module":"imaging","recordedAt":"2026-07-04","title":"全腹超声","summary":"脾脏多发小结节及血管钙化、胰腺慢性改变；左肾 3.18 cm，右肾 3.85 cm。","data":{"modality":"全腹超声","leftKidneyCm":3.18,"rightKidneyCm":3.85},"imageUrls":["/reports/2026-07-04-abdominal-us-1.jpg"],"sourceKey":"baseline:imaging:2026-07-04-abdominal","createdAt":"2026-08-15 08:55:04","updatedAt":"2026-08-15 08:55:04","imageFiles":[{"url":"/reports/2026-07-04-abdominal-us-1.jpg","name":"2026-07-04-abdominal-us-1.jpg","sha256":"bc58bae26d3964163aeeca6139b050947e864829737b6946ed7fdfbfaf9eb4ee"}]},{"id":15,"module":"imaging","recordedAt":"2026-06-28","title":"胰腺与小肠复查超声","summary":"轻度胰腺与小肠改变；胰管约 0.15 cm，胰腺体部约 0.97 cm。","data":{"modality":"局部复查超声","pancreaticDuctCm":0.15,"pancreasBodyCm":0.97},"imageUrls":["/reports/2026-06-28-pancreas-us-1.jpg"],"sourceKey":"baseline:imaging:2026-06-28-pancreas","createdAt":"2026-08-15 08:55:04","updatedAt":"2026-08-15 08:55:04","imageFiles":[{"url":"/reports/2026-06-28-pancreas-us-1.jpg","name":"2026-06-28-pancreas-us-1.jpg","sha256":"553504c9a32bfe79b3652897513c6540ed39937080d5a58821333c2a515aa05a"}]},{"id":14,"module":"imaging","recordedAt":"2026-06-28","title":"全腹超声","summary":"脾脏结节及血管钙化、胰腺慢性改变、胃内异物样内容；左肾 3.13 cm，右肾 3.94 cm。","data":{"modality":"全腹超声","leftKidneyCm":3.13,"rightKidneyCm":3.94},"imageUrls":["/reports/2026-06-28-abdominal-us-1.jpg","/reports/2026-06-28-abdominal-us-2.jpg"],"sourceKey":"baseline:imaging:2026-06-28-abdominal","createdAt":"2026-08-15 08:55:04","updatedAt":"2026-08-15 08:55:04","imageFiles":[{"url":"/reports/2026-06-28-abdominal-us-1.jpg","name":"2026-06-28-abdominal-us-1.jpg","sha256":"cb5d063f118fb66b89137fad76961f8b9a72041be156c1ff11486efd9fa8712a"},{"url":"/reports/2026-06-28-abdominal-us-2.jpg","name":"2026-06-28-abdominal-us-2.jpg","sha256":"53c30735f7fb9e3bd247593ab74569e813969a3f85c397cf9afd5e4b31a18569"}]},{"id":19,"module":"treatment","recordedAt":"2026-06-21","title":"泼尼松龙 + 法莫替丁","summary":"泼尼松龙控制肿瘤发展，法莫替丁抑制胃酸","data":{"treatmentClass":"药物治疗","indication":"MCT-004","endDate":"2026-08-08","dose":"泼尼松龙一1mg/kg，法莫替丁0.5mg/kg","frequency":"泼尼松龙每晚一次；法莫替丁由早晚各一次，逐渐减量至每天一次。","route":"胶囊喂食","response":"泼尼松龙效果不是很明显，肿瘤并没有减小，倒是也没有快速增大。但是这个肿瘤本来就稳定。不好说有多大的作用。","status":"一切正常。","reminderCompletedAt":"2026-08-08T00:00:00.000Z"},"imageUrls":[],"sourceKey":"baseline:treatment:2026-06-21-pred-famotidine","createdAt":"2026-08-15 08:55:05","updatedAt":"2026-08-15T12:44:39.608Z"},{"id":13,"module":"imaging","recordedAt":"2026-06-21","title":"心脏超声","summary":"LA/AO 1.34，EF 97.57%，FS 73.56%；见主观返流血流，未描述明确形态异常。","data":{"modality":"心脏超声","laAo":1.34,"ef":"97.57%","fs":"73.56%"},"imageUrls":["/reports/2026-06-21-cardiac-us-1.jpg"],"sourceKey":"baseline:imaging:2026-06-21-cardiac","createdAt":"2026-08-15 08:55:04","updatedAt":"2026-08-15 08:55:04","imageFiles":[{"url":"/reports/2026-06-21-cardiac-us-1.jpg","name":"2026-06-21-cardiac-us-1.jpg","sha256":"9a4a61c6dce2b854caa9fd0def2952573ab8f5709f1961d688db1ceda1610cf4"}]},{"id":12,"module":"imaging","recordedAt":"2026-06-21","title":"腹部超声 + 胸腹部 DR","summary":"轻度胃肠动力改变；DR 见 T10–11 骨赘/脊椎病改变；左肾 3.24 cm，右肾 3.63 cm。","data":{"modality":"腹部超声 + DR","leftKidneyCm":3.24,"rightKidneyCm":3.63},"imageUrls":["/reports/2026-06-21-dr-1.jpg","/reports/2026-06-21-abdominal-us-1.jpg","/reports/2026-06-21-abdominal-us-2.jpg"],"sourceKey":"baseline:imaging:2026-06-21-abdominal-dr","createdAt":"2026-08-15 08:55:04","updatedAt":"2026-08-15 08:55:04","imageFiles":[{"url":"/reports/2026-06-21-dr-1.jpg","name":"2026-06-21-dr-1.jpg","sha256":"da32c44f86c1e1ed44f18c9e4e4df9a4e622e401295d51b58537b6c7389c82db"},{"url":"/reports/2026-06-21-abdominal-us-1.jpg","name":"2026-06-21-abdominal-us-1.jpg","sha256":"e7653650b3d5e32b64c2f69022b489c37f1cbb32ac9e4200f1bf4639f51c83a6"},{"url":"/reports/2026-06-21-abdominal-us-2.jpg","name":"2026-06-21-abdominal-us-2.jpg","sha256":"69ed9be9e6860131f0151b7a6db128869ca69eeed3a8d4178857a660b30f1fad"}]},{"id":18,"module":"treatment","recordedAt":"2025-07-19","title":"泼尼松龙 + 法莫替丁","summary":"用于左前爪掌垫 MCT，原始资料记录至 2025 年 8 月 22 日；约半月未见明显缩小。","data":{"treatmentClass":"药物治疗","indication":"MCT-004","endDate":"2025-08-22","response":"约半月未见明显缩小","status":"已结束","dose":"原始健康库未录入剂量"},"imageUrls":[],"sourceKey":"baseline:treatment:2025-07-19-pred-famotidine","createdAt":"2026-08-15 08:55:04","updatedAt":"2026-08-15 08:55:04"},{"id":4,"module":"mct","recordedAt":"2025-07-19","title":"MCT-004 · 左前爪掌垫病灶","summary":"细针穿刺确认后曾接受泼尼松龙与法莫替丁，2026 年 7 月 18 日完成冷冻处理。","data":{"lesionId":"MCT-004","location":"左前爪掌垫","side":"左侧","diagnosis":"细针穿刺（FNA）","treatment":"药物治疗；2026-07-18 冷冻处理","response":"2025 年短期药物治疗约半月未见明显缩小","status":"冷冻后历时3周已恢复正常，肉眼看不出肿瘤"},"imageUrls":[],"imageFiles":[],"sourceKey":"baseline:mct-004","createdAt":"2026-08-15 08:55:04","updatedAt":"2026-08-17T13:32:06.702Z"},{"id":11,"module":"imaging","recordedAt":"2025-07-05","title":"心脏超声","summary":"LA/AO 1.44，EF 99.6%，FS 86%；左心房内见主观返流血流，未描述主要结构异常。","data":{"modality":"心脏超声","laAo":1.44,"ef":"99.6%","fs":"86%"},"imageUrls":["/reports/2025-07-05-cardiac-us-1.jpg"],"sourceKey":"baseline:imaging:2025-07-05-cardiac","createdAt":"2026-08-15 08:55:04","updatedAt":"2026-08-15 08:55:04","imageFiles":[{"url":"/reports/2025-07-05-cardiac-us-1.jpg","name":"2025-07-05-cardiac-us-1.jpg","sha256":"d07199c2553e9d1d091c4b10c45fc8c83283aad8aefee52f81df28ea7253c46f"}]},{"id":10,"module":"imaging","recordedAt":"2025-07-05","title":"腹部超声","summary":"报告描述十二指肠炎性改变及左肾偏小；左肾 2.95 cm，右肾 3.52 cm。","data":{"modality":"腹部超声","leftKidneyCm":2.95,"rightKidneyCm":3.52},"imageUrls":["/reports/2025-07-05-abdominal-us-1.jpg"],"sourceKey":"baseline:imaging:2025-07-05-abdominal","createdAt":"2026-08-15 08:55:04","updatedAt":"2026-08-15 08:55:04","imageFiles":[{"url":"/reports/2025-07-05-abdominal-us-1.jpg","name":"2025-07-05-abdominal-us-1.jpg","sha256":"e0a724db1be38d8e6f4e9c2f148320ef78898c426afc53096204b1b95454179b"}]},{"id":3,"module":"mct","recordedAt":"2024-07-01","title":"MCT-003 · 左前爪掌垫病灶","summary":"2024 年 7 月细针穿刺确认，7 月 14 日切除；病理记录提示切缘可见肥大细胞。","data":{"lesionId":"MCT-003","location":"左前爪掌垫","side":"左侧","diagnosis":"细针穿刺 + 组织病理","pathology":"切缘可见肥大细胞","treatment":"2024-07-14 手术切除","status":"切缘阳性记录，持续观察"},"imageUrls":[],"sourceKey":"baseline:mct-003","createdAt":"2026-08-15 08:55:04","updatedAt":"2026-08-15 08:55:04"},{"id":9,"module":"imaging","recordedAt":"2023-02-22","title":"心脏超声","summary":"LA/AO 1.30，EF 87%，FS 53%；报告未描述明显异常。","data":{"modality":"心脏超声","laAo":1.3,"ef":"87%","fs":"53%"},"imageUrls":["/reports/2023-02-22-cardiac-us-1.jpg"],"sourceKey":"baseline:imaging:2023-02-22-cardiac","createdAt":"2026-08-15 08:55:04","updatedAt":"2026-08-15 08:55:04","imageFiles":[{"url":"/reports/2023-02-22-cardiac-us-1.jpg","name":"2023-02-22-cardiac-us-1.jpg","sha256":"917da3e918bdd6fb21122842563cb2f2bdfe30c6dd47a353762da4a79b451f35"}]},{"id":8,"module":"imaging","recordedAt":"2023-02-22","title":"全腹超声","summary":"左肾体积偏小并伴回声改变；左肾 3.07 cm，右肾 3.73 cm。","data":{"modality":"全腹超声","leftKidneyCm":3.07,"rightKidneyCm":3.73},"imageUrls":["/reports/2023-02-22-abdominal-us-1.jpg","/reports/2023-02-22-abdominal-us-2.jpg"],"sourceKey":"baseline:imaging:2023-02-22-abdominal","createdAt":"2026-08-15 08:55:04","updatedAt":"2026-08-15 08:55:04","imageFiles":[{"url":"/reports/2023-02-22-abdominal-us-1.jpg","name":"2023-02-22-abdominal-us-1.jpg","sha256":"9fe238d62f4b42a7330a50e7fc499e55a39f4d346de8f4fe67f54aef0b69b10a"},{"url":"/reports/2023-02-22-abdominal-us-2.jpg","name":"2023-02-22-abdominal-us-2.jpg","sha256":"b947db875e3e8aad422b0a0852f66e13c2eccf79903a2f2f2b0dd810c391ba8d"}]},{"id":2,"module":"mct","recordedAt":"2021-08-01","title":"MCT-002 · 耳尖病灶","summary":"2024 年 7 月 14 日切除并完成病理检查，报告为致密型低级肥大细胞瘤。","data":{"lesionId":"MCT-002","location":"耳尖","diagnosis":"组织病理","pathology":"致密型低级肥大细胞瘤","treatment":"2024-07-14 手术切除","status":"术后随访"},"imageUrls":[],"sourceKey":"baseline:mct-002","createdAt":"2026-08-15 08:55:04","updatedAt":"2026-08-15 08:55:04"},{"id":1,"module":"mct","recordedAt":"2021-08-01","title":"MCT-001 · 前胸病灶","summary":"2021 年 8 月细针穿刺提示肥大细胞瘤，2023 年 3 月完成手术处理。","data":{"lesionId":"MCT-001","location":"前胸","diagnosis":"细针穿刺（FNA）","pathology":"原始健康库未见病理分级记录","treatment":"2023-03 手术","status":"历史病灶，持续随访"},"imageUrls":[],"sourceKey":"baseline:mct-001","createdAt":"2026-08-15 08:55:04","updatedAt":"2026-08-15 08:55:04"},{"id":7,"module":"imaging","recordedAt":"2021-07-23","title":"心脏超声","summary":"LA/AO 1.30，EF 95%，FS 67%；报告未描述明显异常。","data":{"modality":"心脏超声","laAo":1.3,"ef":"95%","fs":"67%"},"imageUrls":["/reports/2021-07-23-cardiac-us-1.jpg","/reports/2021-07-23-cardiac-us-2.jpg"],"sourceKey":"baseline:imaging:2021-07-23-cardiac","createdAt":"2026-08-15 08:55:04","updatedAt":"2026-08-15 08:55:04","imageFiles":[{"url":"/reports/2021-07-23-cardiac-us-1.jpg","name":"2021-07-23-cardiac-us-1.jpg","sha256":"1124705edb312cda9f060d2c1ec42eb27268c10749554af4cdb208c015fab897"},{"url":"/reports/2021-07-23-cardiac-us-2.jpg","name":"2021-07-23-cardiac-us-2.jpg","sha256":"784cc709fea101c1bfb498ab15074f4d9ff5c408aa0b3ba1eab03aef83f2c75b"}]},{"id":6,"module":"imaging","recordedAt":"2021-04-01","title":"腹部超声复查","summary":"报告未见明显异常；肝脏与十二指肠较 2020 年检查描述正常。","data":{"modality":"腹部超声"},"imageUrls":["/reports/2021-04-01-abdominal-us-1.jpg"],"sourceKey":"baseline:imaging:2021-04-01-abdominal","createdAt":"2026-08-15 08:55:04","updatedAt":"2026-08-15 08:55:04","imageFiles":[{"url":"/reports/2021-04-01-abdominal-us-1.jpg","name":"2021-04-01-abdominal-us-1.jpg","sha256":"6f6b9572a4039bd8ecacb40e2e29e79ef74ea9c63d6bfa082807a39d1931b635"}]},{"id":5,"module":"imaging","recordedAt":"2020-12-15","title":"腹部超声","summary":"十二指肠横切面附近见局灶性肝实质回声增强，十二指肠蠕动偏慢；左肾 3.00 cm，右肾 3.80 cm。","data":{"modality":"腹部超声","leftKidneyCm":3,"rightKidneyCm":3.8},"imageUrls":["/reports/2020-12-15-abdominal-us-1.jpg"],"sourceKey":"baseline:imaging:2020-12-15-abdominal","createdAt":"2026-08-15 08:55:04","updatedAt":"2026-08-15 08:55:04","imageFiles":[{"url":"/reports/2020-12-15-abdominal-us-1.jpg","name":"2020-12-15-abdominal-us-1.jpg","sha256":"38f621205748ff995a1e8d9ba0302a1a93be0909930d018380b297c340114a87"}]}],"source":"面面_长期健康管理数据库0815版(2).xlsx","pet":{"name":"面面","age":"8岁","sex":"雌性","status":"长期随访中"},"renalNotice":{"title":"肾脏评估仍待补全","detail":"需补充 USG、尿沉渣、UPC 与收缩压；目前不能仅凭 CREA 完成 CKD 确诊或分期。","pendingCount":4},"reminders":[{"badgeTop":"待安排","badgeMain":"尿检","title":"完整尿液分析","detail":"USG · 尿沉渣 · UPC","priority":"重要","tone":"amber"},{"badgeTop":"待安排","badgeMain":"血压","title":"收缩压 SBP","detail":"用于肾脏风险亚分级","priority":"重要","tone":"blue"},{"badgeTop":"09月","badgeMain":"14","title":"月度家庭记录","detail":"体重 · BCS/MCS · MCT 自检","priority":"常规","tone":"mint"}],"mctFollowUp":{"title":"肥大细胞瘤随访","detail":"左前爪掌垫冷冻后观察中；双前肢腕垫两处疑似病灶待确认。"},"nutritionSummary":{"averageWaterMlPerDay":200,"label":"原始资料中的月均总摄水","note":"营养明细表尚无可核对的逐日记录，可从现在开始手动补录。"},"completeness":[{"label":"血常规与生化","state":"done","stateLabel":"已录入"},{"label":"腹部与心脏影像","state":"done","stateLabel":"已录入"},{"label":"MCT 病灶与病理","state":"done","stateLabel":"已录入"},{"label":"USG · 尿沉渣 · UPC","state":"pending","stateLabel":"待补"},{"label":"收缩压 SBP","state":"pending","stateLabel":"待补"}],"timeline":[{"date":"2026-08-15","type":"综合复查","title":"CBC + IDEXX 生化 + 全腹超声","detail":"CREA 151 · SDMA 9 · PHOS 0.80；双肾轮廓规则，皮髓分界清晰。"},{"date":"2026-07-18","type":"肿瘤治疗","title":"左前爪掌垫 MCT 冷冻","detail":"冷冻笔处理后恢复观察中；病灶位置已统一更正为左前爪。"},{"date":"2026-07-18","type":"实验室","title":"CBC 复查","detail":"无贫血或血小板减少；LYM% 轻度相对升高、MPV 高，绝对 LYM 与 PLT 正常。"},{"date":"2026-07-11","type":"病灶观察","title":"双前肢腕垫发现疑似病灶","detail":"两处疑似 MCT，计划细针穿刺确认。"},{"date":"2026-07-04","type":"影像与生化","title":"全腹超声与大生化","detail":"脾脏多发小结节、胰腺慢性改变；CREA 151，PHOS 0.73。"},{"date":"2026-06-21","type":"年度体检","title":"多系统综合检查","detail":"SDMA 12.47、CysC 正常；CREA 192.9 存在方法学差异。"},{"date":"2025-07-19","type":"肿瘤","title":"左前爪掌垫病灶 FNA 确认 MCT","detail":"泼尼松龙约半月无明显缩小，后转为观察。"},{"date":"2024-07-14","type":"手术与病理","title":"耳尖与脚蹼病灶切除","detail":"致密型低级肥大细胞瘤；脚蹼病灶切缘见肥大细胞。"}],"kidneyMeasurements":[{"date":"2020-12-15","left":3,"right":3.8},{"date":"2023-02-22","left":3.07,"right":3.73},{"date":"2025-07-05","left":2.95,"right":3.52},{"date":"2026-06-21","left":3.24,"right":3.63},{"date":"2026-06-28","left":3.13,"right":3.94},{"date":"2026-07-04","left":3.18,"right":3.85},{"date":"2026-08-15","left":3.03,"right":3.83}],"_cloud":{"revision":10,"updatedAt":"2026-08-19T14:07:35.000Z","updatedBy":"jingyan7115"}};
-  const REPORTS = {"/reports/2020-02-16-chemistry-1.jpg":"./reports/2020-02-16-chemistry-1.jpg","/reports/2020-12-15-abdominal-us-1.jpg":"./reports/2020-12-15-abdominal-us-1.jpg","/reports/2021-04-01-abdominal-us-1.jpg":"./reports/2021-04-01-abdominal-us-1.jpg","/reports/2021-04-01-chemistry-1.jpg":"./reports/2021-04-01-chemistry-1.jpg","/reports/2021-07-23-cardiac-us-1.jpg":"./reports/2021-07-23-cardiac-us-1.jpg","/reports/2021-07-23-cardiac-us-2.jpg":"./reports/2021-07-23-cardiac-us-2.jpg","/reports/2023-02-22-abdominal-us-1.jpg":"./reports/2023-02-22-abdominal-us-1.jpg","/reports/2023-02-22-abdominal-us-2.jpg":"./reports/2023-02-22-abdominal-us-2.jpg","/reports/2023-02-22-cardiac-us-1.jpg":"./reports/2023-02-22-cardiac-us-1.jpg","/reports/2023-02-22-chemistry-1.jpg":"./reports/2023-02-22-chemistry-1.jpg","/reports/2025-07-05-abdominal-us-1.jpg":"./reports/2025-07-05-abdominal-us-1.jpg","/reports/2025-07-05-cardiac-us-1.jpg":"./reports/2025-07-05-cardiac-us-1.jpg","/reports/2026-06-21-abdominal-us-1.jpg":"./reports/2026-06-21-abdominal-us-1.jpg","/reports/2026-06-21-abdominal-us-2.jpg":"./reports/2026-06-21-abdominal-us-2.jpg","/reports/2026-06-21-antibody-titers-1.jpg":"./reports/2026-06-21-antibody-titers-1.jpg","/reports/2026-06-21-blood-gas-1.jpg":"./reports/2026-06-21-blood-gas-1.jpg","/reports/2026-06-21-cardiac-coagulation-1.jpg":"./reports/2026-06-21-cardiac-coagulation-1.jpg","/reports/2026-06-21-cardiac-us-1.jpg":"./reports/2026-06-21-cardiac-us-1.jpg","/reports/2026-06-21-cbc-1.jpg":"./reports/2026-06-21-cbc-1.jpg","/reports/2026-06-21-chemistry-1.jpg":"./reports/2026-06-21-chemistry-1.jpg","/reports/2026-06-21-dr-1.jpg":"./reports/2026-06-21-dr-1.jpg","/reports/2026-06-21-renal-fluorescence-1.jpg":"./reports/2026-06-21-renal-fluorescence-1.jpg","/reports/2026-06-21-saa-1.jpg":"./reports/2026-06-21-saa-1.jpg","/reports/2026-06-28-abdominal-us-1.jpg":"./reports/2026-06-28-abdominal-us-1.jpg","/reports/2026-06-28-abdominal-us-2.jpg":"./reports/2026-06-28-abdominal-us-2.jpg","/reports/2026-06-28-cbc-1.jpg":"./reports/2026-06-28-cbc-1.jpg","/reports/2026-06-28-pancreas-us-1.jpg":"./reports/2026-06-28-pancreas-us-1.jpg","/reports/2026-06-28-saa-1.jpg":"./reports/2026-06-28-saa-1.jpg","/reports/2026-07-04-abdominal-us-1.jpg":"./reports/2026-07-04-abdominal-us-1.jpg","/reports/2026-07-04-chemistry-1.jpg":"./reports/2026-07-04-chemistry-1.jpg","/reports/2026-07-18-cbc-1.jpg":"./reports/2026-07-18-cbc-1.jpg","/reports/2026-07-18-cbc-2.jpg":"./reports/2026-07-18-cbc-2.jpg","/reports/2026-08-15-abdominal-us-1.jpg":"./reports/2026-08-15-abdominal-us-1.jpg","/reports/2026-08-15-cbc-1.jpg":"./reports/2026-08-15-cbc-1.jpg","/reports/2026-08-15-cbc-2.jpg":"./reports/2026-08-15-cbc-2.jpg","/reports/2026-08-15-chemistry-1.jpg":"./reports/2026-08-15-chemistry-1.jpg"};
+  const INITIAL = {metrics: [], records: [], uploads: [], labReports: [], moduleEntries: [], timeline: [], kidneyMeasurements: []};
   const REPO_OWNER = "jingyan7115";
   const REPO_NAME = "mianmian-health";
   const BRANCH = "main";
@@ -51,14 +50,14 @@
   });
 
   const CATEGORIES = [
-    ["lab", "实验室", "CBC · 生化 · 炎症指标", "🔬", "blue"],
-    ["renal", "肾脏管理", "CREA · SDMA · 尿检 · 血压", "💧", "mint"],
-    ["mct", "MCT 病灶", "病灶地图 · 病理 · 处理", "🧬", "peach"],
-    ["imaging", "影像检查", "腹超 · 心超 · DR", "🩻", "violet"],
-    ["treatment", "用药与治疗", "剂量 · 疗效 · 不良反应", "💊", "amber"],
-    ["nutrition", "营养与水合", "饮食 · 摄水 · 体重", "🥣", "mint"],
-    ["qol", "生活质量", "活动 · 食欲 · 疼痛 · QOL", "💚", "blue"],
-    ["timeline", "病程时间轴", "全部检查与治疗事件", "🗓️", "violet"],
+    ["lab", "实验室", "CBC · 生化 · 炎症指标", "◈", "blue"],
+    ["renal", "肾脏管理", "CREA · SDMA · 尿检 · 血压", "◌", "mint"],
+    ["mct", "MCT 病灶", "病灶地图 · 病理 · 处理", "✧", "peach"],
+    ["imaging", "影像检查", "腹超 · 心超 · DR", "▧", "violet"],
+    ["treatment", "用药与治疗", "剂量 · 疗效 · 不良反应", "☾", "amber"],
+    ["nutrition", "营养与水合", "饮食 · 摄水 · 体重", "◡", "mint"],
+    ["qol", "生活质量", "活动 · 食欲 · 疼痛 · QOL", "♡", "blue"],
+    ["timeline", "病程时间轴", "全部检查与治疗事件", "⌛", "violet"],
   ];
 
   const MODULE_LABEL = {
@@ -592,10 +591,10 @@
     state = clone(INITIAL);
     setCloudStatus(
       "error",
-      apiError?.message || "无法读取线上数据，当前显示发布时内置版本",
+      apiError?.message || "无法读取线上数据，请连接网络重新载入资料",
     );
     render();
-    if (notify) toast("无法读取线上数据，当前显示内置版本", 3600);
+    if (notify) toast("无法读取线上数据，请重试", 3600);
   }
 
   function safeUploadName(file) {
@@ -887,7 +886,7 @@
 
   function stat(metric) {
     const item = latest(metric);
-    return `<div class="stat">
+    return `<button class="stat" data-trend-link="${esc(metric)}" aria-label="查看${esc(METRIC_LABEL[metric] || metric)}长期趋势">
       <small>${esc(METRIC_LABEL[metric] || metric)}</small>
       <strong>${item ? esc(item.value) : "—"}</strong>
       <em>${item ? esc(item.unit) : ""}</em>
@@ -896,7 +895,8 @@
           ? `${date(item.recordedAt)} · ${esc(item.status || "已记录")}`
           : "暂无记录"
       }</div>
-    </div>`;
+      <span class="stat-link">查看趋势 ↗</span>
+    </button>`;
   }
 
   function hero() {
@@ -909,9 +909,9 @@
           : `最新健康资料来自线上同步库（版本 ${esc(state._cloud?.revision || "—")}）。`;
     return `<section class="hero">
       <div class="hero-grid">
-        <div class="avatar">🐈</div>
+        <div class="avatar" aria-hidden="true"><span class="cat-sigil">☾</span><span class="sigil-star">✧</span></div>
         <div>
-          <h1>${esc(state.pet?.name || "面面")}</h1>
+          <span class="eyebrow">MIANMIAN · HEALTH JOURNAL</span><h1>${esc(state.pet?.name || "面面")}的健康手记</h1>
           <p>${esc(state.pet?.age || "8岁")} · ${esc(state.pet?.sex || "母猫")} · 当前体重 ${weight ? esc(weight.value) : "—"} kg<br>${syncText}</p>
         </div>
         ${ownerMode ? '<button class="primary" data-action="upload">＋ 上传并同步</button>' : ""}
@@ -922,16 +922,16 @@
   function searchBar() {
     return `<form class="search" id="search-form">
       <span>⌕</span>
-      <input id="search-input" aria-label="检索面面的长期健康库" placeholder="输入日期、检查、病灶、药物或指标，按 Enter 跳转">
+      <input id="search-input" aria-label="检索面面的长期健康库" placeholder="搜索日期、报告、药物或指标…">
       <button>检索</button>
     </form>`;
   }
 
-  function categoryGrid() {
-    return `<div class="category-grid">${CATEGORIES.map(
+  function categoryGrid(ids = CATEGORIES.map(item => item[0])) {
+    return `<div class="category-grid">${CATEGORIES.filter(item => ids.includes(item[0])).map(
       (category) => `<button class="category tone-${category[4]}" data-category="${category[0]}">
         <span class="icon">${category[3]}</span>
-        <span><h3>${category[1]}</h3><p>${category[2]}</p></span>
+        <span><h3>${category[1]}</h3><p>${category[2]}</p></span><span class="category-arrow" aria-hidden="true">↗</span>
       </button>`,
     ).join("")}</div>`;
   }
@@ -1077,7 +1077,7 @@
             <p>${[data.dose && `剂量：${data.dose}`, data.frequency && `频率：${data.frequency}`, `开始：${date(reminder.entry.recordedAt)}`].filter(Boolean).map(esc).join(" · ")}</p>
             <div class="med-action"><strong>到期动作：</strong>${esc(reminder.action)}${data.reminderNote ? `<br><span>${esc(data.reminderNote)}</span>` : ""}</div>
             ${reminder.glucocorticoid ? '<div class="med-warning"><strong>激素用药提示：</strong>疗程计时到期不等于可以自行骤停。请按开药医生既定减量方案确认停药或换量；没有适用于所有猫的统一减量日程。</div>' : ""}
-            <div class="entry-actions"><button data-med-calendar="${esc(reminder.entry.id)}">添加到手机日历</button>${ownerMode ? `<button data-med-complete="${esc(reminder.entry.id)}">标记已处理</button>` : ""}</div>
+            <div class="entry-actions">${recordLink("treatment", reminder.entry.id, "查看疗程原记录")}<button data-med-calendar="${esc(reminder.entry.id)}">添加到手机日历</button>${ownerMode ? `<button data-med-complete="${esc(reminder.entry.id)}">标记已处理</button>` : ""}</div>
           </article>`;
         }).join("")
       : '<div class="empty">目前没有未处理的用药疗程提醒。可在“用药与治疗”中填写开始日期和疗程长度。</div>';
@@ -1184,6 +1184,7 @@
       <p class="guidance-observation"><strong>当前依据：</strong>${esc(observation)}</p>
       <p><strong>建议：</strong>${esc(advice)}</p>
       <div class="evidence-links" aria-label="科学来源">${evidenceLinks(sources)}</div>
+      <div class="guidance-actions">${sources.includes("mctStudy") ? moduleLink("mct","核对病灶记录") + moduleLink("treatment","查看治疗") : sources.includes("wsavaNutrition") ? moduleLink("nutrition","查看营养记录") : sources.includes("phosphorusReview") ? moduleLink("lab","核对检查结果") + moduleLink("nutrition","查看饮食") : moduleLink("renal","核对肾脏指标")}</div>
     </article>`;
   }
 
@@ -1268,44 +1269,74 @@
     ];
 
     return `<section class="guidance-section" aria-labelledby="medical-guidance-title">
-      <div class="section-head"><div><h2 id="medical-guidance-title">循证医疗与喂养建议</h2><p>根据当前线上指标动态生成 · 每条建议均附可点击来源</p></div></div>
+      <div class="section-head"><div><span class="eyebrow">03 / EVIDENCE & CARE</span><h2 id="medical-guidance-title">循证医疗与喂养建议</h2><p>根据当前线上指标动态生成 · 每条建议均附可点击来源</p></div></div>
       <div class="guidance-note"><strong>使用边界：</strong>这是基于现有记录的决策提示，不代替兽医诊断、处方或面对面检查。若数据更新，建议内容会随最新指标重新计算。</div>
       <div class="guidance-grid">${cards.join("")}</div>
     </section>`;
   }
 
+  const CARE_MODULES = ["treatment", "nutrition", "qol"];
+  function pageHeading(kicker, title, description) {
+    return `<div class="page-heading"><span class="eyebrow">${kicker}</span><h1>${title}</h1><p>${description}</p></div>`;
+  }
+  function moduleLink(id, label) {
+    return `<button class="text-link" data-category="${esc(id)}">${esc(label)} <span aria-hidden="true">↗</span></button>`;
+  }
+  function recordLink(type, id, label) {
+    return `<button class="text-link" data-search-type="${esc(type)}" data-search-id="${esc(id)}">${esc(label)} ↗</button>`;
+  }
+  function sameDayLinks(day, excludeId) {
+    const labs = (state.labReports || []).filter(x => x.recordedAt === day && String(x.id) !== String(excludeId));
+    const imaging = (state.moduleEntries || []).filter(x => x.module === "imaging" && x.recordedAt === day && String(x.id) !== String(excludeId));
+    const links = [...labs.map(x => recordLink("lab", x.id, "同日实验室报告")), ...imaging.map(x => recordLink("imaging", x.id, x.title))];
+    return links.length ? `<div class="related-records"><span>同日记录</span>${links.join("")}</div>` : "";
+  }
+  function relatedModules(id) {
+    const map = {
+      lab: [["renal","肾脏评估"],["imaging","影像报告"]],
+      renal: [["lab","实验室报告"],["imaging","肾脏超声"],["nutrition","饮食与摄水"]],
+      mct: [["treatment","用药与治疗"],["qol","生活质量"]],
+      imaging: [["renal","肾脏评估"],["lab","实验室报告"]],
+      treatment: [["mct","病灶随访"],["qol","生活质量"]],
+      nutrition: [["renal","肾脏评估"],["qol","生活质量"]],
+      qol: [["nutrition","饮食与摄水"],["treatment","用药与治疗"]],
+      timeline: [["lab","实验室报告"],["treatment","治疗记录"]]
+    };
+    return `<div class="related-strip"><span>关联查看</span>${(map[id] || []).map(([key,label]) => moduleLink(key,label)).join("")}${["lab","renal","imaging","nutrition"].includes(id) ? `<button class="text-link" data-trend-link="${id === "nutrition" ? "WEIGHT" : "CREA"}" ${["renal","imaging"].includes(id) ? 'data-trend-section="kidney-size"' : ''}>${["renal","imaging"].includes(id) ? "双肾大小趋势" : "指标趋势"} ↗</button>` : ""}</div>`;
+  }
   function home() {
     const renalNotice = liveRenalNotice();
     const mctNotice = liveMctFollowUp();
     const manualNotice = recentManualNotice();
-    return `<div class="view">
+    return `<div class="view home-view">
       ${medicationReminderPeek()}
       ${hero()}
       ${searchBar()}
-      <div class="section-head"><div><h2>关键指标</h2><p>最新一次已确认记录</p></div></div>
+      <div class="section-head"><div><span class="eyebrow">01 / AT A GLANCE</span><h2>面面的近况</h2><p>每项显示自己的检查日期 · 点击查看历史变化</p></div><button class="text-link" data-nav="trends">全部趋势 ↗</button></div>
       <div class="stats">${["WEIGHT", "CREA", "SDMA", "PHOS"].map(stat).join("")}</div>
-      <div class="section-head"><div><h2>数据分类</h2><p>点击进入完整内容</p></div></div>
-      ${categoryGrid()}
-      <div class="section-head"><div><h2>随访提醒</h2></div></div>
+      <div class="quick-paths">${moduleLink("lab","查检查报告")}${moduleLink("mct","看病灶变化")}${moduleLink("treatment","管理用药疗程")}${moduleLink("nutrition","记录饮食摄水")}</div>
+      <div class="section-head"><div><span class="eyebrow">02 / FOLLOW-UP</span><h2>随访提醒</h2></div>${moduleLink("timeline","完整病程")}</div>
       <div class="notice-grid">
-        <article class="notice"><h3>${esc(renalNotice.title)}</h3><p>${esc(renalNotice.detail)}</p></article>
-        <article class="notice"><h3>${esc(mctNotice.title)}</h3><p>${esc(mctNotice.detail)}</p></article>
-        ${manualNotice ? `<article class="notice"><h3>${esc(manualNotice.title)}</h3><p>${esc(manualNotice.detail)}</p></article>` : ""}
+        <article class="notice"><h3>${esc(renalNotice.title)}</h3><p>${esc(renalNotice.detail)}</p>${moduleLink("renal","查看肾脏监测")}</article>
+        <article class="notice"><h3>${esc(mctNotice.title)}</h3><p>${esc(mctNotice.detail)}</p>${moduleLink("mct","查看病灶记录")}</article>
       </div>
-      ${medicationReminderSection()}
+      ${manualNotice ? `<div class="latest-update"><span>最近手动更新</span><p>${esc(manualNotice.detail)}</p>${moduleLink("timeline","查看记录")}</div>` : ""}
       ${medicalGuidance()}
     </div>`;
   }
-
   function library() {
-    const description = ownerMode
-      ? "8 个模块均可打开；修改后会保存到线上并同步给所有访客"
-      : "8 个模块均可打开；当前为公开只读视图";
-    return `<div class="view">
-      ${hero()}
+    return `<div class="view">${pageHeading("THE ARCHIVE / 健康档案", "每一份记录，都有来处。", "按检查、专病与病程查阅；日常喂养和用药统一放在「照护记录」。")}
       ${searchBar()}
-      <div class="section-head"><div><h2>面面的长期健康库</h2><p>${description}</p></div></div>
-      ${categoryGrid()}
+      <section class="archive-group"><div class="section-head"><div><span class="eyebrow">01 / EXAMINATIONS</span><h2>检查与报告</h2><p>从原始检查开始，追溯每一项指标</p></div>${ownerMode ? '<button class="primary" data-action="upload">＋ 上传报告</button>' : ''}</div>${categoryGrid(["lab","imaging"])}</section>
+      <section class="archive-group"><div class="section-head"><div><span class="eyebrow">02 / HEALTH TOPICS</span><h2>专病随访</h2><p>围绕同一个健康问题，关联检查和治疗</p></div></div>${categoryGrid(["renal","mct"])}</section>
+      <div class="archive-footer"><div><span class="eyebrow">THE CHRONICLE</span><h2>把时间连起来</h2><p>沿着日期回看检查、病灶与治疗经过。</p></div>${moduleLink("timeline","打开病程时间轴")}</div>
+    </div>`;
+  }
+  function care() {
+    return `<div class="view">${pageHeading("DAILY RITUALS / 照护记录", "把照顾，落在每一天。", "用药、饮食与生活质量各有归处；疗程提醒直接关联原记录。")}
+      ${categoryGrid(CARE_MODULES)}
+      ${medicationReminderSection()}
+      <div class="archive-footer"><div><h2>今天的记录，成为下次就诊的依据</h2><p>首页的随访提醒与循证建议会随保存后的记录更新。</p></div><button class="text-link" data-nav="home">查看今日照护 ↗</button></div>
     </div>`;
   }
 
@@ -1367,15 +1398,15 @@
           .join("")}
       </svg>
     </div>
-    <div class="entry-list">${[...points]
+    <details class="trend-history"><summary>查看 ${points.length} 次历史数值与来源</summary><div class="entry-list">${[...points]
       .reverse()
       .map(
         (point) => `<div class="entry">
           <div class="entry-top"><h3>${date(point.recordedAt)}</h3><span class="date">${esc(point.status || "已记录")}</span></div>
-          <p><strong>${esc(point.value)} ${esc(point.unit)}</strong> · ${esc(point.source || "")}</p>
+          <p><strong>${esc(point.value)} ${esc(point.unit)}</strong> · ${esc(point.status || "已记录")}</p>${sameDayLinks(point.recordedAt, null)}
         </div>`,
       )
-      .join("")}</div>`;
+      .join("")}</div></details>`;
   }
 
   function kidneyMeasurementSeries(source = state) {
@@ -1510,20 +1541,20 @@
         </svg>
       </div>
       <table class="result-table">
-        <thead><tr><th>超声日期</th><th>左肾长径</th><th>右肾长径</th></tr></thead>
+        <thead><tr><th>超声日期</th><th>左肾长径</th><th>右肾长径</th><th>来源</th></tr></thead>
         <tbody>${[...points]
           .reverse()
           .map(
-            (point) => `<tr><td>${date(point.recordedAt)}</td><td>${formatCm(point.left)} cm</td><td>${formatCm(point.right)} cm</td></tr>`,
+            (point) => `<tr><td>${date(point.recordedAt)}</td><td>${formatCm(point.left)} cm</td><td>${formatCm(point.right)} cm</td><td>${sameDayLinks(point.recordedAt, null) || "历史超声记录"}</td></tr>`,
           )
           .join("")}</tbody>
       </table>`;
   }
 
   function trends() {
-    const metrics = ["WEIGHT", "CREA", "SDMA", "PHOS", "BUN", "ALT"];
+    const metrics = ["WEIGHT", "CREA", "SDMA", "PHOS", "BUN", "ALT", "USG", "UPC", "SBP"];
     return `<div class="view">
-      <div class="toolbar"><div class="module-title"><h1>长期趋势</h1><p>线上数据更新后，图表会使用最新记录重新绘制</p></div></div>
+      ${pageHeading("THE CONSTELLATIONS / 长期趋势", "让变化，有迹可循。", "指标与双肾大小集中查看；从每次记录可返回同日原始报告。")}<div class="related-strip"><a class="text-link" href="#kidney-size">查看双肾大小 ↓</a>${moduleLink("lab","实验室报告")}${moduleLink("imaging","影像报告")}</div>
       <div class="chart-card">
         <div class="metric-tabs">${metrics
           .map(
@@ -1534,7 +1565,7 @@
         ${chart(selectedMetric)}
       </div>
       <div style="height:14px"></div>
-      <div class="chart-card">
+      <div class="chart-card" id="kidney-size" tabindex="-1">
         <div class="section-head" style="margin:0 0 13px"><div><h2>双肾大小趋势</h2><p>来自历次腹部超声报告的左右肾长径</p></div></div>
         ${kidneyChart()}
         <div class="privacy" style="margin-top:14px">超声长径会受检查切面、操作者和设备影响，应结合肾脏形态、尿检、UPC、血压及肾功能指标综合判断；本图不单独用于 CKD 诊断或分期。</div>
@@ -1546,10 +1577,10 @@
     const category = CATEGORIES.find((item) => item[0] === id);
     return `<div class="view">
       <div class="toolbar">
-        <button class="back" data-nav="library">← 返回健康库</button>
+        <button class="back" data-nav="${CARE_MODULES.includes(id) ? "care" : "library"}">← ${CARE_MODULES.includes(id) ? "照护记录" : "健康档案"}</button>
         ${editable && ownerMode ? `<button class="primary" data-add="${id}">＋ 新增记录</button>` : ""}
       </div>
-      <div class="module-title"><h1>${category?.[3] || ""} ${category?.[1] || id}</h1><p>${category?.[2] || ""}</p></div>
+      <div class="module-title"><span class="eyebrow">${CARE_MODULES.includes(id) ? "DAILY RITUALS" : "HEALTH ARCHIVE"}</span><h1>${category?.[1] || id}</h1><p>${category?.[2] || ""}</p></div>${relatedModules(id)}
       <div style="height:14px"></div>
       ${body}
     </div>`;
@@ -1567,10 +1598,10 @@
                 <div><h3>${esc(report.title)}</h3><small>${esc((report.panels || []).join(" · "))}</small></div>
                 <span class="date">${date(report.recordedAt)}</span>
               </div>
-              <p>${esc(report.summary || "")}</p>
+              <p>${esc(report.summary || "")}</p>${sameDayLinks(report.recordedAt, report.id)}
               ${
                 (report.results || []).length
-                  ? `<table class="result-table"><thead><tr><th>项目</th><th>结果</th><th>单位</th><th>状态</th></tr></thead><tbody>${report.results
+                  ? `<details class="record-details"><summary>展开 ${(report.results || []).length} 项检查结果</summary><table class="result-table"><thead><tr><th>项目</th><th>结果</th><th>单位</th><th>状态</th></tr></thead><tbody>${report.results
                       .map(
                         (result) => `<tr>
                           <td>${esc(result.label || result.metric)}</td>
@@ -1579,7 +1610,7 @@
                           <td>${esc(result.status || result.flag || "")}</td>
                         </tr>`,
                       )
-                      .join("")}</tbody></table>`
+                      .join("")}</tbody></table></details>`
                   : ""
               }
               <div class="entry-actions">${(report.reportPages || [])
@@ -1609,7 +1640,7 @@
         ${chart(selectedMetric)}
       </div>
       <div style="height:13px"></div>
-      <div class="notice"><h3>${esc(state.renalNotice?.title || "待完成监测")}</h3><p>${esc(state.renalNotice?.detail || "建议结合尿检、UPC 与血压评估，不只依据单次肌酐判断。")}</p></div>`;
+      <div class="notice"><h3>${esc(liveRenalNotice().title)}</h3><p>${esc(liveRenalNotice().detail)}</p></div>`;
     return moduleShell("renal", body);
   }
 
@@ -1644,7 +1675,7 @@
               .join("")}</div>`
           : ""
       }
-      ${reportButtons || editButtons ? `<div class="entry-actions">${reportButtons}${editButtons}</div>` : ""}
+      ${entry.module === "imaging" ? sameDayLinks(entry.recordedAt, entry.id) : ""}${entry.module === "treatment" && medicationReminderFor(entry) ? `<div class="entry-actions"><button data-med-jump="#medication-reminder-details">查看到期提醒 ↗</button></div>` : ""}${reportButtons || editButtons ? `<div class="entry-actions">${reportButtons}${editButtons}</div>` : ""}
     </article>`;
   }
 
@@ -1665,26 +1696,11 @@
   }
 
   function timelineEvents() {
-    const all = [
-      ...(state.timeline || []).map((item) => ({
-        date: item.date,
-        type: item.type,
-        title: item.title,
-        detail: item.detail,
-      })),
-      ...(state.labReports || []).map((item) => ({
-        date: item.recordedAt,
-        type: "实验室",
-        title: item.title,
-        detail: item.summary,
-      })),
-      ...(state.moduleEntries || []).map((item) => ({
-        date: item.recordedAt,
-        type: MODULE_LABEL[item.module] || item.module,
-        title: item.title,
-        detail: item.summary,
-      })),
+    const live = [
+      ...(state.labReports || []).map(item => ({ date: item.recordedAt, type: "实验室", title: item.title, detail: item.summary, target: "lab", id: item.id })),
+      ...(state.moduleEntries || []).map(item => ({ date: item.recordedAt, type: MODULE_LABEL[item.module] || item.module, title: item.title, detail: entryCurrentText(item), target: item.module, id: item.id }))
     ];
+    const all = [...live, ...(state.timeline || []).map(item => ({date:item.date,type:item.type,title:item.title,detail:item.detail}))];
     const seen = new Set();
     return all
       .filter((item) => {
@@ -1701,7 +1717,7 @@
       .map(
         (item, index) => `<article class="entry" id="item-time-${index}">
           <div class="entry-top"><div><h3>${esc(item.title)}</h3><small>${esc(item.type)}</small></div><span class="date">${date(item.date)}</span></div>
-          <p>${esc(item.detail || "")}</p>
+          <p>${esc(item.detail || "")}</p>${item.target ? recordLink(item.target,item.id,"打开原始记录") : sameDayLinks(item.date,null)}
         </article>`,
       )
       .join("")}</div>`;
@@ -1767,8 +1783,8 @@
         )
       ) {
         output.push({
-          type: "renal",
-          id: null,
+          type: "metric",
+          id: item.metric,
           title: `${METRIC_LABEL[item.metric] || item.metric} ${item.value} ${item.unit}`,
           meta: `指标 · ${date(item.recordedAt)}`,
           detail: item.status,
@@ -1799,7 +1815,7 @@
   }
 
   async function resolveAsset(url) {
-    if (REPORTS[url]) return REPORTS[url];
+    if (url?.startsWith("/reports/")) return `.${url}`;
     if (url?.startsWith("local:")) {
       const item = await getLocalFile(url.slice(6));
       return item ? URL.createObjectURL(item.blob) : "";
@@ -2323,13 +2339,29 @@
     toast("旧版本机记录已迁移到线上");
   }
 
+  let restoringNavigation = false;
+  let navigationKey = "";
   function render() {
+    const key = [route.name, route.id || "", selectedMetric].join("|");
+    if (navigationKey && key !== navigationKey && !restoringNavigation) {
+      history.pushState({mianmianRoute: {...route, highlight: null}, metric: selectedMetric}, "");
+    } else if (!navigationKey) {
+      history.replaceState({mianmianRoute: {...route, highlight: null}, metric: selectedMetric}, "");
+    }
+    navigationKey = key;
     document.querySelectorAll("[data-nav]").forEach((button) => {
-      button.classList.toggle("active", button.dataset.nav === route.name);
+      const activeRoute = route.name === "module" ? (CARE_MODULES.includes(route.id) ? "care" : "library") : route.name;
+      button.classList.toggle("active", button.dataset.nav === activeRoute);
+      if (button.dataset.nav === activeRoute) button.setAttribute("aria-current", "page"); else button.removeAttribute("aria-current");
     });
+    if (!(state.metrics?.length || state.labReports?.length || state.moduleEntries?.length) && ["loading", "error"].includes(cloudStatus)) {
+      main.innerHTML = `<div class="empty"><h2>${cloudStatus === "loading" ? "正在打开面面的健康手记…" : "暂时无法读取健康资料"}</h2><p>资料尚未载入，不据此生成健康判断。</p><button class="secondary" data-reload>重新载入</button></div>`;
+      bind(); updateStatusPill(); return;
+    }
     if (route.name === "home") main.innerHTML = home();
     else if (route.name === "library") main.innerHTML = library();
     else if (route.name === "trends") main.innerHTML = trends();
+    else if (route.name === "care") main.innerHTML = care();
     else if (route.name === "more") main.innerHTML = more();
     else if (route.name === "search") main.innerHTML = searchResults(route.id);
     else if (route.name === "module") {
@@ -2363,6 +2395,9 @@
   }
 
   function bind() {
+    document.querySelectorAll("[data-trend-link]").forEach(button => {
+      button.onclick = () => { selectedMetric = button.dataset.trendLink; route = {name:"trends",id:null,highlight:button.dataset.trendSection ? "#" + button.dataset.trendSection : null}; render(); };
+    });
     document.querySelectorAll("[data-nav]").forEach((button) => {
       button.onclick = () => {
         route = { name: button.dataset.nav, id: null, highlight: null };
@@ -2473,6 +2508,11 @@
     });
     document.querySelectorAll("[data-med-jump]").forEach((button) => {
       button.onclick = () => {
+        if (route.name !== "care") {
+          route = { name: "care", id: null, highlight: button.dataset.medJump };
+          render();
+          return;
+        }
         const target = document.querySelector(button.dataset.medJump);
         if (!target) return;
         target.scrollIntoView({ block: "start" });
@@ -2493,6 +2533,7 @@
       button.onclick = () => {
         const type = button.dataset.searchType;
         const id = button.dataset.searchId;
+        if (type === "metric") { selectedMetric = id; route = {name:"trends",id:null,highlight:null}; render(); return; }
         const escapedId = window.CSS?.escape
           ? window.CSS.escape(id)
           : id.replace(/[^a-zA-Z0-9_-]/g, "");
@@ -2535,6 +2576,14 @@
     });
   }
 
+  window.addEventListener("popstate", event => {
+    if (!event.state?.mianmianRoute) return;
+    route = event.state.mianmianRoute;
+    selectedMetric = event.state.metric || "CREA";
+    restoringNavigation = true;
+    render();
+    restoringNavigation = false;
+  });
   statusButton?.addEventListener("click", () => openOwnerModal());
   async function refreshCloudIfStale() {
     if (cloudStatus === "saving" || Date.now() - lastCloudRefreshAt < 60000) return;
@@ -2548,3 +2597,4 @@
   render();
   void loadCloudData();
 })();
+
