@@ -914,7 +914,7 @@
           <span class="eyebrow">MIANMIAN · HEALTH JOURNAL</span><h1>${esc(state.pet?.name || "面面")}的健康手记</h1>
           <p>${esc(state.pet?.age || "8岁")} · ${esc(state.pet?.sex || "母猫")} · 当前体重 ${weight ? esc(weight.value) : "—"} kg<br>${syncText}</p>
         </div>
-        ${ownerMode ? '<button class="primary" data-action="upload">＋ 上传并同步</button>' : ""}
+        <button class="primary" data-action="upload" title="支持图片和 PDF，上传前自动检测重复">＋ 上传报告扫描件</button>
       </div>
     </section>`;
   }
@@ -1327,7 +1327,7 @@
   function library() {
     return `<div class="view">${pageHeading("THE ARCHIVE / 健康档案", "每一份记录，都有来处。", "按检查、专病与病程查阅；日常喂养和用药统一放在「照护记录」。")}
       ${searchBar()}
-      <section class="archive-group"><div class="section-head"><div><span class="eyebrow">01 / EXAMINATIONS</span><h2>检查与报告</h2><p>从原始检查开始，追溯每一项指标</p></div>${ownerMode ? '<button class="primary" data-action="upload">＋ 上传报告</button>' : ''}</div>${categoryGrid(["lab","imaging"])}</section>
+      <section class="archive-group"><div class="section-head"><div><span class="eyebrow">01 / EXAMINATIONS</span><h2>检查与报告</h2><p>从原始检查开始，追溯每一项指标</p></div><button class="primary" data-action="upload">＋ 上传报告扫描件</button></div>${categoryGrid(["lab","imaging"])}</section>
       <section class="archive-group"><div class="section-head"><div><span class="eyebrow">02 / HEALTH TOPICS</span><h2>专病随访</h2><p>围绕同一个健康问题，关联检查和治疗</p></div></div>${categoryGrid(["renal","mct"])}</section>
       <div class="archive-footer"><div><span class="eyebrow">THE CHRONICLE</span><h2>把时间连起来</h2><p>沿着日期回看检查、病灶与治疗经过。</p></div>${moduleLink("timeline","打开病程时间轴")}</div>
     </div>`;
@@ -2039,7 +2039,7 @@
   }
 
   function uploadModal() {
-    if (!requireOwner("上传检查结果需要主人权限。")) return;
+    if (!requireOwner("上传报告扫描件需要主人权限。请先启用主人模式，然后再次点击「上传报告扫描件」，即可选择图片或 PDF。")) return;
     overlay.innerHTML = `<div class="modal">
       <section class="modal-card">
         <header class="modal-head"><h2>上传检查结果并同步</h2><button class="close" data-close>×</button></header>
