@@ -881,7 +881,7 @@
   function latest(metric) {
     return [...(state.metrics || [])]
       .filter((item) => item.metric === metric)
-      .sort((a, b) => b.recordedAt.localeCompare(a.recordedAt))[0];
+      .sort((a, b) => b.recordedAt.localeCompare(a.recordedAt) || (metric === "WEIGHT" ? updatedTimestamp(b) - updatedTimestamp(a) : 0))[0];
   }
 
   function stat(metric) {
@@ -1343,7 +1343,7 @@
   function chart(metric) {
     const points = [...(state.metrics || [])]
       .filter((item) => item.metric === metric)
-      .sort((a, b) => a.recordedAt.localeCompare(b.recordedAt));
+      .sort((a, b) => a.recordedAt.localeCompare(b.recordedAt) || (metric === "WEIGHT" ? updatedTimestamp(a) - updatedTimestamp(b) : 0));
     if (!points.length) {
       return `<div class="empty">暂无 ${esc(METRIC_LABEL[metric] || metric)} 数据</div>`;
     }
@@ -1398,12 +1398,12 @@
           .join("")}
       </svg>
     </div>
-    <details class="trend-history"><summary>查看 ${points.length} 次历史数值与来源</summary><div class="entry-list">${[...points]
+    <details class="trend-history" ${metric === "WEIGHT" ? "open" : ""}><summary>查看 ${points.length} 次历史数值与来源</summary><div class="entry-list">${[...points]
       .reverse()
       .map(
-        (point) => `<div class="entry">
+        (point) => `<div class="entry" id="weight-point-${esc(point.id)}">
           <div class="entry-top"><h3>${date(point.recordedAt)}</h3><span class="date">${esc(point.status || "已记录")}</span></div>
-          <p><strong>${esc(point.value)} ${esc(point.unit)}</strong> · ${esc(point.status || "已记录")}</p>${sameDayLinks(point.recordedAt, null)}
+          <p><strong>${esc(point.value)} ${esc(point.unit)}</strong> · ${esc(point.status || "已记录")}</p>${point.metric === "WEIGHT" && point.note ? `<p>备注：${esc(point.note)}</p>` : ""}${point.source === "manual-weight" ? `<small>来源：手动称重</small>${ownerMode ? `<div class="entry-actions"><button data-weight-edit="${esc(point.id)}">修改体重</button><button class="danger" data-weight-delete="${esc(point.id)}">删除这次称重</button></div>` : ""}` : sameDayLinks(point.recordedAt, null)}
         </div>`,
       )
       .join("")}</div></details>`;
@@ -1562,6 +1562,7 @@
               `<button class="${selectedMetric === metric ? "active" : ""}" data-metric="${metric}">${esc(METRIC_LABEL[metric])}</button>`,
           )
           .join("")}</div>
+        ${selectedMetric === "WEIGHT" ? `<div class="section-head" style="margin:18px 0 8px;align-items:center"><div><h2>体重记录</h2><p>单位 kg · 可补记历史称重，保存后同步首页</p></div><button class="primary" data-weight-add>＋ 记录体重</button></div>` : ""}
         ${chart(selectedMetric)}
       </div>
       <div style="height:14px"></div>
@@ -1866,6 +1867,83 @@
       current = (current + 1) % available.length;
       void draw();
     });
+  }
+
+  function prepareWeightRecord(source, input, editId = null) {
+    const recordedAt = String(input.recordedAt || "");
+    const parsed = parseDateOnly(recordedAt);
+    if (!parsed || isoDateOnly(parsed) !== recordedAt || recordedAt > today()) throw new Error("请填写有效的称重日期，不能晚于今天。");
+    const rawValue = String(input.value ?? "").trim();
+    const value = Number(rawValue);
+    if (!rawValue || !Number.isFinite(value) || value <= 0 || value > 30) throw new Error("请用 kg 填写大于 0、且不超过 30 的体重，例如 3.65。");
+    const note = String(input.note || "").trim();
+    if (note.length > 500) throw new Error("备注请控制在 500 字以内。");
+    const rows = source.metrics || [];
+    const entry = editId == null ? null : rows.find(item => String(item.id) === String(editId));
+    if (editId != null && (!entry || entry.metric !== "WEIGHT" || entry.source !== "manual-weight")) throw new Error("只能在此修改手动称重记录，请重新打开记录。");
+    const sameDay = rows.filter(item => item.metric === "WEIGHT" && item.recordedAt === recordedAt && String(item.id) !== String(editId));
+    if (sameDay.some(item => item.unit === "kg" && Number(item.value) === value)) throw new Error(`${date(recordedAt)} 已有 ${value} kg 的体重记录，无需重复保存。`);
+    const now = new Date().toISOString();
+    const next = clone(source);
+    const record = { ...entry, id: entry?.id || `manual-weight-${crypto.randomUUID()}`, metric: "WEIGHT", recordedAt, value, unit: "kg", status: "手动称重", source: "manual-weight", sourceUploadId: null, note, createdAt: entry?.createdAt || now, updatedAt: now };
+    next.metrics = [...(next.metrics || [])];
+    if (entry) next.metrics[next.metrics.findIndex(item => String(item.id) === String(editId))] = record;
+    else next.metrics.push(record);
+    return { next, record, sameDay };
+  }
+
+  function weightEditor(id = null) {
+    if (!requireOwner("记录体重需要主人权限。请先启用主人模式，再点击「记录体重」。")) return;
+    const entry = id == null ? null : (state.metrics || []).find(item => String(item.id) === String(id) && item.metric === "WEIGHT" && item.source === "manual-weight");
+    if (id != null && !entry) return toast("未找到可修改的手动体重记录");
+    overlay.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-labelledby="weight-editor-title"><section class="modal-card">
+      <header class="modal-head"><h2 id="weight-editor-title">${entry ? "修改体重记录" : "记录体重"}</h2><button class="close" type="button" data-close aria-label="关闭体重记录">×</button></header>
+      <form class="modal-body" id="weight-form">
+        <div class="privacy">保存后同步到线上健康库，体重趋势和首页会一起更新。补记较早日期会加入历史曲线，首页仍显示最新日期的体重。</div>
+        <div class="form-grid" style="margin-top:16px">
+          <div class="field"><label for="weight-date">称重日期</label><input id="weight-date" name="recordedAt" type="date" max="${today()}" value="${esc(entry?.recordedAt || today())}" required></div>
+          <div class="field"><label for="weight-value">体重（kg）</label><input id="weight-value" name="value" type="number" inputmode="decimal" step="0.001" min="0.001" max="30" placeholder="例如 3.65" value="${entry ? esc(entry.value) : ""}" required></div>
+          <div class="field wide"><label for="weight-note">备注（可不填）</label><textarea id="weight-note" name="note" maxlength="500" placeholder="例如：饭前称重、使用的体重秤">${esc(entry?.note || "")}</textarea></div>
+        </div>
+        <p data-weight-error role="alert" style="color:var(--danger);font-size:13px"></p>
+        <div class="modal-foot"><button type="button" class="secondary" data-close>取消</button><button class="primary" data-submit>保存并同步</button></div>
+      </form></section></div>`;
+    overlay.querySelectorAll("[data-close]").forEach(button => button.onclick = () => { overlay.innerHTML = ""; });
+    overlay.querySelector("#weight-form").onsubmit = async event => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const submit = form.querySelector("[data-submit]");
+      if (submit.disabled) return;
+      const error = form.querySelector("[data-weight-error]");
+      error.textContent = "";
+      try {
+        const fields = new FormData(form);
+        const prepared = prepareWeightRecord(state, {recordedAt:fields.get("recordedAt"),value:fields.get("value"),note:fields.get("note")}, id);
+        if (prepared.sameDay.length && !confirm(`${date(prepared.record.recordedAt)} 已有体重记录：${prepared.sameDay.map(item => `${item.value} ${item.unit || ""}`).join("、")}。本次保存为单独的称重记录，其他记录保留，首页同日采用最后录入或修改的体重。继续保存吗？`)) return;
+        submit.disabled = true;
+        submit.textContent = "正在同步…";
+        // Preserve the draft if saving fails; saveCloud handles version conflicts.
+        await saveCloud(prepared.next, `${entry ? "Edit" : "Add"} manual weight ${prepared.record.recordedAt}`);
+        overlay.innerHTML = "";
+        selectedMetric = "WEIGHT";
+        route = {name:"trends",id:null,highlight:`#weight-point-${prepared.record.id}`};
+        render();
+        toast("体重已保存，趋势与首页已更新");
+      } catch (err) {
+        error.textContent = err?.message || "保存失败，请重试。";
+        submit.disabled = false;
+        submit.textContent = "保存并同步";
+      }
+    };
+  }
+
+  async function deleteWeight(id) {
+    if (!requireOwner("删除手动称重记录需要主人权限。")) return;
+    const entry = (state.metrics || []).find(item => String(item.id) === String(id) && item.metric === "WEIGHT" && item.source === "manual-weight");
+    if (!entry || !confirm(`删除 ${date(entry.recordedAt)} 的手动称重 ${entry.value} kg？该次称重将从线上趋势中移除。`)) return;
+    const next = clone(state);
+    next.metrics = next.metrics.filter(item => String(item.id) !== String(id));
+    try { await saveCloud(next, `Delete manual weight ${entry.recordedAt}`); } catch { /* saveCloud presents the error */ }
   }
 
   function editor(module, id = null) {
@@ -2395,6 +2473,9 @@
   }
 
   function bind() {
+    document.querySelectorAll("[data-weight-add]").forEach(button => button.onclick = () => weightEditor());
+    document.querySelectorAll("[data-weight-edit]").forEach(button => button.onclick = () => weightEditor(button.dataset.weightEdit));
+    document.querySelectorAll("[data-weight-delete]").forEach(button => button.onclick = () => deleteWeight(button.dataset.weightDelete));
     document.querySelectorAll("[data-trend-link]").forEach(button => {
       button.onclick = () => { selectedMetric = button.dataset.trendLink; route = {name:"trends",id:null,highlight:button.dataset.trendSection ? "#" + button.dataset.trendSection : null}; render(); };
     });
@@ -2597,4 +2678,5 @@
   render();
   void loadCloudData();
 })();
+
 
