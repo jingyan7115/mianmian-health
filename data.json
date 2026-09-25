@@ -1527,6 +1527,24 @@
   ],
   "moduleEntries": [
     {
+      "id": "user-d4e5f6e0-5932-424c-9782-22c91e9058fd",
+      "module": "mct",
+      "recordedAt": "2026-09-25",
+      "title": "疑似MCT-005",
+      "summary": "经过冷冻后结痂明显，结痂一直没掉，手摸有肿物",
+      "data": {
+        "location": "右后爪掌垫边缘",
+        "side": "右肢",
+        "size": "3.3mmx2.5mm",
+        "diagnosis": "未确认 待下次做细胞学"
+      },
+      "imageUrls": [],
+      "imageFiles": [],
+      "sourceKey": "user:7789de39-50c0-4543-9f4e-0ebdf2f6d497",
+      "createdAt": "2026-09-25T04:01:46.970Z",
+      "updatedAt": "2026-09-25T04:01:46.970Z"
+    },
+    {
       "id": "user-e3426f2f-be18-4cbf-83fc-75679cc94071",
       "module": "treatment",
       "recordedAt": "2026-09-09",
@@ -2277,8 +2295,8 @@
     }
   ],
   "_cloud": {
-    "revision": 13,
-    "updatedAt": "2026-09-09T17:20:24.049Z",
+    "revision": 14,
+    "updatedAt": "2026-09-25T04:01:49.555Z",
     "updatedBy": "jingyan7115"
   }
 }
