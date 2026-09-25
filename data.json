@@ -467,6 +467,19 @@
       "source": "baseline:0815(2)",
       "sourceUploadId": null,
       "createdAt": "2026-08-15 07:23:30"
+    },
+    {
+      "id": "manual-weight-118895c9-a1ef-435c-9398-e6c42912f0c2",
+      "metric": "WEIGHT",
+      "recordedAt": "2026-09-25",
+      "value": 3.67,
+      "unit": "kg",
+      "status": "手动称重",
+      "source": "manual-weight",
+      "sourceUploadId": null,
+      "note": "",
+      "createdAt": "2026-09-25T04:12:58.961Z",
+      "updatedAt": "2026-09-25T04:12:58.961Z"
     }
   ],
   "records": [
@@ -2295,8 +2308,8 @@
     }
   ],
   "_cloud": {
-    "revision": 14,
-    "updatedAt": "2026-09-25T04:01:49.555Z",
+    "revision": 15,
+    "updatedAt": "2026-09-25T04:12:59.816Z",
     "updatedBy": "jingyan7115"
   }
 }
