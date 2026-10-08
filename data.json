@@ -1540,6 +1540,32 @@
   ],
   "moduleEntries": [
     {
+      "id": "user-9d12c877-7b85-452d-a4e4-92a9e80dcfd1",
+      "module": "treatment",
+      "recordedAt": "2026-10-08",
+      "title": "小儿阿莫西林克拉维酸钾",
+      "summary": "黑下巴疑似恶化成毛囊炎，已尝试过百多邦仍然更严重",
+      "data": {
+        "treatmentClass": "口服",
+        "indication": "下巴毛囊炎",
+        "dose": "12.5mg/kg",
+        "frequency": "一天两次",
+        "route": "颗粒喂服",
+        "cycle": "7-10天（症状消失后减量3天）",
+        "durationUnit": "天",
+        "endDate": "2026-10-15",
+        "reminderTime": "09:00",
+        "reminderAction": "复诊 / 复查",
+        "reminderNote": "阿莫西林克拉维酸钾最后一天",
+        "notes": "若出现胃肠道相关反应则立刻就医"
+      },
+      "imageUrls": [],
+      "imageFiles": [],
+      "sourceKey": "user:5a900c3c-ffff-4bc9-b292-af6f355abf24",
+      "createdAt": "2026-10-08T15:16:54.607Z",
+      "updatedAt": "2026-10-08T15:16:54.607Z"
+    },
+    {
       "id": "user-d4e5f6e0-5932-424c-9782-22c91e9058fd",
       "module": "mct",
       "recordedAt": "2026-09-25",
@@ -2308,8 +2334,8 @@
     }
   ],
   "_cloud": {
-    "revision": 15,
-    "updatedAt": "2026-09-25T04:12:59.816Z",
+    "revision": 16,
+    "updatedAt": "2026-10-08T15:17:01.118Z",
     "updatedBy": "jingyan7115"
   }
 }
