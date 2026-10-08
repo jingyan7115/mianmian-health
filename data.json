@@ -1548,7 +1548,7 @@
       "data": {
         "treatmentClass": "口服",
         "indication": "下巴毛囊炎",
-        "dose": "12.5mg/kg",
+        "dose": "12.5mg/kg （43.75mg每次）",
         "frequency": "一天两次",
         "route": "颗粒喂服",
         "cycle": "7-10天（症状消失后减量3天）",
@@ -1563,7 +1563,7 @@
       "imageFiles": [],
       "sourceKey": "user:5a900c3c-ffff-4bc9-b292-af6f355abf24",
       "createdAt": "2026-10-08T15:16:54.607Z",
-      "updatedAt": "2026-10-08T15:19:07.448Z"
+      "updatedAt": "2026-10-08T15:26:48.270Z"
     },
     {
       "id": "user-d4e5f6e0-5932-424c-9782-22c91e9058fd",
@@ -2334,8 +2334,8 @@
     }
   ],
   "_cloud": {
-    "revision": 17,
-    "updatedAt": "2026-10-08T15:19:15.184Z",
+    "revision": 18,
+    "updatedAt": "2026-10-08T15:26:53.932Z",
     "updatedBy": "jingyan7115"
   }
 }
