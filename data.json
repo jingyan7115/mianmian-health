@@ -1542,7 +1542,7 @@
     {
       "id": "user-9d12c877-7b85-452d-a4e4-92a9e80dcfd1",
       "module": "treatment",
-      "recordedAt": "2026-10-08",
+      "recordedAt": "2026-10-09",
       "title": "小儿阿莫西林克拉维酸钾",
       "summary": "黑下巴疑似恶化成毛囊炎，已尝试过百多邦仍然更严重",
       "data": {
@@ -1556,14 +1556,14 @@
         "endDate": "2026-10-15",
         "reminderTime": "09:00",
         "reminderAction": "复诊 / 复查",
-        "reminderNote": "阿莫西林克拉维酸钾最后一天",
+        "reminderNote": "阿莫西林克拉维酸钾第七天",
         "notes": "若出现胃肠道相关反应则立刻就医"
       },
       "imageUrls": [],
       "imageFiles": [],
       "sourceKey": "user:5a900c3c-ffff-4bc9-b292-af6f355abf24",
       "createdAt": "2026-10-08T15:16:54.607Z",
-      "updatedAt": "2026-10-08T15:16:54.607Z"
+      "updatedAt": "2026-10-08T15:19:07.448Z"
     },
     {
       "id": "user-d4e5f6e0-5932-424c-9782-22c91e9058fd",
@@ -2334,8 +2334,8 @@
     }
   ],
   "_cloud": {
-    "revision": 16,
-    "updatedAt": "2026-10-08T15:17:01.118Z",
+    "revision": 17,
+    "updatedAt": "2026-10-08T15:19:15.184Z",
     "updatedBy": "jingyan7115"
   }
 }
