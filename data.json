@@ -1598,13 +1598,14 @@
         "durationUnit": "月",
         "endDate": "2026-10-09",
         "reminderTime": "19:30",
-        "reminderAction": "联系医生确认停药或换量"
+        "reminderAction": "联系医生确认停药或换量",
+        "reminderCompletedAt": "2026-10-10T01:41:40.279Z"
       },
       "imageUrls": [],
       "imageFiles": [],
       "sourceKey": "user:30f1a46a-aec0-4efb-bfe9-2e6658f3ab51",
       "createdAt": "2026-09-09T17:20:21.820Z",
-      "updatedAt": "2026-09-09T17:20:21.820Z"
+      "updatedAt": "2026-10-10T01:41:40.279Z"
     },
     {
       "id": "user-7452f539-699c-4e52-b159-9cbc44e8f833",
@@ -2334,8 +2335,8 @@
     }
   ],
   "_cloud": {
-    "revision": 18,
-    "updatedAt": "2026-10-08T15:26:53.932Z",
+    "revision": 19,
+    "updatedAt": "2026-10-10T01:41:42.130Z",
     "updatedBy": "jingyan7115"
   }
 }
