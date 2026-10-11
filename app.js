@@ -50,7 +50,9 @@
   });
 
   const CATEGORIES = [
-    ["lab", "实验室", "CBC · 生化 · 炎症指标", "◈", "blue"],
+    ["diagnosis", "诊断与病程", "就诊 · 诊断状态 · 医嘱来源", "✧", "violet"],
+    ["instructions", "照护医嘱", "护理 · 观察 · 复诊安排", "◈", "mint"],
+    ["lab", "报告档案", "检验 · 诊断 · 医嘱 · 原件", "◈", "blue"],
     ["renal", "肾脏管理", "CREA · SDMA · 尿检 · 血压", "◌", "mint"],
     ["mct", "MCT 病灶", "病灶地图 · 病理 · 处理", "✧", "peach"],
     ["imaging", "影像检查", "腹超 · 心超 · DR", "▧", "violet"],
@@ -61,6 +63,7 @@
   ];
 
   const MODULE_LABEL = {
+    diagnosis:"诊断与病程", instructions:"照护医嘱",
     mct: "MCT 病灶",
     imaging: "影像检查",
     treatment: "用药与治疗",
@@ -86,6 +89,8 @@
   };
 
   const FIELDS = {
+    diagnosis: [["status","诊断状态"],["diagnosisDate","诊断明确日期"],["encounterDate","就诊日期"],["ordersText","医嘱原文","textarea"],["precautions","待核对事项","textarea"]],
+    instructions: [["careText","日常护理","textarea"],["nutritionText","饮食医嘱","textarea"],["monitoringText","观察项目","textarea"],["followUpText","复诊要求","textarea"],["precautions","待核对事项","textarea"],["ordersText","完整医嘱","textarea"],["endDate","已约定复诊日期","date"],["reminderAction","提醒动作"],["reminderNote","提醒内容","textarea"]],
     mct: [
       ["lesionId", "病灶编号"],
       ["location", "位置"],
@@ -111,6 +116,7 @@
     ],
     treatment: [
       ["treatmentClass", "类别"],
+      ["startDate", "实际用药开始日期"],
       ["indication", "适应证 / 关联问题"],
       ["dose", "剂量"],
       ["frequency", "频率"],
@@ -1032,10 +1038,10 @@
   }
 
   function medicationReminderFor(entry) {
-    if (entry?.module !== "treatment" || entry.data?.reminderCompletedAt) return null;
+    if (!["treatment","instructions"].includes(entry?.module) || entry.data?.reminderCompletedAt) return null;
     if (/已结束|已完成|停止|停药/.test(String(entry.data?.status || ""))) return null;
     const dueDate = entry.data?.endDate || calculateCourseEnd(
-      entry.recordedAt,
+      entry.sourceKind === "clinical-report" ? entry.data?.startDate : entry.recordedAt,
       entry.data?.durationValue,
       entry.data?.durationUnit,
     );
@@ -1074,15 +1080,15 @@
           const data = reminder.entry.data || {};
           return `<article class="med-reminder-card tone-${status.tone}">
             <div class="med-reminder-head"><div><span class="med-status">${esc(status.text)}</span><h3>${esc(reminder.entry.title)}</h3></div><time>${date(reminder.dueDate)}${data.reminderTime ? ` ${esc(data.reminderTime)}` : ""}</time></div>
-            <p>${[data.dose && `剂量：${data.dose}`, data.frequency && `频率：${data.frequency}`, `开始：${date(reminder.entry.recordedAt)}`].filter(Boolean).map(esc).join(" · ")}</p>
+            <p>${[data.dose && `剂量：${data.dose}`, data.frequency && `频率：${data.frequency}`, `${reminder.entry.sourceKind === "clinical-report" ? "医嘱记录" : "开始"}：${date(reminder.entry.recordedAt)}`].filter(Boolean).map(esc).join(" · ")}</p>
             <div class="med-action"><strong>到期动作：</strong>${esc(reminder.action)}${data.reminderNote ? `<br><span>${esc(data.reminderNote)}</span>` : ""}</div>
             ${reminder.glucocorticoid ? '<div class="med-warning"><strong>激素用药提示：</strong>疗程计时到期不等于可以自行骤停。请按开药医生既定减量方案确认停药或换量；没有适用于所有猫的统一减量日程。</div>' : ""}
-            <div class="entry-actions">${recordLink("treatment", reminder.entry.id, "查看疗程原记录")}<button data-med-calendar="${esc(reminder.entry.id)}">添加到手机日历</button>${ownerMode ? `<button data-med-complete="${esc(reminder.entry.id)}">标记已处理</button>` : ""}</div>
+            <div class="entry-actions">${recordLink(reminder.entry.module, reminder.entry.id, "查看原记录")}<button data-med-calendar="${esc(reminder.entry.id)}">添加到手机日历</button>${ownerMode ? `<button data-med-complete="${esc(reminder.entry.id)}">标记已处理</button>` : ""}</div>
           </article>`;
         }).join("")
       : '<div class="empty">目前没有未处理的用药疗程提醒。可在“用药与治疗”中填写开始日期和疗程长度。</div>';
     return `<section class="medication-reminder-section" id="medication-reminder-details" tabindex="-1" aria-labelledby="medication-reminder-title">
-      <div class="section-head"><div><h2 id="medication-reminder-title">用药疗程详情</h2><p>按开始日期和疗程自动计算 · 可添加到手机日历</p></div></div>
+      <div class="section-head"><div><h2 id="medication-reminder-title">疗程与复诊提醒</h2><p>按已确定的日期提醒 · 可添加到手机日历</p></div></div>
       <div class="guidance-note"><strong>安全边界：</strong>提醒用于执行已经确定的医嘱，不会自动替你决定停药。尤其是泼尼松龙等糖皮质激素，到期后应按开药医生给出的减量或换量方案处理。</div>
       <div class="med-reminder-grid">${cards}</div>
       <div class="evidence-links med-evidence">${evidenceLinks(["prednisoloneSafety", "felineSteroidTaper"])}</div>
@@ -1141,9 +1147,9 @@
     const ics = [
       "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Mianmian Health//Medication Reminder//ZH-CN", "CALSCALE:GREGORIAN",
       "BEGIN:VEVENT", `UID:${uid}`, `DTSTAMP:${stamp}`, eventStart, eventEnd,
-      `SUMMARY:${calendarEscape(`面面用药到期：${entry.title}`)}`,
+      `SUMMARY:${calendarEscape(`面面照护提醒：${entry.title}`)}`,
       `DESCRIPTION:${calendarEscape(description)}`, "BEGIN:VALARM", "ACTION:DISPLAY", "TRIGGER:-P1D",
-      `DESCRIPTION:${calendarEscape(`面面用药提醒：${entry.title}明日到期`)}`, "END:VALARM", "END:VEVENT", "END:VCALENDAR", "",
+      `DESCRIPTION:${calendarEscape(`面面照护提醒：${entry.title}明日到期`)}`, "END:VALARM", "END:VEVENT", "END:VCALENDAR", "",
     ].join("\r\n");
     const url = URL.createObjectURL(new Blob([ics], { type: "text/calendar;charset=utf-8" }));
     const link = document.createElement("a");
@@ -1227,7 +1233,7 @@
     ].filter(Boolean).join("；");
 
     const mctLive = liveMctFollowUp();
-    const latestTreatment = latestEditedEntry("treatment");
+    const latestTreatment = [...(state.moduleEntries || [])].filter(e => e.module === "treatment" && /MCT|肥大细胞/i.test([e.title,e.data?.indication].join(" "))).sort((a,b)=>updatedTimestamp(b)-updatedTimestamp(a))[0];
     const mctObservation = [
       `${mctLive.title}：${mctLive.detail}`,
       latestTreatment ? `近期治疗记录：${latestTreatment.title}——${entryCurrentText(latestTreatment)}` : "",
@@ -1275,7 +1281,7 @@
     </section>`;
   }
 
-  const CARE_MODULES = ["treatment", "nutrition", "qol"];
+  const CARE_MODULES = ["treatment", "instructions", "nutrition", "qol"];
   function pageHeading(kicker, title, description) {
     return `<div class="page-heading"><span class="eyebrow">${kicker}</span><h1>${title}</h1><p>${description}</p></div>`;
   }
@@ -1321,6 +1327,7 @@
         <article class="notice"><h3>${esc(mctNotice.title)}</h3><p>${esc(mctNotice.detail)}</p>${moduleLink("mct","查看病灶记录")}</article>
       </div>
       ${manualNotice ? `<div class="latest-update"><span>最近手动更新</span><p>${esc(manualNotice.detail)}</p>${moduleLink("timeline","查看记录")}</div>` : ""}
+      ${clinicalOverview(true)}
       ${medicalGuidance()}
     </div>`;
   }
@@ -1328,13 +1335,14 @@
     return `<div class="view">${pageHeading("THE ARCHIVE / 健康档案", "每一份记录，都有来处。", "按检查、专病与病程查阅；日常喂养和用药统一放在「照护记录」。")}
       ${searchBar()}
       <section class="archive-group"><div class="section-head"><div><span class="eyebrow">01 / EXAMINATIONS</span><h2>检查与报告</h2><p>从原始检查开始，追溯每一项指标</p></div><button class="primary" data-action="upload">＋ 上传报告扫描件</button></div>${categoryGrid(["lab","imaging"])}</section>
-      <section class="archive-group"><div class="section-head"><div><span class="eyebrow">02 / HEALTH TOPICS</span><h2>专病随访</h2><p>围绕同一个健康问题，关联检查和治疗</p></div></div>${categoryGrid(["renal","mct"])}</section>
+      <section class="archive-group"><div class="section-head"><div><span class="eyebrow">02 / HEALTH TOPICS</span><h2>专病随访</h2><p>围绕同一个健康问题，关联检查和治疗</p></div></div>${categoryGrid(["diagnosis","renal","mct"])}</section>
       <div class="archive-footer"><div><span class="eyebrow">THE CHRONICLE</span><h2>把时间连起来</h2><p>沿着日期回看检查、病灶与治疗经过。</p></div>${moduleLink("timeline","打开病程时间轴")}</div>
     </div>`;
   }
   function care() {
     return `<div class="view">${pageHeading("DAILY RITUALS / 照护记录", "把照顾，落在每一天。", "用药、饮食与生活质量各有归处；疗程提醒直接关联原记录。")}
       ${categoryGrid(CARE_MODULES)}
+      ${clinicalOverview()}
       ${medicationReminderSection()}
       <div class="archive-footer"><div><h2>今天的记录，成为下次就诊的依据</h2><p>首页的随访提醒与循证建议会随保存后的记录更新。</p></div><button class="text-link" data-nav="home">查看今日照护 ↗</button></div>
     </div>`;
@@ -1445,7 +1453,7 @@
   }
 
   function synchronizeDerivedData(source) {
-    const next = clone(source);
+    const next = ClinicalReports.synchronize(source);
     const hasImagingEntries = (next.moduleEntries || []).some(
       (entry) => entry.module === "imaging",
     );
@@ -1599,7 +1607,8 @@
                 <div><h3>${esc(report.title)}</h3><small>${esc((report.panels || []).join(" · "))}</small></div>
                 <span class="date">${date(report.recordedAt)}</span>
               </div>
-              <p>${esc(report.summary || "")}</p>${sameDayLinks(report.recordedAt, report.id)}
+              <p>${esc(report.summary || "")}</p>${report.clinical ? `<span class="clinical-badge">${report.clinical.reviewStatus === 'confirmed' ? '医嘱已核对 · 已关联' : '医嘱草稿 · 待核对'}</span>${clinicalLinks(report)}` : ''}${sameDayLinks(report.recordedAt, report.id)}
+              ${ownerMode ? `<div class="entry-actions"><button class="secondary" data-clinical-edit="${esc(report.id)}">${report.clinical?.reviewStatus === 'confirmed' ? '修改诊断与医嘱' : '识别 / 核对诊断与医嘱'}</button></div>` : ''}
               ${
                 (report.results || []).length
                   ? `<details class="record-details"><summary>展开 ${(report.results || []).length} 项检查结果</summary><table class="result-table"><thead><tr><th>项目</th><th>结果</th><th>单位</th><th>状态</th></tr></thead><tbody>${report.results
@@ -1623,7 +1632,7 @@
             </article>`,
           )
           .join("")}</div>`
-      : '<div class="empty">暂无实验室检查记录。</div>';
+      : '<div class="empty">暂无报告记录。</div>';
     return moduleShell("lab", body);
   }
 
@@ -1656,7 +1665,7 @@
       )
       .join("");
     const editButtons = ownerMode
-      ? `<button data-edit="${esc(entry.id)}">✎ 修改</button><button class="danger" data-delete="${esc(entry.id)}">删除</button>`
+      ? entry.sourceReportId ? `<button data-clinical-edit="${esc(entry.sourceReportId)}">✎ 核对 / 修改来源医嘱</button>` : `<button data-edit="${esc(entry.id)}">✎ 修改</button><button class="danger" data-delete="${esc(entry.id)}">删除</button>`
       : "";
     return `<article class="entry" id="item-module-${esc(entry.id)}">
       <div class="entry-top">
@@ -1664,6 +1673,8 @@
         <span class="date">${date(entry.recordedAt)}</span>
       </div>
       <p>${esc(entry.summary || "已录入结构化记录。")}</p>
+      ${entry.sourceReportId ? `<div class="clinical-source">${recordLink('lab',entry.sourceReportId,'来源：就诊报告 ↗')}<span>记录日期${entry.module === 'treatment' && !ClinicalReports.validDate(entry.data?.startDate) ? '为医嘱日期，实际用药开始日期待核对' : '与来源医嘱同步'}</span></div>` : ''}
+      ${(state.labReports || []).filter(r=>(r.clinical?.relatedEntryIds || []).includes(entry.id)).map(r=>`<div class="clinical-source">${recordLink('lab',r.id,`后续就诊：${r.title}`)}</div>`).join('')}
       ${
         data.length
           ? `<div class="kv">${data
@@ -1690,15 +1701,15 @@
     return moduleShell(
       id,
       rows.length
-        ? `<div class="entry-list">${rows.map(entryCard).join("")}</div>`
-        : `<div class="empty">${empty}</div>`,
+        ? `${["nutrition","qol"].includes(id) ? clinicalOverview(false,id === "nutrition" ? "nutritionText" : "monitoringText") : ""}<div class="entry-list">${rows.map(entryCard).join("")}</div>`
+        : `${["nutrition","qol"].includes(id) ? clinicalOverview(false,id === "nutrition" ? "nutritionText" : "monitoringText") : ""}<div class="empty">${empty}</div>`,
       true,
     );
   }
 
   function timelineEvents() {
     const live = [
-      ...(state.labReports || []).map(item => ({ date: item.recordedAt, type: "实验室", title: item.title, detail: item.summary, target: "lab", id: item.id })),
+      ...(state.labReports || []).map(item => ({ date: item.recordedAt, type: item.clinical ? "就诊报告" : "检查报告", title: item.title, detail: item.summary, target: "lab", id: item.id })),
       ...(state.moduleEntries || []).map(item => ({ date: item.recordedAt, type: MODULE_LABEL[item.module] || item.module, title: item.title, detail: entryCurrentText(item), target: item.module, id: item.id }))
     ];
     const all = [...live, ...(state.timeline || []).map(item => ({date:item.date,type:item.type,title:item.title,detail:item.detail}))];
@@ -1740,6 +1751,7 @@
           item.summary,
           (item.panels || []).join(" "),
           JSON.stringify(item.results),
+          JSON.stringify(item.clinical || {}),
         )
       ) {
         output.push({
@@ -1954,6 +1966,7 @@
             (item) => String(item.id) === String(id),
           )
         : null;
+    if (entry?.sourceReportId) return clinicalEditor(entry.sourceReportId);
     const definitions = FIELDS[module] || [];
     overlay.innerHTML = `<div class="modal">
       <section class="modal-card">
@@ -2116,28 +2129,126 @@
     };
   }
 
+  function clinicalLinks(report) {
+    const entries=(state.moduleEntries || []).filter(e=>e.sourceReportId===report.id);
+    return `<div class="entry-actions">${entries.map(e=>recordLink(e.module,e.id,e.module==='diagnosis'?'诊断记录':e.module==='instructions'?'照护医嘱':e.title)).join('')}${(report.clinical?.relatedEntryIds || []).map(id=>{const e=state.moduleEntries.find(x=>x.id===id);return e?recordLink(e.module,e.id,`关联历史：${e.title}`):'';}).join('')}</div>`;
+  }
+  function clinicalOverview(compact=false, topic='') {
+    const reports=[...(state.labReports || [])].filter(r=>r.clinical?.reviewStatus==='confirmed' && (!topic || r.clinical[topic])).sort((a,b)=>b.recordedAt.localeCompare(a.recordedAt));
+    const pending=(state.labReports || []).filter(r=>r.clinical?.reviewStatus==='draft' || (!r.clinical && /^user-lab-/.test(r.id) && !r.results?.length));
+    if (!reports.length && !pending.length) return '';
+    return `<section class="clinical-overview"><div class="section-head"><div><span class="eyebrow">VETERINARY NOTES / 就诊医嘱</span><h2>${topic?'相关就诊医嘱':'诊断与照护，一起追踪'}</h2><p>以原报告为依据 · 未明确的日期和药量保留待核对</p></div>${moduleLink('diagnosis','全部诊断 ↗')}</div>
+      ${!topic && pending.length?`<div class="clinical-pending"><strong>${pending.length} 份报告待核对医嘱</strong><p>没有数字指标也可以确认诊断与照护内容。</p>${pending.map(r=>`<button class="secondary" data-clinical-edit="${esc(r.id)}">${esc(r.title)} · 核对并同步</button>`).join('')}</div>`:''}
+      ${reports.slice(0,compact?1:topic?3:20).map(r=>{const c=r.clinical;return `<article class="clinical-summary"><div class="entry-top"><h3>${esc(c.diagnosis || r.title)}</h3><span class="date">就诊 ${date(c.encounterDate)}</span></div><p>${esc(topic?c[topic]:r.summary)}</p>${c.followUpText?`<p><strong>复诊：</strong>${esc(c.followUpText)}${c.followUpDate?` · 已定 ${date(c.followUpDate)}`:' · 具体日期待约定'}</p>`:''}${c.precautions?`<p class="clinical-attention">${esc(c.precautions)}</p>`:''}${clinicalLinks(r)}<div class="entry-actions">${recordLink('lab',r.id,'查看来源报告')}${ownerMode?`<button data-clinical-edit="${esc(r.id)}">核对 / 修改整份医嘱</button>`:''}</div></article>`;}).join('')}
+    </section>`;
+  }
+  function clinicalEditor(reportId) {
+    if(!requireOwner('核对诊断和医嘱需要主人权限。')) return;
+    const report=(state.labReports || []).find(r=>r.id===reportId);
+    if(!report) return toast('未找到原始报告');
+    let draft=clone(report.clinical || ClinicalReports.extractDraft('',report));
+    let controller;
+    const formField=(key,label,type='text',value=draft[key] || '')=>`<div class="field ${type==='textarea'?'wide':''}"><label for="clinical-${key}">${esc(label)}</label>${type==='textarea'?`<textarea id="clinical-${key}" name="${key}">${esc(value)}</textarea>`:`<input id="clinical-${key}" name="${key}" type="${type}" value="${esc(value)}">`}</div>`;
+    const historical=(state.moduleEntries || []).filter(e=>e.sourceReportId!==reportId && ['treatment','mct','diagnosis','imaging'].includes(e.module));
+    const medicationRow=(med={})=>`<fieldset class="clinical-med" data-med-row data-med-id="${esc(med.id || crypto.randomUUID())}"><legend>用药医嘱</legend><div class="form-grid">
+      ${[['name','药名 / 原文名称'],['dose','每次剂量（保留原单位）'],['frequency','频率 / 间隔'],['route','给药途径'],['cycle','药物疗程（原文明确时填写）'],['startDate','实际开始日期','date'],['endDate','结束 / 调整日期','date'],['notes','原文与备注','textarea']].map(([key,label,type='text'])=>`<div class="field ${type==='textarea'?'wide':''}"><label>${esc(label)}${type==='textarea'?`<textarea data-med-field="${key}">${esc(med[key] || '')}</textarea>`:`<input data-med-field="${key}" type="${type}" value="${esc(med[key] || '')}">`}</label></div>`).join('')}
+      <div class="field"><label>执行状态<select data-med-field="status">${['医嘱已记录 · 执行待核对','进行中','已结束','已停药'].map(s=>`<option value="${esc(s)}" ${med.status===s?'selected':''}>${s}</option>`).join('')}</select></label></div>
+      <div class="field"><label>关联既往用药（保留历史）<select data-med-field="relatedEntryId"><option value="">暂不关联</option>${historical.filter(e=>e.module==='treatment').map(e=>`<option value="${esc(e.id)}" ${med.relatedEntryId===e.id?'selected':''}>${date(e.recordedAt)} · ${esc(e.title)}</option>`).join('')}</select></label></div></div>
+      <button type="button" class="text-link danger" data-remove-med>移除此条医嘱</button></fieldset>`;
+    const draw=()=>{
+      overlay.innerHTML=`<div class="modal" role="dialog" aria-modal="true" aria-labelledby="clinical-title"><section class="modal-card clinical-modal"><header class="modal-head"><div><span class="eyebrow">REVIEW & CONNECT</span><h2 id="clinical-title">核对诊断与医嘱</h2></div><button class="close" type="button" data-close aria-label="关闭">×</button></header>
+        <form class="modal-body" id="clinical-form"><p class="privacy">识别内容是草稿。确认后，诊断、用药、照护、复诊提醒和病程会共同引用这份报告；无需填写数字指标。</p>
+        <div class="clinical-workspace"><aside class="clinical-original"><h3>${esc(report.title)}</h3>${(report.reportPages || []).map(p=>{const url=p.imageUrl || p.url;return /\.pdf(?:$|\?)/i.test(url)?`<a class="secondary" href="${esc(url)}" target="_blank" rel="noopener">打开原始 PDF ↗</a>`:`<a href="${esc(url)}" target="_blank" rel="noopener"><img src="${esc(url)}" alt="${esc(p.label || '原始报告')}" loading="lazy"></a>`;}).join('')}<p>点击原件可放大核对。手写修改、药名和剂量尤其需要检查。</p></aside>
+        <div class="clinical-fields">
+          <details class="clinical-section" ${draft.ordersText?'':'open'}><summary>1 · 识别原文</summary><p>识别在当前设备完成；失败时可粘贴原文继续。</p><button type="button" class="secondary" data-recognize-existing>重新识别扫描件</button>${formField('rawText','报告文字（可校正）','textarea')}<button type="button" class="secondary" data-parse-clinical>从文字整理核对表</button><p data-ocr-status role="status"></p></details>
+          <section class="clinical-section"><h3>2 · 就诊与诊断</h3><div class="form-grid">${formField('encounterDate','就诊日期','date')}${formField('diagnosis','诊断 / 关联问题')}
+          <div class="field"><label for="clinical-diagnosisStatus">诊断状态</label><select id="clinical-diagnosisStatus" name="diagnosisStatus">${ClinicalReports.statusOptions.map(s=>`<option value="${esc(s)}" ${draft.diagnosisStatus===s?'selected':''}>${s}</option>`).join('')}</select></div>${formField('diagnosisDate','诊断明确日期（不明确留空）','date')}</div></section>
+          <section class="clinical-section"><h3>3 · 用药与治疗</h3><p>起止日期与药物疗程只填已经明确的信息。“病程”不会自动转换成药物疗程。</p><div data-med-rows>${(draft.meds || []).map(medicationRow).join('')}</div><button type="button" class="secondary" data-add-med>＋ 增加用药医嘱</button></section>
+          <section class="clinical-section"><h3>4 · 照护与复诊</h3><div class="form-grid">${formField('ordersText','完整医嘱原文','textarea')}${formField('careText','日常护理 / 外用处理','textarea')}${formField('nutritionText','饮食与营养医嘱','textarea')}${formField('monitoringText','观察项目 / 生活质量','textarea')}${formField('followUpText','复诊要求原文','textarea')}${formField('followUpDate','已约定复诊日期','date')}${formField('precautions','待核对事项 / 注意事项','textarea')}</div><p>只写“每周或每两周复诊”时保留原文；填写确定日期后才生成日历提醒。</p></section>
+          <details class="clinical-section"><summary>5 · 关联已有病程记录</summary><p>用于串联同一疾病的经过，不会自动覆盖或停用旧处方。</p><div class="clinical-related-options">${historical.map(e=>`<label><input type="checkbox" name="relatedEntryIds" value="${esc(e.id)}" ${(draft.relatedEntryIds || []).includes(e.id)?'checked':''}> ${date(e.recordedAt)} · ${esc(e.title)}</label>`).join('')}</div></details>
+        </div></div>
+        <div class="clinical-confirm"><strong>保存后同步：</strong>诊断档案 → 用药与治疗 → 照护医嘱 → 复诊提醒 → 病程时间轴<label><input type="checkbox" name="reviewed" required> 我已核对原报告，未明确的药名、药量和日期已保留待核对。</label></div><p data-clinical-error role="alert"></p>
+        <div class="modal-foot">${draft.reviewStatus!=='confirmed'?'<button type="button" class="secondary" data-save-draft>暂存草稿</button>':''}<button type="button" class="secondary" data-close>取消</button><button class="primary" data-submit>确认医嘱并同步</button></div>
+        </form></section></div>`;
+      const form=overlay.querySelector('#clinical-form');
+      form.elements.diagnosisStatus.value=draft.diagnosisStatus || '病历记载';
+      const collect=()=>{
+        const fd=new FormData(form),c={...draft};
+        ['encounterDate','diagnosis','diagnosisStatus','diagnosisDate','rawText','ordersText','careText','nutritionText','monitoringText','followUpText','followUpDate','precautions'].forEach(k=>c[k]=String(fd.get(k) || '').trim());
+        c.relatedEntryIds=fd.getAll('relatedEntryIds');
+        c.meds=[...form.querySelectorAll('[data-med-row]')].map(row=>{const med={id:row.dataset.medId};row.querySelectorAll('[data-med-field]').forEach(el=>med[el.dataset.medField]=el.value.trim());return med;});
+        c.relatedEntryIds=[...new Set([...c.relatedEntryIds,...c.meds.map(m=>m.relatedEntryId).filter(Boolean)])];return c;
+      };
+      const close=()=>{controller?.abort();overlay.innerHTML='';};
+      form.closest('.modal').querySelectorAll('[data-close]').forEach(b=>b.onclick=close);
+      const bindRows=()=>form.querySelectorAll('[data-remove-med]').forEach(b=>b.onclick=()=>b.closest('[data-med-row]').remove());bindRows();
+      form.querySelector('[data-add-med]').onclick=()=>{form.querySelector('[data-med-rows]').insertAdjacentHTML('beforeend',medicationRow());bindRows();};
+      form.querySelector('[data-parse-clinical]').onclick=()=>{
+        const current=collect();
+        if(!current.rawText.trim()) return toast('先识别扫描件或粘贴原文');
+        if((current.ordersText || current.meds.length) && !confirm('重新整理会替换当前核对表中的内容。已保存的版本不变，继续吗？')) return;
+        draft={...ClinicalReports.extractDraft(current.rawText,report),reviewStatus:current.reviewStatus,relatedEntryIds:current.relatedEntryIds};draw();
+      };
+      form.querySelector('[data-recognize-existing]').onclick=async event=>{
+        const button=event.currentTarget,status=form.querySelector('[data-ocr-status]');button.disabled=true;controller=new AbortController();
+        try {
+          const files=[];
+          for(const p of report.reportPages || []) {const response=await fetch(p.imageUrl || p.url,{signal:controller.signal});if(!response.ok) throw Error('无法读取扫描件');files.push(new File([await response.blob()],p.label || (p.imageUrl || '').split('/').pop(),{type:response.headers.get('content-type') || ''}));}
+          const text=await ReportOCR.recognize(files,message=>status.textContent=message,controller.signal);
+          form.elements.rawText.value=text;status.textContent='文字已提取。检查原文后，点击“从文字整理核对表”。';
+        } catch(error) {status.textContent=error.name==='AbortError'?'已取消识别':`识别未完成：${error.message}。可粘贴原文继续。`;}
+        finally{button.disabled=false;}
+      };
+      form.querySelector('[data-save-draft]')?.addEventListener('click',async event=>{
+        const b=event.currentTarget;b.disabled=true;
+        try {const next=clone(state),r=next.labReports.find(x=>x.id===reportId);r.clinical={...collect(),reviewStatus:'draft'};r.updatedAt=new Date().toISOString();await saveCloud(next,'Save clinical review draft');close();}
+        catch(e){form.querySelector('[data-clinical-error]').textContent=e.message;b.disabled=false;}
+      });
+      form.onsubmit=async event=>{
+        event.preventDefault();const b=form.querySelector('[data-submit]');b.disabled=true;b.textContent='正在同步关联记录…';
+        try {
+          const c=collect();
+          if(!form.elements.reviewed.checked) throw Error('请先核对原报告并勾选确认。');
+          await saveCloud(ClinicalReports.confirmReport(state,reportId,c),'Confirm and link clinical report');
+          close();route={name:'care',id:null,highlight:null};render();toast('诊断、用药、照护与病程已同步');
+        } catch(e){form.querySelector('[data-clinical-error]').textContent=e.message;b.disabled=false;b.textContent='确认医嘱并同步';}
+      };
+    };draw();
+  }
+
   function uploadModal() {
     if (!requireOwner("上传报告扫描件需要主人权限。请先启用主人模式，然后再次点击「上传报告扫描件」，即可选择图片或 PDF。")) return;
     overlay.innerHTML = `<div class="modal">
       <section class="modal-card">
-        <header class="modal-head"><h2>上传检查结果并同步</h2><button class="close" data-close>×</button></header>
+        <header class="modal-head"><h2>上传报告 · 检查、诊断或医嘱</h2><button class="close" data-close>×</button></header>
         <form class="modal-body" id="upload-form">
-          <div class="privacy">扫描件和你核对后的指标会保存到线上。上传前会自动核对文件指纹和完整指标组合；发现重复时会提示原报告日期和名称。请按照原报告逐项核对数值、单位和异常状态。</div>
+          <div class="privacy">先保存原报告，再核对诊断与医嘱。图片和 PDF 均可识别文字；没有数字指标也能完成确认，并同步到照护记录。扫描件将保存到现有线上健康库。</div>
           <div style="height:14px"></div>
           <div class="form-grid">
             <div class="field wide"><label>扫描件图片或 PDF（可多选）</label><input type="file" name="files" accept="image/*,application/pdf" multiple required></div>
-            <div class="field"><label>检查日期</label><input type="date" name="recordedAt" value="${today()}" required></div>
-            <div class="field"><label>记录名称</label><input name="title" value="扫描检查报告" required></div>
-            <div class="field wide"><label>指标（每行：代码, 数值, 单位, 状态）</label><textarea name="metrics" placeholder="CREA, 151, µmol/L, 本次报告范围内&#10;SDMA, 9, µg/dL, 报告范围内"></textarea></div>
+            <div class="field wide"><label>报告内容</label><select name="documentType"><option value="clinical">诊断 / 病历 / 医嘱（也可含指标）</option><option value="lab">仅检验指标</option></select></div>
+            <div class="field"><label>就诊 / 检查日期</label><input type="date" name="recordedAt" value="${today()}" required></div>
+            <div class="field"><label>记录名称</label><input name="title" value="就诊报告" required></div>
+            <div class="field wide"><button type="button" class="secondary" data-upload-ocr>识别扫描件文字</button><p data-upload-ocr-status role="status">文字在本机识别，稍后逐项核对药名、药量和日期。</p><label>报告文字（可识别后校正，或直接粘贴）</label><textarea name="rawText" placeholder="诊断、处方、护理及复诊要求都可以录入；也可以先上传，再核对。"></textarea></div>
+            <div class="field wide"><label>数字指标（可留空，每行：代码, 数值, 单位, 状态）</label><textarea name="metrics" placeholder="CREA, 151, µmol/L, 本次报告范围内&#10;SDMA, 9, µg/dL, 报告范围内"></textarea></div>
           </div>
-          <div class="modal-foot"><button type="button" class="secondary" data-close>取消</button><button class="primary" data-submit>上传并同步</button></div>
+          <div class="modal-foot"><button type="button" class="secondary" data-close>取消</button><button class="primary" data-submit>保存报告并继续</button></div>
         </form>
       </section>
     </div>`;
 
-    overlay.querySelectorAll("[data-close]").forEach((button) => {
-      button.onclick = () => (overlay.innerHTML = "");
-    });
+    let uploadController;
+    const uploadForm=overlay.querySelector('#upload-form');
+    overlay.querySelectorAll('[data-close]').forEach(button=>button.onclick=()=>{uploadController?.abort();overlay.innerHTML='';});
+    uploadForm.querySelector('[data-upload-ocr]').onclick=async event=>{
+      const button=event.currentTarget,status=uploadForm.querySelector('[data-upload-ocr-status]');
+      const files=[...uploadForm.elements.files.files];
+      if(!files.length) return toast('请先选择扫描件图片或 PDF');
+      button.disabled=true;uploadController=new AbortController();
+      try {uploadForm.elements.rawText.value=await ReportOCR.recognize(files,message=>status.textContent=message,uploadController.signal);status.textContent='文字已提取。保存报告后进入诊断与医嘱核对页。';}
+      catch(error) {status.textContent=error.name==='AbortError'?'已取消识别':`识别未完成：${error.message}。可以粘贴文字，或先保存扫描件后补充。`;}
+      finally {button.disabled=false;}
+    };
     overlay.querySelector("#upload-form").onsubmit = async (event) => {
       event.preventDefault();
       const form = event.currentTarget;
@@ -2155,7 +2266,10 @@
         const lines = String(formData.get("metrics") || "")
           .split(/\n+/)
           .map((line) => line.split(/[,，]/).map((value) => value.trim()))
-          .filter((line) => line[0] && Number.isFinite(Number(line[1])));
+          .filter((line) => line[0] && line[1] !== "" && line[1] != null && Number.isFinite(Number(line[1])));
+        const metricText=String(formData.get('metrics') || '').trim();
+        if(metricText && lines.length !== metricText.split(/\n+/).filter(x=>x.trim()).length) throw Error('部分指标行没有有效数值，请核对，或将文字医嘱移到上方原文框。');
+        const clinicalReport=formData.get('documentType') !== 'lab';
         const proposedResults = lines.map((line) => ({ metric: line[0].toUpperCase(), value: Number(line[1]), unit: line[2] || "" }));
 
         submit.textContent = "正在检测重复报告…";
@@ -2163,7 +2277,7 @@
         for (const item of inspected) {
           if (item.match && !confirmDuplicate(item.match, item.file.name)) {
             submit.disabled = false;
-            submit.textContent = "上传并同步";
+            submit.textContent = "保存报告并继续";
             return;
           }
         }
@@ -2172,7 +2286,7 @@
           const dataMatch = duplicateCatalog().find((item) => item.signature === signature && item.resultCount === proposedResults.length);
           if (dataMatch && !confirmDuplicate(dataMatch, title, "的完整指标数据相同")) {
             submit.disabled = false;
-            submit.textContent = "上传并同步";
+            submit.textContent = "保存报告并继续";
             return;
           }
         }
@@ -2194,6 +2308,7 @@
           unit: line[2] || "",
           status: line[3] || "已由用户核对",
           source: title,
+          sourceReportId: reportId,
           sourceUploadId: uploaded[0]?.url || null,
           createdAt: now,
         }));
@@ -2201,13 +2316,15 @@
           ? metrics
               .map((item) => `${item.metric} ${item.value} ${item.unit}`.trim())
               .join("；")
-          : `已上传 ${uploaded.length} 页扫描报告；结构化指标待人工录入。`;
+          : `已上传 ${uploaded.length} 页报告；${clinicalReport ? "诊断与医嘱待核对，无需数字指标" : "指标待核对"}。`;
         const report = {
           id: reportId,
           recordedAt,
           title,
           summary,
-          panels: ["用户上传报告"],
+          documentType: clinicalReport ? (metrics.length ? 'mixed' : 'clinical') : 'lab',
+          clinical: clinicalReport ? ClinicalReports.extractDraft(String(formData.get('rawText') || ''),{recordedAt,title}) : null,
+          panels: [clinicalReport ? "就诊报告 · 待核对" : "用户上传报告"],
           results: metrics.map((item) => ({
             metric: item.metric,
             label: METRIC_LABEL[item.metric] || item.metric,
@@ -2235,6 +2352,7 @@
             title,
             summary,
             sourceUploadId: uploaded[0]?.url || null,
+            sourceReportId: reportId,
             createdAt: now,
           },
           ...(nextState.records || []),
@@ -2255,11 +2373,13 @@
         ];
         route = { name: "module", id: "lab", highlight: `#item-lab-${reportId}` };
         submit.textContent = "正在提交健康数据…";
-        await saveCloud(nextState, `Add laboratory report ${recordedAt}`);
+        await saveCloud(nextState, `Add health report ${recordedAt}`);
         overlay.innerHTML = "";
+        uploadController?.abort();
+        if(clinicalReport) clinicalEditor(reportId);
       } catch (error) {
         submit.disabled = false;
-        submit.textContent = "上传并同步";
+        submit.textContent = "保存报告并继续";
         if (!(error instanceof GitHubApiError)) {
           toast(error?.message || "上传失败", 4800);
         }
@@ -2473,6 +2593,7 @@
   }
 
   function bind() {
+    document.querySelectorAll("[data-clinical-edit]").forEach(button=>button.onclick=()=>clinicalEditor(button.dataset.clinicalEdit));
     document.querySelectorAll("[data-weight-add]").forEach(button => button.onclick = () => weightEditor());
     document.querySelectorAll("[data-weight-edit]").forEach(button => button.onclick = () => weightEditor(button.dataset.weightEdit));
     document.querySelectorAll("[data-weight-delete]").forEach(button => button.onclick = () => deleteWeight(button.dataset.weightDelete));
@@ -2541,6 +2662,7 @@
         const entry = (state.moduleEntries || []).find(
           (item) => String(item.id) === button.dataset.delete,
         );
+        if (entry?.sourceReportId) { toast("请从来源医嘱中修改或移除该条记录，以保持关联同步"); return clinicalEditor(entry.sourceReportId); }
         if (!entry || !confirm(`确定删除“${entry.title}”并同步到线上吗？`)) return;
         const nextState = clone(state);
         nextState.moduleEntries = (nextState.moduleEntries || []).filter(
@@ -2678,5 +2800,6 @@
   render();
   void loadCloudData();
 })();
+
 
 
