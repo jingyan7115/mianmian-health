@@ -1681,19 +1681,18 @@
         "dose": "12.5mg/kg （43.75mg每次）",
         "frequency": "一天两次",
         "route": "颗粒喂服",
-        "cycle": "7-10天（症状消失后减量3天）",
+        "cycle": "吃了2天，换药了",
         "durationUnit": "天",
-        "endDate": "2026-10-15",
+        "endDate": "2026-10-11",
         "reminderTime": "09:00",
-        "reminderAction": "复诊 / 复查",
-        "reminderNote": "阿莫西林克拉维酸钾第七天",
-        "notes": "若出现胃肠道相关反应则立刻就医"
+        "reminderAction": "联系医生确认停药或换量",
+        "notes": "去医院了"
       },
       "imageUrls": [],
       "imageFiles": [],
       "sourceKey": "user:5a900c3c-ffff-4bc9-b292-af6f355abf24",
       "createdAt": "2026-10-08T15:16:54.607Z",
-      "updatedAt": "2026-10-08T15:26:48.270Z"
+      "updatedAt": "2026-10-11T13:57:20.856Z"
     },
     {
       "id": "user-d4e5f6e0-5932-424c-9782-22c91e9058fd",
@@ -2617,9 +2616,8 @@
     }
   ],
   "_cloud": {
-    "revision": 22,
-    "updatedAt": "2026-10-11T13:48:51.824Z",
-    "updatedBy": "jingyan7115",
-    "changeNote": "补全既有病历的诊断与医嘱关联；未明确的用药信息保留待核对"
+    "revision": 23,
+    "updatedAt": "2026-10-11T13:57:22.478Z",
+    "updatedBy": "jingyan7115"
   }
 }
