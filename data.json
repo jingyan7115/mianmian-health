@@ -497,6 +497,15 @@
   ],
   "records": [
     {
+      "id": "user-record-fb4d648b-7dfa-4b74-aad3-746d195303e4",
+      "recordedAt": "2026-10-11",
+      "category": "检查报告",
+      "title": "脓皮症初诊",
+      "summary": "已上传 1 页扫描报告；结构化指标待人工录入。",
+      "sourceUploadId": "./uploads/20261011073015-08087a47-IMG_20261011_152923.jpg",
+      "createdAt": "2026-10-11T07:30:19.877Z"
+    },
+    {
       "id": 1,
       "ownerId": "mianmian-vault-v1",
       "recordedAt": "2026-08-15",
@@ -547,8 +556,39 @@
       "createdAt": "2026-08-15 07:23:30"
     }
   ],
-  "uploads": [],
+  "uploads": [
+    {
+      "id": "user-upload-9d9c9d8a-c428-4b9a-ab9e-d529a3da9565",
+      "originalName": "IMG_20261011_152923.jpg",
+      "url": "./uploads/20261011073015-08087a47-IMG_20261011_152923.jpg",
+      "mimeType": "image/jpeg",
+      "size": 358121,
+      "sha256": "2e738f1642a659ccd6238494db01336e1e8421f67a2db3f1fc441ce93de2d430",
+      "recordedAt": "2026-10-11",
+      "title": "脓皮症初诊",
+      "createdAt": "2026-10-11T07:30:19.877Z"
+    }
+  ],
   "labReports": [
+    {
+      "id": "user-lab-7dde8d70-9e53-4ad6-822b-4e94146f949e",
+      "recordedAt": "2026-10-11",
+      "title": "脓皮症初诊",
+      "summary": "已上传 1 页扫描报告；结构化指标待人工录入。",
+      "panels": [
+        "用户上传报告"
+      ],
+      "results": [],
+      "reportPages": [
+        {
+          "label": "IMG_20261011_152923.jpg",
+          "imageUrl": "./uploads/20261011073015-08087a47-IMG_20261011_152923.jpg",
+          "sha256": "2e738f1642a659ccd6238494db01336e1e8421f67a2db3f1fc441ce93de2d430"
+        }
+      ],
+      "createdAt": "2026-10-11T07:30:19.877Z",
+      "updatedAt": "2026-10-11T07:30:19.877Z"
+    },
     {
       "id": "lab-2020-02-16",
       "recordedAt": "2020-02-16",
@@ -2348,8 +2388,8 @@
     }
   ],
   "_cloud": {
-    "revision": 20,
-    "updatedAt": "2026-10-11T05:33:02.853Z",
+    "revision": 21,
+    "updatedAt": "2026-10-11T07:30:21.008Z",
     "updatedBy": "jingyan7115"
   }
 }
