@@ -2676,6 +2676,9 @@
       if (query) {
         route = { name: "search", id: query, highlight: null };
         render();
+      } else {
+        toast("开始检索吧");
+        document.querySelector("#search-input")?.focus();
       }
     });
     document.querySelectorAll("[data-metric]").forEach((button) => {
@@ -2834,6 +2837,18 @@
     restoringNavigation = false;
   });
   statusButton?.addEventListener("click", () => openOwnerModal());
+  const homeLink = document.querySelector("[data-home-link]");
+  const goHome = () => {
+    route = { name: "home", id: null, highlight: null };
+    render();
+  };
+  homeLink?.addEventListener("click", goHome);
+  homeLink?.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      goHome();
+    }
+  });
   async function refreshCloudIfStale() {
     if (cloudStatus === "saving" || Date.now() - lastCloudRefreshAt < 60000) return;
     await loadCloudData({ quiet: true });
