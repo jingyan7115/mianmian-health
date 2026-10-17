@@ -450,9 +450,13 @@
 
   async function githubRequest(path, options = {}, token = "") {
     let response;
+    const isRead = !options.method || options.method === "GET";
+    const controller = isRead ? new AbortController() : null;
+    const timer = controller ? setTimeout(() => controller.abort(), READ_TIMEOUT_MS) : null;
     try {
       response = await fetch(`${API_ROOT}${path}`, {
         ...options,
+        ...(controller ? { signal: controller.signal } : {}),
         cache: "no-store",
         headers: {
           ...githubHeaders(token),
@@ -461,6 +465,8 @@
       });
     } catch {
       throw new GitHubApiError(0, "无法连接 GitHub 云端，请检查网络后重试");
+    } finally {
+      if (timer) clearTimeout(timer);
     }
 
     if (!response.ok) {
@@ -531,67 +537,106 @@
     return normalized;
   }
 
-  async function loadCloudData({ notify = false, quiet = false } = {}) {
-    if (!quiet) setCloudStatus("loading", "正在读取最新线上数据");
-    let apiError = null;
+  const READ_TIMEOUT_MS = 8000;
 
+  function dataRevision(value) {
+    const revision = Number(value?._cloud?.revision);
+    return Number.isFinite(revision) ? revision : -1;
+  }
+
+  function sameDataVersion(a, b) {
+    return dataRevision(a) === dataRevision(b) &&
+      String(a?._cloud?.updatedAt || "") === String(b?._cloud?.updatedAt || "");
+  }
+
+  function hasHealthContent(value) {
+    return Boolean(value?.metrics?.length || value?.labReports?.length || value?.moduleEntries?.length);
+  }
+
+  async function readFromGitHubApi() {
     try {
-      let file;
-      try {
-        file = await getGitHubContent(DATA_PATH, ownerToken);
-      } catch (error) {
-        apiError = error;
-        if (!ownerToken) throw error;
-        if (error instanceof GitHubApiError && error.status === 401) {
-          ownerToken = "";
-          ownerMode = false;
-          storageRemove(TOKEN_KEY);
-        }
-        file = await getGitHubContent(DATA_PATH, "");
-      }
-      const remote = JSON.parse(file.text);
-      if (!validateHealthData(remote)) throw new Error("线上数据格式异常");
-      state = remote;
-      cacheState();
-      lastCloudRefreshAt = Date.now();
-      setCloudStatus(
-        "online",
-        `线上数据更新时间：${formatCloudTime(state._cloud?.updatedAt)}`,
-      );
-      render();
-      if (notify) toast("已载入最新线上数据");
-      return;
+      const file = await getGitHubContent(DATA_PATH, ownerToken);
+      return JSON.parse(file.text);
     } catch (error) {
-      apiError ||= error;
+      if (!ownerToken) throw error;
+      if (error instanceof GitHubApiError && error.status === 401) {
+        ownerToken = "";
+        ownerMode = false;
+        storageRemove(TOKEN_KEY);
+      }
+      const file = await getGitHubContent(DATA_PATH, "");
+      return JSON.parse(file.text);
     }
+  }
 
+  async function readFromSite() {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), READ_TIMEOUT_MS);
     try {
       const response = await fetch(`./data.json?v=${Date.now()}`, {
         cache: "no-store",
+        signal: controller.signal,
       });
       if (!response.ok) throw new Error("同站数据文件读取失败");
-      const remote = await response.json();
-      if (!validateHealthData(remote)) throw new Error("同站数据格式异常");
-      state = remote;
-      cacheState();
+      return await response.json();
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  // Owner mode reads the API first (sees a save before Pages finishes deploying);
+  // public viewing reads the same-site file first (no API rate limit).
+  async function loadCloudData({ notify = false, quiet = false } = {}) {
+    if (!quiet) setCloudStatus("loading", hasHealthContent(state) ? "正在核对最新线上数据，当前先显示上次的记录" : "正在读取最新线上数据");
+    const sources = ownerToken
+      ? [["api", readFromGitHubApi], ["site", readFromSite]]
+      : [["site", readFromSite], ["api", readFromGitHubApi]];
+    const floor = dataRevision(state);
+    let apiError = null;
+    let best = null;
+
+    for (const [kind, read] of sources) {
+      try {
+        const remote = await read();
+        if (!validateHealthData(remote)) throw new Error("线上数据格式异常");
+        if (!best || dataRevision(remote) > dataRevision(best.data)) best = { kind, data: remote };
+        // A same-site copy older than what is already shown is a Pages deploy lag; ask the other source.
+        if (dataRevision(remote) >= floor) break;
+      } catch (error) {
+        if (kind === "api") apiError ||= error;
+      }
+    }
+
+    if (best) {
+      const changed = !sameDataVersion(state, best.data) || !hasHealthContent(state);
+      const keepShown = dataRevision(best.data) < floor;
+      if (changed && !keepShown) {
+        state = best.data;
+        cacheState();
+      }
       lastCloudRefreshAt = Date.now();
       setCloudStatus(
         "online",
-        `已读取公开站点数据；更新时间：${formatCloudTime(state._cloud?.updatedAt)}`,
+        `${best.kind === "site" ? "已读取公开站点数据；" : "线上数据"}更新时间：${formatCloudTime(state._cloud?.updatedAt)}`,
       );
-      render();
-      if (notify) toast("已载入公开站点的最新数据");
+      if (changed && !keepShown) render({ keepScroll: quiet || hasHealthContent(state) });
+      if (notify) toast(changed ? "已载入最新线上数据" : "已是最新线上数据");
       return;
-    } catch {
-      if (quiet) return;
-      const cached = readStoredJson(CACHE_KEY);
-      if (validateHealthData(cached)) {
-        state = cached;
-        setCloudStatus("cache", "当前显示设备缓存，网络恢复后请重新载入");
-        render();
-        if (notify) toast("网络不可用，当前显示设备缓存", 3600);
-        return;
-      }
+    }
+
+    if (quiet) return;
+    if (hasHealthContent(state)) {
+      setCloudStatus("cache", "当前显示设备缓存，网络恢复后请重新载入");
+      if (notify) toast("网络不可用，当前显示设备缓存", 3600);
+      return;
+    }
+    const cached = readStoredJson(CACHE_KEY);
+    if (validateHealthData(cached)) {
+      state = cached;
+      setCloudStatus("cache", "当前显示设备缓存，网络恢复后请重新载入");
+      render();
+      if (notify) toast("网络不可用，当前显示设备缓存", 3600);
+      return;
     }
 
     state = clone(INITIAL);
@@ -2539,7 +2584,8 @@
 
   let restoringNavigation = false;
   let navigationKey = "";
-  function render() {
+  function render({ keepScroll = false } = {}) {
+    const savedScroll = keepScroll ? window.scrollY : 0;
     const key = [route.name, route.id || "", selectedMetric].join("|");
     if (navigationKey && key !== navigationKey && !restoringNavigation) {
       history.pushState({mianmianRoute: {...route, highlight: null}, metric: selectedMetric}, "");
@@ -2589,7 +2635,7 @@
         route.highlight = null;
       }, 80);
     }
-    window.scrollTo({ top: 0, behavior: "auto" });
+    window.scrollTo({ top: keepScroll && !route.highlight ? savedScroll : 0, behavior: "auto" });
   }
 
   function bind() {
@@ -2797,6 +2843,12 @@
   });
   window.addEventListener("focus", () => void refreshCloudIfStale());
   window.setInterval(() => void refreshCloudIfStale(), 5 * 60 * 1000);
+  // Show the last synced copy at once; loadCloudData then checks for a newer version.
+  const startupCache = readStoredJson(CACHE_KEY);
+  if (validateHealthData(startupCache) && hasHealthContent(startupCache)) {
+    state = startupCache;
+    setCloudStatus("loading", "正在核对最新线上数据，当前先显示上次的记录");
+  }
   render();
   void loadCloudData();
 })();
