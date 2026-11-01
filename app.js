@@ -1653,7 +1653,7 @@
                 <span class="date">${date(report.recordedAt)}</span>
               </div>
               <p>${esc(report.summary || "")}</p>${report.clinical ? `<span class="clinical-badge">${report.clinical.reviewStatus === 'confirmed' ? '医嘱已核对 · 已关联' : '医嘱草稿 · 待核对'}</span>${clinicalLinks(report)}` : ''}${sameDayLinks(report.recordedAt, report.id)}
-              ${ownerMode ? `<div class="entry-actions"><button class="secondary" data-clinical-edit="${esc(report.id)}">${report.clinical?.reviewStatus === 'confirmed' ? '修改诊断与医嘱' : '识别 / 核对诊断与医嘱'}</button></div>` : ''}
+              ${ownerMode ? `<div class="entry-actions">${String(report.id).startsWith("user-lab-") ? `<button class="secondary" data-metrics-edit="${esc(report.id)}">${(state.metrics || []).some((item) => String(item.sourceReportId) === String(report.id)) ? "补录 / 修改指标" : report.documentType === "lab" ? "补录指标 · 尚未进入趋势" : "补录指标"}</button>` : ""}<button class="secondary" data-clinical-edit="${esc(report.id)}">${report.clinical?.reviewStatus === 'confirmed' ? '修改诊断与医嘱' : '识别 / 核对诊断与医嘱'}</button></div>` : ''}
               ${
                 (report.results || []).length
                   ? `<details class="record-details"><summary>展开 ${(report.results || []).length} 项检查结果</summary><table class="result-table"><thead><tr><th>项目</th><th>结果</th><th>单位</th><th>状态</th></tr></thead><tbody>${report.results
@@ -2261,6 +2261,169 @@
     };draw();
   }
 
+  // ---- Numeric metrics: parse the "代码, 数值, 单位, 状态" box and pull candidates out of recognized text ----
+  const METRIC_UNITS = {WEIGHT:"kg",CREA:"µmol/L",SDMA:"µg/dL",PHOS:"mmol/L",BUN:"mmol/L",ALT:"U/L",WBC:"10^9/L",HCT:"%",HGB:"g/L",PLT:"10^9/L",MPV:"fL",USG:"",UPC:"",SBP:"mmHg"};
+  const METRIC_PATTERNS = [
+    ["CREA", /\bCREA\b|肌酐/i],
+    ["BUN", /\bUREA\b|\bBUN\b|尿素/i],
+    ["PHOS", /\bPHOS\b|磷离子|血磷|无机磷/i],
+    ["SDMA", /\bSDMA\b/i],
+    ["ALT", /\bALT\b|丙氨酸(?:氨基)?转氨酶/i],
+    ["WBC", /\bWBC\b|白细胞(?:值|计数)/i],
+    ["HCT", /\bHCT\b|红细胞压积/i],
+    ["HGB", /\bHGB\b|(?<!平均)血红蛋白(?:值|浓度)?(?!含量)/i],
+    ["PLT", /\bPLT\b|血小板(?:值|计数)/i],
+    ["MPV", /\bMPV\b|血小板平均体积|平均血小板体积/i],
+    ["USG", /\bUSG\b|尿比重/i],
+    ["UPC", /\bUPC\b|尿蛋白[\/／]肌酐/i],
+    ["SBP", /\bSBP\b|收缩压/i],
+  ];
+
+  function parseMetricLines(text) {
+    const raw = String(text || "").split(/\n+/).map((line) => line.trim()).filter(Boolean);
+    const lines = raw
+      .map((line) => line.split(/[,，]/).map((value) => value.trim()))
+      .filter((line) => line[0] && line[1] !== "" && line[1] != null && Number.isFinite(Number(line[1])));
+    if (lines.length !== raw.length) throw Error("部分指标行没有有效数值，请按「代码, 数值, 单位, 状态」逐行填写。");
+    const seen = new Set();
+    for (const line of lines) {
+      const code = line[0].toUpperCase();
+      if (seen.has(code)) throw Error(`${code} 填了不止一行，请保留一行。`);
+      seen.add(code);
+    }
+    return lines.map((line) => ({metric: line[0].toUpperCase(), value: Number(line[1]), unit: line[2] || METRIC_UNITS[line[0].toUpperCase()] || "", status: line[3] || "已由用户核对"}));
+  }
+
+  function normalizeUnit(token, code) {
+    let unit = String(token || "").replace(/[，,;；]+$/, "");
+    unit = unit.replace(/^[pμuU](?=mol\/L)/, "µ").replace(/^[pμuU](?=g\/dL)/, "µ").replace(/×/g, "");
+    if (!/^(?:[µm]?mol\/L|[µm]?g\/dL|g\/L|U\/L|%|fL|kg|mmHg|10\^?\d+\/L)$/i.test(unit)) return METRIC_UNITS[code] || "";
+    return unit.replace(/^10(\d)/, "10^$1");
+  }
+
+  // Best-effort candidates for the trend metrics only; the owner checks every line before saving.
+  function extractMetricCandidates(text) {
+    const found = new Map();
+    const lines = String(text || "").split(/\n+/);
+    lines.forEach((line, index) => {
+      if (/[A-Z]{2,}\s*[\/／]\s*[A-Z]{2,}|比\s*$|比\s*[(（]/.test(line)) return; // ratios such as BUN/CREA
+      for (const [code, pattern] of METRIC_PATTERNS) {
+        if (found.has(code)) continue;
+        const match = line.match(pattern);
+        if (!match) continue;
+        let rest = line.slice(match.index + match[0].length);
+        let number = rest.match(/([↑↓]?)\s*<?\s*(\d+(?:\.\d+)?)\s*([^\s\d]*)/);
+        if (!number && index > 0) {
+          // Two-line labels: "磷离子 1.13 mmol/L" followed by "(PHOS)".
+          rest = lines[index - 1];
+          number = rest.match(/([↑↓]?)\s*<?\s*(\d+(?:\.\d+)?)\s*([^\s\d]*)/);
+        }
+        if (!number) continue;
+        const flag = number[1] === "↑" || /\b[H]\b|偏高|高$/.test(rest.slice(0, 40)) ? "高于参考" : number[1] === "↓" ? "低于参考" : "待核对";
+        found.set(code, `${code}, ${number[2]}, ${normalizeUnit(number[3], code)}, ${flag}`);
+      }
+    });
+    return [...found.values()];
+  }
+
+  function metricLinesFor(reportId) {
+    return (state.metrics || [])
+      .filter((item) => String(item.sourceReportId) === String(reportId))
+      .map((item) => `${item.metric}, ${item.value}, ${item.unit || ""}, ${item.status || ""}`.replace(/,\s*$/, ""))
+      .join("\n");
+  }
+
+  function mergeMetricText(current, additions) {
+    const have = new Set(String(current || "").split(/\n+/).map((line) => line.split(/[,，]/)[0].trim().toUpperCase()).filter(Boolean));
+    const fresh = additions.filter((line) => !have.has(line.split(",")[0]));
+    return {text: [String(current || "").trim(), ...fresh].filter(Boolean).join("\n"), added: fresh.length};
+  }
+
+  function metricsEditor(reportId) {
+    if (!requireOwner("补录或修改指标需要主人权限。")) return;
+    const report = (state.labReports || []).find((item) => String(item.id) === String(reportId));
+    if (!report) return toast("没有找到这份报告");
+    overlay.innerHTML = `<div class="modal">
+      <section class="modal-card">
+        <header class="modal-head"><h2>补录 / 修改指标 · ${esc(report.title)}</h2><button class="close" data-close>×</button></header>
+        <form class="modal-body" id="metrics-form">
+          <div class="privacy">每行一项：代码, 数值, 单位, 状态。保存后同步到首页与长期趋势。识别只会填入草稿，请对照原件逐项核对数值和单位。</div>
+          <div style="height:14px"></div>
+          <div class="form-grid">
+            <div class="field"><label>检查日期</label><input value="${esc(report.recordedAt)}" disabled></div>
+            <div class="field"><label>可进入趋势的代码</label><p class="muted" style="margin:6px 0 0">${Object.keys(METRIC_UNITS).join(" · ")}</p></div>
+            <div class="field wide"><button type="button" class="secondary" data-metrics-ocr>识别原件中的指标</button><p data-metrics-ocr-status role="status">在本机识别 ${(report.reportPages || []).length} 页原件，只补充尚未填写的代码。</p></div>
+            <div class="field wide"><label>数字指标</label><textarea name="metrics" rows="9" placeholder="CREA, 137, µmol/L, 报告范围内&#10;MPV, 20.1, fL, 高于参考">${esc(metricLinesFor(report.id))}</textarea></div>
+          </div>
+          <div class="modal-foot"><button type="button" class="secondary" data-close>取消</button><button class="primary" data-submit>保存并同步</button></div>
+        </form>
+      </section>
+    </div>`;
+    let controller;
+    const form = overlay.querySelector("#metrics-form");
+    overlay.querySelectorAll("[data-close]").forEach((button) => button.onclick = () => { controller?.abort(); overlay.innerHTML = ""; });
+    form.querySelector("[data-metrics-ocr]").onclick = async (event) => {
+      const button = event.currentTarget, status = form.querySelector("[data-metrics-ocr-status]");
+      button.disabled = true; controller = new AbortController();
+      try {
+        const files = [];
+        for (const [index, page] of (report.reportPages || []).entries()) {
+          const url = await resolveAsset(page.imageUrl || page.url);
+          if (!url) continue;
+          const response = await fetch(url, {signal: controller.signal});
+          if (!response.ok) throw Error(`第 ${index + 1} 页原件读取失败`);
+          const blob = await response.blob();
+          files.push(new File([blob], page.label || `第${index + 1}页`, {type: blob.type}));
+        }
+        if (!files.length) throw Error("这份报告没有可识别的原件");
+        const text = await ReportOCR.recognize(files, (message) => status.textContent = message, controller.signal);
+        const merged = mergeMetricText(form.elements.metrics.value, extractMetricCandidates(text));
+        form.elements.metrics.value = merged.text;
+        status.textContent = merged.added ? `已补充 ${merged.added} 项，请逐项对照原件核对后保存。` : "没有识别到新的趋势指标，可以直接手动填写。";
+      } catch (error) {
+        status.textContent = error.name === "AbortError" ? "已取消识别" : `识别未完成：${error.message}。可以直接手动填写。`;
+      } finally { button.disabled = false; }
+    };
+    form.onsubmit = async (event) => {
+      event.preventDefault();
+      const submit = form.querySelector("[data-submit]");
+      try {
+        const lines = parseMetricLines(form.elements.metrics.value);
+        const others = (state.metrics || []).filter((item) => item.recordedAt === report.recordedAt && String(item.sourceReportId) !== String(report.id) && lines.some((line) => line.metric === item.metric));
+        if (others.length && !confirm(`同一天已有其他来源的 ${[...new Set(others.map((item) => item.metric))].join("、")} 记录，保存后趋势里会出现两条。仍然保存吗？`)) return;
+        submit.disabled = true; submit.textContent = "正在同步…";
+        const now = new Date().toISOString();
+        const nextState = clone(state);
+        const target = nextState.labReports.find((item) => String(item.id) === String(report.id));
+        const previous = new Map((nextState.metrics || []).filter((item) => String(item.sourceReportId) === String(report.id)).map((item) => [item.metric, item]));
+        const metrics = lines.map((line) => ({
+          ...(previous.get(line.metric) || {}),
+          id: previous.get(line.metric)?.id || `user-metric-${crypto.randomUUID()}`,
+          recordedAt: target.recordedAt, metric: line.metric, value: line.value, unit: line.unit, status: line.status,
+          source: target.title, sourceReportId: target.id,
+          sourceUploadId: previous.get(line.metric)?.sourceUploadId || target.reportPages?.[0]?.imageUrl || null,
+          createdAt: previous.get(line.metric)?.createdAt || now, updatedAt: now,
+        }));
+        nextState.metrics = [...(nextState.metrics || []).filter((item) => String(item.sourceReportId) !== String(target.id)), ...metrics];
+        // Rebuild the result table only when it was generated from this box; transcribed full tables stay as they are.
+        if (!(target.results || []).length || target.results.every((item) => item.metric)) {
+          target.results = metrics.map((item) => ({metric: item.metric, label: METRIC_LABEL[item.metric] || item.metric, value: item.value, unit: item.unit, status: item.status}));
+        }
+        if (/指标待核对/.test(target.summary || "") && metrics.length) {
+          target.summary = metrics.map((item) => `${item.metric} ${item.value} ${item.unit}`.trim()).join("；");
+          for (const record of nextState.records || []) if (String(record.sourceReportId) === String(target.id)) record.summary = target.summary;
+        }
+        target.updatedAt = now;
+        await saveCloud(nextState, `Update metrics for report ${target.recordedAt}`);
+        overlay.innerHTML = "";
+        toast(`已同步 ${metrics.length} 项指标到趋势`);
+      } catch (error) {
+        submit.disabled = false; submit.textContent = "保存并同步";
+        if (!(error instanceof GitHubApiError)) toast(error?.message || "保存失败", 4800);
+      }
+    };
+  }
+
   function uploadModal() {
     if (!requireOwner("上传报告扫描件需要主人权限。请先启用主人模式，然后再次点击「上传报告扫描件」，即可选择图片或 PDF。")) return;
     overlay.innerHTML = `<div class="modal">
@@ -2290,7 +2453,7 @@
       const files=[...uploadForm.elements.files.files];
       if(!files.length) return toast('请先选择扫描件图片或 PDF');
       button.disabled=true;uploadController=new AbortController();
-      try {uploadForm.elements.rawText.value=await ReportOCR.recognize(files,message=>status.textContent=message,uploadController.signal);status.textContent='文字已提取。保存报告后进入诊断与医嘱核对页。';}
+      try {const text=await ReportOCR.recognize(files,message=>status.textContent=message,uploadController.signal);uploadForm.elements.rawText.value=text;const merged=mergeMetricText(uploadForm.elements.metrics.value,extractMetricCandidates(text));uploadForm.elements.metrics.value=merged.text;status.textContent=merged.added?`文字已提取，并识别出 ${merged.added} 项趋势指标，已填入下方「数字指标」，请对照原件逐项核对。`:'文字已提取，未识别到趋势指标；有数值请在下方「数字指标」中填写。';}
       catch(error) {status.textContent=error.name==='AbortError'?'已取消识别':`识别未完成：${error.message}。可以粘贴文字，或先保存扫描件后补充。`;}
       finally {button.disabled=false;}
     };
@@ -2308,13 +2471,10 @@
 
         const recordedAt = String(formData.get("recordedAt"));
         const title = String(formData.get("title") || "").trim();
-        const lines = String(formData.get("metrics") || "")
-          .split(/\n+/)
-          .map((line) => line.split(/[,，]/).map((value) => value.trim()))
-          .filter((line) => line[0] && line[1] !== "" && line[1] != null && Number.isFinite(Number(line[1])));
-        const metricText=String(formData.get('metrics') || '').trim();
-        if(metricText && lines.length !== metricText.split(/\n+/).filter(x=>x.trim()).length) throw Error('部分指标行没有有效数值，请核对，或将文字医嘱移到上方原文框。');
+        const parsedMetrics = parseMetricLines(formData.get("metrics"));
+        const lines = parsedMetrics.map((item) => [item.metric, item.value, item.unit, item.status]);
         const clinicalReport=formData.get('documentType') !== 'lab';
+        if (!clinicalReport && !lines.length && !confirm("「数字指标」是空的，这份检验报告保存后不会进入趋势。可以先点「识别扫描件文字」自动填入，或稍后在报告上点「补录 / 修改指标」。仍然先保存原件吗？")) { submit.disabled = false; return; }
         const proposedResults = lines.map((line) => ({ metric: line[0].toUpperCase(), value: Number(line[1]), unit: line[2] || "" }));
 
         submit.textContent = "正在检测重复报告…";
@@ -2640,6 +2800,7 @@
 
   function bind() {
     document.querySelectorAll("[data-clinical-edit]").forEach(button=>button.onclick=()=>clinicalEditor(button.dataset.clinicalEdit));
+    document.querySelectorAll("[data-metrics-edit]").forEach(button => button.onclick = () => metricsEditor(button.dataset.metricsEdit));
     document.querySelectorAll("[data-weight-add]").forEach(button => button.onclick = () => weightEditor());
     document.querySelectorAll("[data-weight-edit]").forEach(button => button.onclick = () => weightEditor(button.dataset.weightEdit));
     document.querySelectorAll("[data-weight-delete]").forEach(button => button.onclick = () => deleteWeight(button.dataset.weightDelete));
