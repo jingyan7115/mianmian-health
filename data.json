@@ -497,6 +497,16 @@
   ],
   "records": [
     {
+      "id": "user-record-5cdf92ef-5f36-4955-ac9a-182585802283",
+      "recordedAt": "2026-11-01",
+      "category": "检查报告",
+      "title": "就诊报告",
+      "summary": "已上传 6 页报告；指标待核对。",
+      "sourceUploadId": "./uploads/20261101105504-7b665916-_4.jpg",
+      "sourceReportId": "user-lab-161153cd-13ec-480c-93af-dc7c48e62407",
+      "createdAt": "2026-11-01T10:55:23.331Z"
+    },
+    {
       "id": "user-record-86ee7d7c-b5fa-4db8-8947-f71c30c18d0c",
       "recordedAt": "2026-11-01",
       "category": "检查报告",
@@ -569,6 +579,72 @@
   ],
   "uploads": [
     {
+      "id": "user-upload-247c20b3-df19-4638-bd1e-ef67bee5d97c",
+      "originalName": "血常规五分类检验报告单_4.jpg",
+      "url": "./uploads/20261101105504-7b665916-_4.jpg",
+      "mimeType": "image/jpeg",
+      "size": 495395,
+      "sha256": "1d8a0a3c3004a0d43bd8562f793b7fb6a572bcd7a97a21f8f2d7f2005455e97f",
+      "recordedAt": "2026-11-01",
+      "title": "就诊报告",
+      "createdAt": "2026-11-01T10:55:23.331Z"
+    },
+    {
+      "id": "user-upload-97a98cb9-7a0e-4e59-b618-fa76c2fa566a",
+      "originalName": "血常规五分类检验报告单_5.jpg",
+      "url": "./uploads/20261101105508-7f0a2fda-_5.jpg",
+      "mimeType": "image/jpeg",
+      "size": 432409,
+      "sha256": "bd1b6c3ee3b8a4e57683911e9d155761b3b72913498f3c56758a4b3f94254cf4",
+      "recordedAt": "2026-11-01",
+      "title": "就诊报告",
+      "createdAt": "2026-11-01T10:55:23.331Z"
+    },
+    {
+      "id": "user-upload-e81a5949-30d6-4f3e-88fc-87d489210d20",
+      "originalName": "血常规五分类检验报告单_1.jpg",
+      "url": "./uploads/20261101105511-90fb0a72-_1.jpg",
+      "mimeType": "image/jpeg",
+      "size": 733247,
+      "sha256": "f1c41f0b94752ca80f158f0b103e25078bbd524c485afd7015ce9bc29c5c77f7",
+      "recordedAt": "2026-11-01",
+      "title": "就诊报告",
+      "createdAt": "2026-11-01T10:55:23.331Z"
+    },
+    {
+      "id": "user-upload-95070bda-a44a-4f65-b73b-e81522ebbd87",
+      "originalName": "血常规五分类检验报告单_3.jpg",
+      "url": "./uploads/20261101105514-3c4772cb-_3.jpg",
+      "mimeType": "image/jpeg",
+      "size": 444376,
+      "sha256": "05c08d205199df6d54cafcb552c421328bd7a1245370c0b3148d791f68ae940a",
+      "recordedAt": "2026-11-01",
+      "title": "就诊报告",
+      "createdAt": "2026-11-01T10:55:23.331Z"
+    },
+    {
+      "id": "user-upload-0001be74-4ea4-4566-90e5-07d8f636155f",
+      "originalName": "血常规五分类检验报告单_2.jpg",
+      "url": "./uploads/20261101105517-01a7dbb9-_2.jpg",
+      "mimeType": "image/jpeg",
+      "size": 308340,
+      "sha256": "d39f92826cb6042ff92f484fde4189498436a313100fe119fa0e11a9a3d03f28",
+      "recordedAt": "2026-11-01",
+      "title": "就诊报告",
+      "createdAt": "2026-11-01T10:55:23.331Z"
+    },
+    {
+      "id": "user-upload-9ed3789c-c245-4290-9d3e-8f8b75a85e97",
+      "originalName": "血常规五分类检验报告单_8.jpg",
+      "url": "./uploads/20261101105520-84d0e0b5-_8.jpg",
+      "mimeType": "image/jpeg",
+      "size": 391998,
+      "sha256": "3a9b39f0ffe9811e43d19596777a20ab604bc0c84abae315400ecb148834b980",
+      "recordedAt": "2026-11-01",
+      "title": "就诊报告",
+      "createdAt": "2026-11-01T10:55:23.331Z"
+    },
+    {
       "id": "user-upload-9898b772-2eec-4603-9343-481f534f4da1",
       "originalName": "血常规五分类检验报告单_6.jpg",
       "url": "./uploads/20261101105303-d2b12e85-_6.jpg",
@@ -592,6 +668,52 @@
     }
   ],
   "labReports": [
+    {
+      "id": "user-lab-161153cd-13ec-480c-93af-dc7c48e62407",
+      "recordedAt": "2026-11-01",
+      "title": "就诊报告",
+      "summary": "已上传 6 页报告；指标待核对。",
+      "documentType": "lab",
+      "clinical": null,
+      "panels": [
+        "用户上传报告"
+      ],
+      "results": [],
+      "reportPages": [
+        {
+          "label": "血常规五分类检验报告单_4.jpg",
+          "imageUrl": "./uploads/20261101105504-7b665916-_4.jpg",
+          "sha256": "1d8a0a3c3004a0d43bd8562f793b7fb6a572bcd7a97a21f8f2d7f2005455e97f"
+        },
+        {
+          "label": "血常规五分类检验报告单_5.jpg",
+          "imageUrl": "./uploads/20261101105508-7f0a2fda-_5.jpg",
+          "sha256": "bd1b6c3ee3b8a4e57683911e9d155761b3b72913498f3c56758a4b3f94254cf4"
+        },
+        {
+          "label": "血常规五分类检验报告单_1.jpg",
+          "imageUrl": "./uploads/20261101105511-90fb0a72-_1.jpg",
+          "sha256": "f1c41f0b94752ca80f158f0b103e25078bbd524c485afd7015ce9bc29c5c77f7"
+        },
+        {
+          "label": "血常规五分类检验报告单_3.jpg",
+          "imageUrl": "./uploads/20261101105514-3c4772cb-_3.jpg",
+          "sha256": "05c08d205199df6d54cafcb552c421328bd7a1245370c0b3148d791f68ae940a"
+        },
+        {
+          "label": "血常规五分类检验报告单_2.jpg",
+          "imageUrl": "./uploads/20261101105517-01a7dbb9-_2.jpg",
+          "sha256": "d39f92826cb6042ff92f484fde4189498436a313100fe119fa0e11a9a3d03f28"
+        },
+        {
+          "label": "血常规五分类检验报告单_8.jpg",
+          "imageUrl": "./uploads/20261101105520-84d0e0b5-_8.jpg",
+          "sha256": "3a9b39f0ffe9811e43d19596777a20ab604bc0c84abae315400ecb148834b980"
+        }
+      ],
+      "createdAt": "2026-11-01T10:55:23.331Z",
+      "updatedAt": "2026-11-01T10:55:23.331Z"
+    },
     {
       "id": "user-lab-725aa013-8f8d-4c15-be85-d38aa042b7e5",
       "recordedAt": "2026-11-01",
@@ -2754,8 +2876,8 @@
     }
   ],
   "_cloud": {
-    "revision": 32,
-    "updatedAt": "2026-11-01T10:53:08.301Z",
+    "revision": 33,
+    "updatedAt": "2026-11-01T10:55:24.264Z",
     "updatedBy": "jingyan7115"
   }
 }
