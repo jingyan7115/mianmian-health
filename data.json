@@ -2539,7 +2539,8 @@
         "status": "进行中",
         "notes": "原文：免洗泡沫，早晚各一次。洗完20分钟上外用药。",
         "reminderAction": "联系医生核对后续用药",
-        "reminderNote": "医嘱到期提醒不代表可以自行停药。"
+        "reminderNote": "医嘱到期提醒不代表可以自行停药。",
+        "reminderCompletedAt": "2026-11-01T06:25:37.809Z"
       },
       "sourceKind": "clinical-report",
       "sourceReportId": "user-lab-7dde8d70-9e53-4ad6-822b-4e94146f949e",
@@ -2711,8 +2712,8 @@
     }
   ],
   "_cloud": {
-    "revision": 30,
-    "updatedAt": "2026-11-01T06:25:26.426Z",
+    "revision": 31,
+    "updatedAt": "2026-11-01T06:25:38.618Z",
     "updatedBy": "jingyan7115"
   }
 }
