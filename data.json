@@ -493,6 +493,126 @@
       "note": "空腹",
       "createdAt": "2026-10-11T05:33:01.446Z",
       "updatedAt": "2026-10-11T05:33:01.446Z"
+    },
+    {
+      "id": "user-metric-f1ab3950-fa05-4304-9f10-95e31a45e3ee",
+      "recordedAt": "2026-11-01",
+      "metric": "CREA",
+      "value": 137,
+      "unit": "µmol/L",
+      "status": "本次报告范围内",
+      "source": "IDEXX 生化",
+      "sourceReportId": "user-lab-725aa013-8f8d-4c15-be85-d38aa042b7e5",
+      "sourceUploadId": "./uploads/20261101105303-d2b12e85-_6.jpg",
+      "createdAt": "2026-11-01T12:00:00.000Z"
+    },
+    {
+      "id": "user-metric-8f84ce66-3e4a-44c7-bcf1-1943c140bb7d",
+      "recordedAt": "2026-11-01",
+      "metric": "BUN",
+      "value": 7.2,
+      "unit": "mmol/L",
+      "status": "报告范围内",
+      "source": "IDEXX 生化",
+      "sourceReportId": "user-lab-725aa013-8f8d-4c15-be85-d38aa042b7e5",
+      "sourceUploadId": "./uploads/20261101105303-d2b12e85-_6.jpg",
+      "createdAt": "2026-11-01T12:00:00.000Z"
+    },
+    {
+      "id": "user-metric-82e13ce6-b651-431c-9932-bfa299796783",
+      "recordedAt": "2026-11-01",
+      "metric": "PHOS",
+      "value": 1.13,
+      "unit": "mmol/L",
+      "status": "报告范围内",
+      "source": "IDEXX 生化",
+      "sourceReportId": "user-lab-725aa013-8f8d-4c15-be85-d38aa042b7e5",
+      "sourceUploadId": "./uploads/20261101105303-d2b12e85-_6.jpg",
+      "createdAt": "2026-11-01T12:00:00.000Z"
+    },
+    {
+      "id": "user-metric-bd312c1c-1a91-48f9-a266-fba96906bb13",
+      "recordedAt": "2026-11-01",
+      "metric": "ALT",
+      "value": 48,
+      "unit": "U/L",
+      "status": "报告范围内",
+      "source": "IDEXX 生化",
+      "sourceReportId": "user-lab-725aa013-8f8d-4c15-be85-d38aa042b7e5",
+      "sourceUploadId": "./uploads/20261101105303-d2b12e85-_6.jpg",
+      "createdAt": "2026-11-01T12:00:00.000Z"
+    },
+    {
+      "id": "user-metric-768247f5-7c96-4056-b078-31b735882db6",
+      "recordedAt": "2026-11-01",
+      "metric": "WBC",
+      "value": 8.48,
+      "unit": "10^9/L",
+      "status": "报告范围内",
+      "source": "血常规五分类 + fSAA（同日超声、细胞学）",
+      "sourceReportId": "user-lab-161153cd-13ec-480c-93af-dc7c48e62407",
+      "sourceUploadId": "./uploads/20261101105511-90fb0a72-_1.jpg",
+      "createdAt": "2026-11-01T12:00:00.000Z"
+    },
+    {
+      "id": "user-metric-f26b812a-809b-45b3-b2de-d0c3f0e569b2",
+      "recordedAt": "2026-11-01",
+      "metric": "HCT",
+      "value": 36.3,
+      "unit": "%",
+      "status": "报告范围内",
+      "source": "血常规五分类 + fSAA（同日超声、细胞学）",
+      "sourceReportId": "user-lab-161153cd-13ec-480c-93af-dc7c48e62407",
+      "sourceUploadId": "./uploads/20261101105511-90fb0a72-_1.jpg",
+      "createdAt": "2026-11-01T12:00:00.000Z"
+    },
+    {
+      "id": "user-metric-c1860df9-a75c-4825-9a54-e982e8a57b3d",
+      "recordedAt": "2026-11-01",
+      "metric": "HGB",
+      "value": 124,
+      "unit": "g/L",
+      "status": "报告范围内",
+      "source": "血常规五分类 + fSAA（同日超声、细胞学）",
+      "sourceReportId": "user-lab-161153cd-13ec-480c-93af-dc7c48e62407",
+      "sourceUploadId": "./uploads/20261101105511-90fb0a72-_1.jpg",
+      "createdAt": "2026-11-01T12:00:00.000Z"
+    },
+    {
+      "id": "user-metric-73961691-0258-4bf9-b9e2-5593830c49b9",
+      "recordedAt": "2026-11-01",
+      "metric": "PLT",
+      "value": 258,
+      "unit": "10^9/L",
+      "status": "报告范围内",
+      "source": "血常规五分类 + fSAA（同日超声、细胞学）",
+      "sourceReportId": "user-lab-161153cd-13ec-480c-93af-dc7c48e62407",
+      "sourceUploadId": "./uploads/20261101105511-90fb0a72-_1.jpg",
+      "createdAt": "2026-11-01T12:00:00.000Z"
+    },
+    {
+      "id": "user-metric-2c61d3ae-a92a-431e-94cc-9e286c132a79",
+      "recordedAt": "2026-11-01",
+      "metric": "MPV",
+      "value": 20.1,
+      "unit": "fL",
+      "status": "高于参考",
+      "source": "血常规五分类 + fSAA（同日超声、细胞学）",
+      "sourceReportId": "user-lab-161153cd-13ec-480c-93af-dc7c48e62407",
+      "sourceUploadId": "./uploads/20261101105511-90fb0a72-_1.jpg",
+      "createdAt": "2026-11-01T12:00:00.000Z"
+    },
+    {
+      "id": "user-metric-f02b33c5-d9ef-4e70-a143-675e09a187b6",
+      "recordedAt": "2026-11-01",
+      "metric": "WEIGHT",
+      "value": 3.54,
+      "unit": "kg",
+      "status": "超声报告抬头体重",
+      "source": "腹部超声报告抬头",
+      "sourceReportId": "user-lab-161153cd-13ec-480c-93af-dc7c48e62407",
+      "sourceUploadId": "./uploads/20261101105504-7b665916-_4.jpg",
+      "createdAt": "2026-11-01T12:00:00.000Z"
     }
   ],
   "records": [
@@ -500,8 +620,8 @@
       "id": "user-record-5cdf92ef-5f36-4955-ac9a-182585802283",
       "recordedAt": "2026-11-01",
       "category": "检查报告",
-      "title": "就诊报告",
-      "summary": "已上传 6 页报告；指标待核对。",
+      "title": "血常规五分类 + fSAA（同日超声、细胞学）",
+      "summary": "CBC：WBC 8.48、HCT 36.3%、HGB 124 g/L、PLT 258；MPV 20.1 fL 高（报告提示列出血小板凝集、样本放置过久等多种可能）。fSAA <1.00 mg/L 阴性。细胞学镜检提示化脓性炎症。",
       "sourceUploadId": "./uploads/20261101105504-7b665916-_4.jpg",
       "sourceReportId": "user-lab-161153cd-13ec-480c-93af-dc7c48e62407",
       "createdAt": "2026-11-01T10:55:23.331Z"
@@ -510,8 +630,8 @@
       "id": "user-record-86ee7d7c-b5fa-4db8-8947-f71c30c18d0c",
       "recordedAt": "2026-11-01",
       "category": "检查报告",
-      "title": "就诊报告",
-      "summary": "已上传 1 页报告；指标待核对。",
+      "title": "IDEXX 生化",
+      "summary": "CREA 137 µmol/L、UREA 7.2 mmol/L、PHOS 1.13 mmol/L；17 项均在该报告参考范围内（GLU 8.56 mmol/L 接近上限 8.84）。",
       "sourceUploadId": "./uploads/20261101105303-d2b12e85-_6.jpg",
       "sourceReportId": "user-lab-725aa013-8f8d-4c15-be85-d38aa042b7e5",
       "createdAt": "2026-11-01T10:53:06.503Z"
@@ -586,7 +706,7 @@
       "size": 495395,
       "sha256": "1d8a0a3c3004a0d43bd8562f793b7fb6a572bcd7a97a21f8f2d7f2005455e97f",
       "recordedAt": "2026-11-01",
-      "title": "就诊报告",
+      "title": "血常规五分类 + fSAA（同日超声、细胞学）",
       "createdAt": "2026-11-01T10:55:23.331Z"
     },
     {
@@ -597,7 +717,7 @@
       "size": 432409,
       "sha256": "bd1b6c3ee3b8a4e57683911e9d155761b3b72913498f3c56758a4b3f94254cf4",
       "recordedAt": "2026-11-01",
-      "title": "就诊报告",
+      "title": "血常规五分类 + fSAA（同日超声、细胞学）",
       "createdAt": "2026-11-01T10:55:23.331Z"
     },
     {
@@ -608,7 +728,7 @@
       "size": 733247,
       "sha256": "f1c41f0b94752ca80f158f0b103e25078bbd524c485afd7015ce9bc29c5c77f7",
       "recordedAt": "2026-11-01",
-      "title": "就诊报告",
+      "title": "血常规五分类 + fSAA（同日超声、细胞学）",
       "createdAt": "2026-11-01T10:55:23.331Z"
     },
     {
@@ -619,7 +739,7 @@
       "size": 444376,
       "sha256": "05c08d205199df6d54cafcb552c421328bd7a1245370c0b3148d791f68ae940a",
       "recordedAt": "2026-11-01",
-      "title": "就诊报告",
+      "title": "血常规五分类 + fSAA（同日超声、细胞学）",
       "createdAt": "2026-11-01T10:55:23.331Z"
     },
     {
@@ -630,7 +750,7 @@
       "size": 308340,
       "sha256": "d39f92826cb6042ff92f484fde4189498436a313100fe119fa0e11a9a3d03f28",
       "recordedAt": "2026-11-01",
-      "title": "就诊报告",
+      "title": "血常规五分类 + fSAA（同日超声、细胞学）",
       "createdAt": "2026-11-01T10:55:23.331Z"
     },
     {
@@ -641,7 +761,7 @@
       "size": 391998,
       "sha256": "3a9b39f0ffe9811e43d19596777a20ab604bc0c84abae315400ecb148834b980",
       "recordedAt": "2026-11-01",
-      "title": "就诊报告",
+      "title": "血常规五分类 + fSAA（同日超声、细胞学）",
       "createdAt": "2026-11-01T10:55:23.331Z"
     },
     {
@@ -652,7 +772,7 @@
       "size": 502343,
       "sha256": "1c035a043b0ac091b405180b89a6d3d342ba6eded7122a755af62932fb29ee9a",
       "recordedAt": "2026-11-01",
-      "title": "就诊报告",
+      "title": "IDEXX 生化",
       "createdAt": "2026-11-01T10:53:06.503Z"
     },
     {
@@ -671,14 +791,127 @@
     {
       "id": "user-lab-161153cd-13ec-480c-93af-dc7c48e62407",
       "recordedAt": "2026-11-01",
-      "title": "就诊报告",
-      "summary": "已上传 6 页报告；指标待核对。",
+      "title": "血常规五分类 + fSAA（同日超声、细胞学）",
+      "summary": "CBC：WBC 8.48、HCT 36.3%、HGB 124 g/L、PLT 258；MPV 20.1 fL 高（报告提示列出血小板凝集、样本放置过久等多种可能）。fSAA <1.00 mg/L 阴性。细胞学镜检提示化脓性炎症。",
       "documentType": "lab",
       "clinical": null,
       "panels": [
-        "用户上传报告"
+        "CBC 五分类",
+        "fSAA",
+        "腹部超声",
+        "细胞学"
       ],
-      "results": [],
+      "results": [
+        {
+          "label": "WBC",
+          "value": "8.48 ×10^9/L"
+        },
+        {
+          "label": "LYM%",
+          "value": "31.61 %"
+        },
+        {
+          "label": "MON%",
+          "value": "5.60 %"
+        },
+        {
+          "label": "NEU%",
+          "value": "57.17 %"
+        },
+        {
+          "label": "EOS%",
+          "value": "5.46 %"
+        },
+        {
+          "label": "BASO%",
+          "value": "0.16 %"
+        },
+        {
+          "label": "LYM#",
+          "value": "2.680 ×10^9/L"
+        },
+        {
+          "label": "MON#",
+          "value": "0.474 ×10^9/L"
+        },
+        {
+          "label": "NEU#",
+          "value": "4.850 ×10^9/L"
+        },
+        {
+          "label": "EOS#",
+          "value": "0.463 ×10^9/L"
+        },
+        {
+          "label": "BASO#",
+          "value": "0.013 ×10^9/L"
+        },
+        {
+          "label": "NRBC%",
+          "value": "0.93 %"
+        },
+        {
+          "label": "NRBC#",
+          "value": "0.07 ×10^9/L"
+        },
+        {
+          "label": "RBC",
+          "value": "7.41 ×10^12/L"
+        },
+        {
+          "label": "HGB",
+          "value": "124 g/L"
+        },
+        {
+          "label": "HCT",
+          "value": "36.3 %"
+        },
+        {
+          "label": "MCV",
+          "value": "49.1 fL"
+        },
+        {
+          "label": "MCH",
+          "value": "16.7 pg"
+        },
+        {
+          "label": "MCHC",
+          "value": "341 g/L"
+        },
+        {
+          "label": "RDW-CV",
+          "value": "17.8 %"
+        },
+        {
+          "label": "PLT",
+          "value": "258 ×10^9/L"
+        },
+        {
+          "label": "MPV",
+          "value": "20.1 fL",
+          "flag": "high"
+        },
+        {
+          "label": "ALY%",
+          "value": "0.68 %"
+        },
+        {
+          "label": "ALY#",
+          "value": "0.057 ×10^9/L"
+        },
+        {
+          "label": "LIC%",
+          "value": "0.44 %"
+        },
+        {
+          "label": "LIC#",
+          "value": "0.037 ×10^9/L"
+        },
+        {
+          "label": "fSAA",
+          "value": "<1.00 mg/L（阴性）"
+        }
+      ],
       "reportPages": [
         {
           "label": "血常规五分类检验报告单_4.jpg",
@@ -712,19 +945,89 @@
         }
       ],
       "createdAt": "2026-11-01T10:55:23.331Z",
-      "updatedAt": "2026-11-01T10:55:23.331Z"
+      "updatedAt": "2026-11-01T12:00:00.000Z",
+      "note": "同一套原件还含腹部超声（已另建影像记录）与细胞学：中性粒细胞+++、巨噬细胞+++、鳞状上皮细胞+；镜检提示“化脓性炎症，请结合临床综合判断”。原件未写明细胞学采样部位。上传文件名缺第 7 页，待确认。"
     },
     {
       "id": "user-lab-725aa013-8f8d-4c15-be85-d38aa042b7e5",
       "recordedAt": "2026-11-01",
-      "title": "就诊报告",
-      "summary": "已上传 1 页报告；指标待核对。",
+      "title": "IDEXX 生化",
+      "summary": "CREA 137 µmol/L、UREA 7.2 mmol/L、PHOS 1.13 mmol/L；17 项均在该报告参考范围内（GLU 8.56 mmol/L 接近上限 8.84）。",
       "documentType": "lab",
       "clinical": null,
       "panels": [
-        "用户上传报告"
+        "IDEXX Catalyst One 生化"
       ],
-      "results": [],
+      "results": [
+        {
+          "label": "GLU",
+          "value": "8.56 mmol/L"
+        },
+        {
+          "label": "CREA",
+          "value": "137 µmol/L"
+        },
+        {
+          "label": "UREA",
+          "value": "7.2 mmol/L"
+        },
+        {
+          "label": "BUN/CREA",
+          "value": "13"
+        },
+        {
+          "label": "PHOS",
+          "value": "1.13 mmol/L"
+        },
+        {
+          "label": "Ca",
+          "value": "2.36 mmol/L"
+        },
+        {
+          "label": "TP",
+          "value": "73 g/L"
+        },
+        {
+          "label": "ALB",
+          "value": "32 g/L"
+        },
+        {
+          "label": "GLOB",
+          "value": "41 g/L"
+        },
+        {
+          "label": "A/G",
+          "value": "0.8"
+        },
+        {
+          "label": "ALT",
+          "value": "48 U/L"
+        },
+        {
+          "label": "ALKP",
+          "value": "29 U/L"
+        },
+        {
+          "label": "GGT",
+          "value": "0 U/L"
+        },
+        {
+          "label": "TBIL",
+          "value": "<2 µmol/L"
+        },
+        {
+          "label": "CHOL",
+          "value": "2.87 mmol/L"
+        },
+        {
+          "label": "AMYL",
+          "value": "689 U/L"
+        },
+        {
+          "label": "LIPA",
+          "value": "543 U/L"
+        }
+      ],
       "reportPages": [
         {
           "label": "血常规五分类检验报告单_6.jpg",
@@ -733,7 +1036,8 @@
         }
       ],
       "createdAt": "2026-11-01T10:53:06.503Z",
-      "updatedAt": "2026-11-01T10:53:06.503Z"
+      "updatedAt": "2026-11-01T12:00:00.000Z",
+      "note": "数值按 2026-11-01 14:21 IDEXX 打印原件转录；本次报告未含 SDMA。"
     },
     {
       "id": "user-lab-7dde8d70-9e53-4ad6-822b-4e94146f949e",
@@ -2712,6 +3016,30 @@
       "imageUrls": [],
       "createdAt": "2026-10-11T13:48:51.821Z",
       "updatedAt": "2026-10-11T14:02:02.690Z"
+    },
+    {
+      "id": "user-613d968a-88c1-491e-9f57-b7c0d57a9afb",
+      "module": "imaging",
+      "recordedAt": "2026-11-01",
+      "title": "全腹超声",
+      "summary": "超声诊断：脾脏结节、脾脏血管钙化；左肾 3.07 cm，右肾 3.59 cm；胰腺左叶厚约 0.66 cm。建议结合临床其他指标综合判断。",
+      "data": {
+        "modality": "全腹超声",
+        "leftKidneyCm": 3.07,
+        "rightKidneyCm": 3.59,
+        "pancreasCm": 0.66,
+        "largestSplenicNodule": "0.20 × 0.12 cm",
+        "findings": "肝脏轮廓规则，肝门淋巴结未见明显增大；胆囊适度充盈，胆总管未见扩张；胰腺左叶实质回声升高、与周围软组织相近，厚约 0.66 cm；脾实质回声不均，多个高回声结节沿血管分布，最大 0.20×0.12 cm，脾体厚约 0.76 cm；双肾皮髓分界清晰、肾盂未见扩张；膀胱未见异常；胃、小肠、结肠未见梗阻征象；胰十二指肠淋巴结 0.59×0.33 cm，空肠淋巴结厚 0.37 cm，双侧髂内淋巴结厚约 0.64 cm。",
+        "clinicalHistory": "下颌痤疮，肥大细胞瘤病史",
+        "doctor": "陈德明"
+      },
+      "imageUrls": [
+        "./uploads/20261101105504-7b665916-_4.jpg",
+        "./uploads/20261101105508-7f0a2fda-_5.jpg"
+      ],
+      "sourceReportId": "user-lab-161153cd-13ec-480c-93af-dc7c48e62407",
+      "createdAt": "2026-11-01T12:00:00.000Z",
+      "updatedAt": "2026-11-01T12:00:00.000Z"
     }
   ],
   "source": "面面_长期健康管理数据库0815版(2).xlsx",
@@ -2873,11 +3201,16 @@
       "date": "2026-08-15",
       "left": 3.03,
       "right": 3.83
+    },
+    {
+      "date": "2026-11-01",
+      "left": 3.07,
+      "right": 3.59
     }
   ],
   "_cloud": {
-    "revision": 33,
-    "updatedAt": "2026-11-01T10:55:24.264Z",
+    "revision": 34,
+    "updatedAt": "2026-11-01T12:00:00.000Z",
     "updatedBy": "jingyan7115"
   }
 }
