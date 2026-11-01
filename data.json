@@ -2511,7 +2511,8 @@
         "status": "进行中",
         "notes": "原文：外用药，局部涂抹药液，两小时1次。免洗泡沫用完后20分钟后上药。",
         "reminderAction": "联系医生核对后续用药",
-        "reminderNote": "医嘱到期提醒不代表可以自行停药。"
+        "reminderNote": "医嘱到期提醒不代表可以自行停药。",
+        "reminderCompletedAt": "2026-11-01T06:25:25.646Z"
       },
       "sourceKind": "clinical-report",
       "sourceReportId": "user-lab-7dde8d70-9e53-4ad6-822b-4e94146f949e",
@@ -2710,8 +2711,8 @@
     }
   ],
   "_cloud": {
-    "revision": 29,
-    "updatedAt": "2026-11-01T06:25:19.021Z",
+    "revision": 30,
+    "updatedAt": "2026-11-01T06:25:26.426Z",
     "updatedBy": "jingyan7115"
   }
 }
