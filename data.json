@@ -2454,7 +2454,8 @@
         "status": "进行中",
         "notes": "原文：爱波克：每天两次，每次半片，12小时一次。",
         "reminderAction": "联系医生核对后续用药",
-        "reminderNote": "医嘱到期提醒不代表可以自行停药。"
+        "reminderNote": "医嘱到期提醒不代表可以自行停药。",
+        "reminderCompletedAt": "2026-11-01T06:25:06.090Z"
       },
       "sourceKind": "clinical-report",
       "sourceReportId": "user-lab-7dde8d70-9e53-4ad6-822b-4e94146f949e",
@@ -2708,8 +2709,8 @@
     }
   ],
   "_cloud": {
-    "revision": 27,
-    "updatedAt": "2026-11-01T06:24:57.556Z",
+    "revision": 28,
+    "updatedAt": "2026-11-01T06:25:07.078Z",
     "updatedBy": "jingyan7115"
   }
 }
