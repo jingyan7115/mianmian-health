@@ -497,6 +497,16 @@
   ],
   "records": [
     {
+      "id": "user-record-86ee7d7c-b5fa-4db8-8947-f71c30c18d0c",
+      "recordedAt": "2026-11-01",
+      "category": "检查报告",
+      "title": "就诊报告",
+      "summary": "已上传 1 页报告；指标待核对。",
+      "sourceUploadId": "./uploads/20261101105303-d2b12e85-_6.jpg",
+      "sourceReportId": "user-lab-725aa013-8f8d-4c15-be85-d38aa042b7e5",
+      "createdAt": "2026-11-01T10:53:06.503Z"
+    },
+    {
       "id": "user-record-fb4d648b-7dfa-4b74-aad3-746d195303e4",
       "recordedAt": "2026-10-11",
       "category": "诊断与医嘱",
@@ -559,6 +569,17 @@
   ],
   "uploads": [
     {
+      "id": "user-upload-9898b772-2eec-4603-9343-481f534f4da1",
+      "originalName": "血常规五分类检验报告单_6.jpg",
+      "url": "./uploads/20261101105303-d2b12e85-_6.jpg",
+      "mimeType": "image/jpeg",
+      "size": 502343,
+      "sha256": "1c035a043b0ac091b405180b89a6d3d342ba6eded7122a755af62932fb29ee9a",
+      "recordedAt": "2026-11-01",
+      "title": "就诊报告",
+      "createdAt": "2026-11-01T10:53:06.503Z"
+    },
+    {
       "id": "user-upload-9d9c9d8a-c428-4b9a-ab9e-d529a3da9565",
       "originalName": "IMG_20261011_152923.jpg",
       "url": "./uploads/20261011073015-08087a47-IMG_20261011_152923.jpg",
@@ -571,6 +592,27 @@
     }
   ],
   "labReports": [
+    {
+      "id": "user-lab-725aa013-8f8d-4c15-be85-d38aa042b7e5",
+      "recordedAt": "2026-11-01",
+      "title": "就诊报告",
+      "summary": "已上传 1 页报告；指标待核对。",
+      "documentType": "lab",
+      "clinical": null,
+      "panels": [
+        "用户上传报告"
+      ],
+      "results": [],
+      "reportPages": [
+        {
+          "label": "血常规五分类检验报告单_6.jpg",
+          "imageUrl": "./uploads/20261101105303-d2b12e85-_6.jpg",
+          "sha256": "1c035a043b0ac091b405180b89a6d3d342ba6eded7122a755af62932fb29ee9a"
+        }
+      ],
+      "createdAt": "2026-11-01T10:53:06.503Z",
+      "updatedAt": "2026-11-01T10:53:06.503Z"
+    },
     {
       "id": "user-lab-7dde8d70-9e53-4ad6-822b-4e94146f949e",
       "recordedAt": "2026-10-11",
@@ -2712,8 +2754,8 @@
     }
   ],
   "_cloud": {
-    "revision": 31,
-    "updatedAt": "2026-11-01T06:25:38.618Z",
+    "revision": 32,
+    "updatedAt": "2026-11-01T10:53:08.301Z",
     "updatedBy": "jingyan7115"
   }
 }
