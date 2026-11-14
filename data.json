@@ -613,6 +613,19 @@
       "sourceReportId": "user-lab-161153cd-13ec-480c-93af-dc7c48e62407",
       "sourceUploadId": "./uploads/20261101105504-7b665916-_4.jpg",
       "createdAt": "2026-11-01T12:00:00.000Z"
+    },
+    {
+      "id": "manual-weight-4eda567f-9d51-4926-a6ca-76774051b6e5",
+      "metric": "WEIGHT",
+      "recordedAt": "2026-11-14",
+      "value": 3.475,
+      "unit": "kg",
+      "status": "手动称重",
+      "source": "manual-weight",
+      "sourceUploadId": null,
+      "note": "",
+      "createdAt": "2026-11-14T03:31:33.170Z",
+      "updatedAt": "2026-11-14T03:31:33.170Z"
     }
   ],
   "records": [
@@ -2861,6 +2874,30 @@
       ]
     },
     {
+      "id": "user-613d968a-88c1-491e-9f57-b7c0d57a9afb",
+      "module": "imaging",
+      "recordedAt": "2026-11-01",
+      "title": "全腹超声",
+      "summary": "超声诊断：脾脏结节、脾脏血管钙化；左肾 3.07 cm，右肾 3.59 cm；胰腺左叶厚约 0.66 cm。建议结合临床其他指标综合判断。",
+      "data": {
+        "modality": "全腹超声",
+        "leftKidneyCm": 3.07,
+        "rightKidneyCm": 3.59,
+        "pancreasCm": 0.66,
+        "largestSplenicNodule": "0.20 × 0.12 cm",
+        "findings": "肝脏轮廓规则，肝门淋巴结未见明显增大；胆囊适度充盈，胆总管未见扩张；胰腺左叶实质回声升高、与周围软组织相近，厚约 0.66 cm；脾实质回声不均，多个高回声结节沿血管分布，最大 0.20×0.12 cm，脾体厚约 0.76 cm；双肾皮髓分界清晰、肾盂未见扩张；膀胱未见异常；胃、小肠、结肠未见梗阻征象；胰十二指肠淋巴结 0.59×0.33 cm，空肠淋巴结厚 0.37 cm，双侧髂内淋巴结厚约 0.64 cm。",
+        "clinicalHistory": "下颌痤疮，肥大细胞瘤病史",
+        "doctor": "陈德明"
+      },
+      "imageUrls": [
+        "./uploads/20261101105504-7b665916-_4.jpg",
+        "./uploads/20261101105508-7f0a2fda-_5.jpg"
+      ],
+      "sourceReportId": "user-lab-161153cd-13ec-480c-93af-dc7c48e62407",
+      "createdAt": "2026-11-01T12:00:00.000Z",
+      "updatedAt": "2026-11-01T12:00:00.000Z"
+    },
+    {
       "id": "clinical-user-lab-7dde8d70-9e53-4ad6-822b-4e94146f949e-diagnosis",
       "module": "diagnosis",
       "recordedAt": "2026-10-11",
@@ -3016,30 +3053,6 @@
       "imageUrls": [],
       "createdAt": "2026-10-11T13:48:51.821Z",
       "updatedAt": "2026-10-11T14:02:02.690Z"
-    },
-    {
-      "id": "user-613d968a-88c1-491e-9f57-b7c0d57a9afb",
-      "module": "imaging",
-      "recordedAt": "2026-11-01",
-      "title": "全腹超声",
-      "summary": "超声诊断：脾脏结节、脾脏血管钙化；左肾 3.07 cm，右肾 3.59 cm；胰腺左叶厚约 0.66 cm。建议结合临床其他指标综合判断。",
-      "data": {
-        "modality": "全腹超声",
-        "leftKidneyCm": 3.07,
-        "rightKidneyCm": 3.59,
-        "pancreasCm": 0.66,
-        "largestSplenicNodule": "0.20 × 0.12 cm",
-        "findings": "肝脏轮廓规则，肝门淋巴结未见明显增大；胆囊适度充盈，胆总管未见扩张；胰腺左叶实质回声升高、与周围软组织相近，厚约 0.66 cm；脾实质回声不均，多个高回声结节沿血管分布，最大 0.20×0.12 cm，脾体厚约 0.76 cm；双肾皮髓分界清晰、肾盂未见扩张；膀胱未见异常；胃、小肠、结肠未见梗阻征象；胰十二指肠淋巴结 0.59×0.33 cm，空肠淋巴结厚 0.37 cm，双侧髂内淋巴结厚约 0.64 cm。",
-        "clinicalHistory": "下颌痤疮，肥大细胞瘤病史",
-        "doctor": "陈德明"
-      },
-      "imageUrls": [
-        "./uploads/20261101105504-7b665916-_4.jpg",
-        "./uploads/20261101105508-7f0a2fda-_5.jpg"
-      ],
-      "sourceReportId": "user-lab-161153cd-13ec-480c-93af-dc7c48e62407",
-      "createdAt": "2026-11-01T12:00:00.000Z",
-      "updatedAt": "2026-11-01T12:00:00.000Z"
     }
   ],
   "source": "面面_长期健康管理数据库0815版(2).xlsx",
@@ -3209,8 +3222,8 @@
     }
   ],
   "_cloud": {
-    "revision": 34,
-    "updatedAt": "2026-11-01T12:00:00.000Z",
+    "revision": 35,
+    "updatedAt": "2026-11-14T03:31:34.389Z",
     "updatedBy": "jingyan7115"
   }
 }
